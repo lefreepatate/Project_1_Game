@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ECB2F66820C570410087750C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB2F66720C570410087750C /* main.swift */; };
-		ECB2F66F20C58C980087750C /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB2F66E20C58C980087750C /* Characters.swift */; };
+		ECF0E14F20C58FE000037870 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF0E14E20C58FDF00037870 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,8 +24,7 @@
 
 /* Begin PBXFileReference section */
 		ECB2F66420C570410087750C /* Project_1_Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project_1_Game; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECB2F66720C570410087750C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		ECB2F66E20C58C980087750C /* Characters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
+		ECF0E14E20C58FDF00037870 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +57,7 @@
 		ECB2F66620C570410087750C /* Project_1_Game */ = {
 			isa = PBXGroup;
 			children = (
-				ECB2F66720C570410087750C /* main.swift */,
-				ECB2F66E20C58C980087750C /* Characters.swift */,
+				ECF0E14E20C58FDF00037870 /* main.swift */,
 			);
 			path = Project_1_Game;
 			sourceTree = "<group>";
@@ -97,6 +94,7 @@
 				TargetAttributes = {
 					ECB2F66320C570410087750C = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -123,8 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECB2F66820C570410087750C /* main.swift in Sources */,
-				ECB2F66F20C58C980087750C /* Characters.swift in Sources */,
+				ECF0E14F20C58FE000037870 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,8 +237,11 @@
 		ECB2F66C20C570410087750C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -249,7 +249,9 @@
 		ECB2F66D20C570410087750C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};

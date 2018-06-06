@@ -14,7 +14,6 @@ class Character : CustomStringConvertible  {
         } else {
             print("You're already dead")
         }
-        
     }
     func healthCare(){
         if healthBar <= 90 || healthBar >= 10{

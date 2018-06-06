@@ -3,7 +3,7 @@ class Character  {
     var characterName: String
     var characterType: String
     var characterWeapon: String
-    var healthBar = 100
+    var healthBar:Int = 100
     func healthDamages(){
         healthBar -= 10
     }
@@ -41,11 +41,11 @@ class Colossus: Character {
 class Dwarf: Character {
     override var characterType:String {get { return "Dwarf"} set {} }
     override var characterWeapon:String {get { return "Axe"} set {} }
-    override var healthBar:Int {get {return 80} set{} }
+    override var healthBar: Int {willSet{80}didSet{80}}
     override func healthDamages() { super.healthBar -= 30 }
 }
 var aFighter = Dwarf(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100)
 print(aFighter.description)
-aFighter.healthDamages()
-aFighter.description
+print(aFighter.healthDamages())
 print(aFighter.description)
+

@@ -4,9 +4,9 @@ class Character : CustomStringConvertible  {
     var characterType: String
     var characterWeapon: String
     var healthBar = 100
-    func healthDamages(){
+    func healthDamages() {
         if healthBar <= 100 || healthBar >= 10{
-            healthBar -= 10
+            healthBar -= 10;
             print ("\(characterWeapon)Attack !\(healthDamages())")
         }
         else if healthBar == 10 {
@@ -54,11 +54,9 @@ class Colossus: Character {
 class Dwarf: Character {
     override var characterType:String {get { return "Dwarf"} set {} }
     override var characterWeapon:String {get { return "Axe"} set {} }
-    override var healthBar: Int {willSet{80}didSet{80}}
+    override var healthBar:Int {willSet{ healthBar = 100}didSet{healthBar = 80}}
     override func healthDamages() { super.healthBar -= 30 }
 }
-var aFighter = Colossus(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100)
-print(aFighter)
-print(aFighter.healthDamages())
-print(aFighter)
+
+
 

@@ -5,10 +5,20 @@ class Character  {
     var characterWeapon: String
     var healthBar:Int = 100
     func healthDamages(){
-        healthBar -= 10
+        if healthBar <= 100 || healthBar >= 10{
+            healthBar -= 10}
+        else if healthBar == 10 {
+            print("You're Dead !")
+        } else {
+            print("You're already dead")
+        }
     }
     func healthCare(){
-        healthBar += 10
+        if healthBar <= 90 || healthBar >= 10{
+            healthBar += 10}
+        else {
+            print("You're already dead")
+        }
     }
     init(characterName: String, characterType:String, characterWeapon:String, healthBar:Int){
         self.characterName = characterName

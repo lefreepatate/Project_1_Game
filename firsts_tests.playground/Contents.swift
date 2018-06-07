@@ -1,64 +1,75 @@
-//Definition of the global character class
-class Character : CustomStringConvertible  {
-    var characterName: String
-    var characterType: String
-    var characterWeapon: String
-    var healthBar = 100
-    func healthDamages(){
-        if healthBar <= 100 || healthBar >= 10{
-            healthBar -= 10
-            print ("\(characterWeapon)Attack !\(healthDamages())")
+import Foundation
+
+class Choice {
+    var name:Int
+    init(name:Int){
+        self.name = name
+    }
+    //Welcome message and explication of the differents characters game's type to choice
+    func characterChoice(){
+        print("Bonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n\nQuel sera le premier personnage qui va faire parti de ton équipe ?"
+            + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
+            + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
+            + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
+            + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
+    }
+    //Choice of the player
+    func playerChoice() {
+        if let choice = readLine() {
+            switch choice {
+            case "1":
+                print("Vous avez choisi un combattant !")
+                giveName()
+            case "2":
+                print("Vous avez choisi un Mage !")
+                giveName()
+            case "3":
+                print("Vous avez choisi un Colosse !")
+                giveName()
+            case "4":
+                print("Vous avez choisi un Nain !")
+                giveName()
+            default:
+                print("Tu ne sais pas compter !")
+                characterChoice()
+            }
         }
-        else if healthBar == 10 {
-            print("You're Dead !")
-        } else {
-            print("You're already dead")
-        }
-        
     }
-    func healthCare(){
-        if healthBar <= 90 || healthBar >= 10{
-            healthBar += 10}
-        else {
-            print("You're already dead")
+    //Function that gives to the player free choice of the fighter names
+    func giveName(){
+        print("Comment s'appelle-t-il ?")
+        if  let name = readLine() {
+            print("Votre guerrier s'appelle \(name)" )
         }
     }
-    init(characterName: String, characterType:String, characterWeapon:String, healthBar:Int){
-        self.characterName = characterName
-        self.characterType = characterType
-        self.characterWeapon = characterWeapon
-        self.healthBar = healthBar
-    }
-    var description: String{
-        return "\(characterName),\(characterType),\(characterWeapon),\(healthBar)"
-    }
+    //Choice of the character type for the team
+    playerChoice()
+    //Then choice of the second character type
+    secondCharacterType()
+
+func secondCharacterType(){
+    print("Bien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?"
+        + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
+        + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
+        + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
+        + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
+    //Choice of the character type for the team
+    playerChoice()
+    //Then choice of the third and last character type
+    thirdCharacterType()
 }
-//Definition of the fighter character
-class Fighter: Character {
-    override var characterType:String {get { return "Fighter"} set {} }
-    override var characterWeapon:String {get { return "Sword"} set {} }
+func thirdCharacterType(){
+    print("Parfait !\n\nPlus qu'un combattant à choisir !"
+        + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
+        + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
+        + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
+        + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
+    //Choice of the character type for the team
+    playerChoice()
+    print("Votre équipe est prête !!!")
+    
 }
-//Definition of the Wizard character
-class Wizard: Character {
-    override var characterType:String {get { return "Wizard"} set {} }
-    override var characterWeapon:String {get { return "Dagger"} set {} }
-    override func healthCare() { super.healthBar += 30}
 }
-//Definition of the Colossus character
-class Colossus: Character {
-    override var characterType:String {get { return "Colossus"} set {} }
-    override var characterWeapon:String {get { return "Mass"} set {} }
-    override func healthDamages() { super.healthBar -= 5 }
-}
-//Definition of the Dwarf character
-class Dwarf: Character {
-    override var characterType:String {get { return "Dwarf"} set {} }
-    override var characterWeapon:String {get { return "Axe"} set {} }
-    override var healthBar: Int {willSet{80}didSet{80}}
-    override func healthDamages() { super.healthBar -= 30 }
-}
-var aFighter = Colossus(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100)
-print(aFighter)
-print(aFighter.healthDamages())
-print(aFighter)
+
+
 

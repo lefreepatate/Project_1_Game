@@ -3,7 +3,7 @@ class Character : CustomStringConvertible  {
     var characterName: String
     var characterType: String
     var characterWeapon: String
-    var healthBar = 100
+    var healthBar:Int = 100
     func healthDamages() {
         if healthBar <= 100 || healthBar >= 10{
             healthBar -= 10;
@@ -53,7 +53,7 @@ class Colossus: Character {
 class Dwarf: Character {
     override var characterType:String {get { return "Dwarf"} set {} }
     override var characterWeapon:String {get { return "Axe"} set {} }
-    override var healthBar:Int {willSet{ healthBar = 100}didSet{healthBar = 80}}
+    override var healthBar:Int {willSet{healthBar = 100}didSet{healthBar = 80}}
     override func healthDamages() { super.healthBar -= 30 }
 }
 

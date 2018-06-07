@@ -5,7 +5,7 @@
 //  Created by Carlos Garcia-Muskat on 06/06/2018.
 //  Copyright © 2018 Carlos Garcia-Muskat. All rights reserved.
 //
-
+/*
 import Foundation
 
 class Teams {
@@ -13,10 +13,7 @@ class Teams {
     init(name:String){
         self.name = name
     }
-    let table: [Character] = [
-        Character(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100),
-        Character(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100),
-        Character(characterName: "Name", characterType: "wizard", characterWeapon: "weapon", healthBar: 100),
-    ]
-
+        var team1 = ["Name": "\(characterName)","Type":"\(characterType)" ,"Weapon":"\(characterWeapon)","Health": "\(healthBar)"]
 }
+
+*/

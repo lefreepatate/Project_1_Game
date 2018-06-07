@@ -1,9 +1,15 @@
 //Definition of the global character class
-class Character : CustomStringConvertible  {
-    var characterName: String
+class Character   {
+    var characterName:String
     var characterType: String
     var characterWeapon: String
-    var healthBar:Int = 100
+    var healthBar:Int
+    init(characterName: String, characterType:String, characterWeapon:String, healthBar:Int){
+        self.characterName = characterName
+        self.characterType = characterType
+        self.characterWeapon = characterWeapon
+        self.healthBar = healthBar
+    }
     func healthDamages() {
         if healthBar <= 100 || healthBar >= 10{
             healthBar -= 10;
@@ -22,12 +28,7 @@ class Character : CustomStringConvertible  {
             print("You're already dead")
         }
     }
-    init(characterName: String, characterType:String, characterWeapon:String, healthBar:Int){
-        self.characterName = characterName
-        self.characterType = characterType
-        self.characterWeapon = characterWeapon
-        self.healthBar = healthBar
-    }
+
     var description: String{
         return "\(characterName),\(characterType),\(characterWeapon),\(healthBar)"
     }

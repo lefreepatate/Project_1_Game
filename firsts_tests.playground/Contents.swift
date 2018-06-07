@@ -1,20 +1,46 @@
 import Foundation
-
+//Welcome message and explication of the differents characters game's type to choice
 class Choice {
-    var name:Int
-    init(name:Int){
+    var name:String = ""
+    init(name:String){
         self.name = name
     }
-    //Welcome message and explication of the differents characters game's type to choice
     func characterChoice(){
-        print("Bonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n\nQuel sera le premier personnage qui va faire parti de ton équipe ?"
+        print("\n"
             + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
             + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
             + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
             + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
     }
+    func firstCharacterType(){
+        print("\n\nBonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n\nQuel sera le premier personnage qui va faire parti de ton équipe ?")
+        //Choice of the character type for the team
+        characterChoice()
+        //Then choice of the second character type
+        playerChoice()
+        secondCharacterType()
+    }
+    func secondCharacterType(){
+        print("\n\nBien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?")
+        characterChoice()
+        playerChoice()
+        thirdCharacterType()
+    }
+    func thirdCharacterType(){
+        print("\n\nParfait !\n\nPlus qu'un combattant à choisir !")
+        characterChoice()
+        playerChoice()
+        print("\n\nVotre équipe est prête !!!")
+    }
+    //Function that gives to the player free choice of the fighter names
+    func giveName(){
+        print("\nComment s'appelle-t-il ?")
+        if  let name = readLine() {
+            print("\nVotre guerrier s'appelle \(name)" )
+        }
+    }
     //Choice of the player
-    func playerChoice() {
+    func playerChoice(){
         if let choice = readLine() {
             switch choice {
             case "1":
@@ -35,41 +61,7 @@ class Choice {
             }
         }
     }
-    //Function that gives to the player free choice of the fighter names
-    func giveName(){
-        print("Comment s'appelle-t-il ?")
-        if  let name = readLine() {
-            print("Votre guerrier s'appelle \(name)" )
-        }
-    }
-    //Choice of the character type for the team
-    playerChoice()
-    //Then choice of the second character type
-    secondCharacterType()
-
-func secondCharacterType(){
-    print("Bien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?"
-        + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
-        + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
-        + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
-        + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
-    //Choice of the character type for the team
-    playerChoice()
-    //Then choice of the third and last character type
-    thirdCharacterType()
-}
-func thirdCharacterType(){
-    print("Parfait !\n\nPlus qu'un combattant à choisir !"
-        + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
-        + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
-        + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
-        + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
-    //Choice of the character type for the team
-    playerChoice()
-    print("Votre équipe est prête !!!")
-    
-}
 }
 
-
-
+var firstTeam = Choice(name: "")
+firstTeam.firstCharacterType()

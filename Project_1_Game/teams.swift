@@ -1,19 +1,10 @@
-//
-//  teams.swift
-//  Project_1_Game
-//
-//  Created by Carlos Garcia-Muskat on 06/06/2018.
-//  Copyright © 2018 Carlos Garcia-Muskat. All rights reserved.
-//
-/*
 import Foundation
 
-class Teams {
-    var name:String = ""
-    init(name:String){
-        self.name = name
+class Teams: Character {
+    /*var tableTeam1 : ["Name" :" \(characterName)","Type" :" \(characterType),,"Weapon" : "\(characterWeapon)","Life" :" \(healthBar)"]*/
+    var descriptionTeam1:String{
+        return "Name : \(characterName)\n\nType : \(characterType)\nWeapon : \(characterWeapon)\nLife : \(healthBar)"
     }
-        var team1 = ["Name": "\(characterName)","Type":"\(characterType)" ,"Weapon":"\(characterWeapon)","Health": "\(healthBar)"]
 }
 
-*/
+

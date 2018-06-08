@@ -1,1 +1,4 @@
-import Foundationvar firstTeam = Service()firstTeam.firstCharacterType()
+import Foundation
+var firstTeam = Service()
+firstTeam.firstCharacterType()
+ 

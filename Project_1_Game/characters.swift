@@ -8,10 +8,8 @@ class Character   {
         self.healthBar = healthBar
         self.healthDamages = healthDamages
     }
-    
-
     var description: String{
-        return "\(characterName),\(healthBar)"
+        return "\n–––– \(characterName) ––––\nLife : \(healthBar)\nDamages : \(healthDamages)"
     }
 }
 //Definition of the fighter character
@@ -19,6 +17,7 @@ class Fighter: Character {
     init(name: String){
         super.init(characterName: name, healthBar: 100, healthDamages: 10)
     }
+
 }
 //Definition of the Wizard character
 class Wizard: Character {

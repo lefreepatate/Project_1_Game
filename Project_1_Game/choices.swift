@@ -1,7 +1,7 @@
 import Foundation
 //Welcome message and explication of the differents characters game's type to choice
 class Service {
-
+     var team: [String] = []
     //Explication of the differents characters game's type to choice
     func characterChoice(){
         print(""
@@ -17,24 +17,26 @@ class Service {
         //Choice of the character type for the team
         characterChoice()
         //Then choice of the second character type
-        playerChoice()
+       
+        team.insert("\(playerChoice())", at :0)
         secondCharacterType()
     }
     //Second Character choice with message
     func secondCharacterType(){
         print("\nBien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?")
         characterChoice()
-        playerChoice()
+        team.insert("\(playerChoice())", at :1)
         thirdCharacterType()
-    }
+        }
     //T Character choice with message
     func thirdCharacterType(){
         print("\nParfait !\n\nPlus qu'un combattant à choisir !")
         characterChoice()
-        playerChoice()
-        print("\nVotre équipe est prête !!!\n")
+        team.insert("\(playerChoice())", at :2)
+        print("\nVotre équipe est prête !!!\n\(team)")
+       
     }
-    
+
     //Choice of the player
     func playerChoice() -> Character{
         if let characterChoice = readLine() {
@@ -42,8 +44,7 @@ class Service {
             case "1":
                 print("\nComment s'appellera votre combattant ?")
                 if let name = readLine(){
-                    var aFighter = Fighter(name: name)
-                    print("\(aFighter.description)")
+                    let aFighter = Fighter(name: name)
                 return aFighter
                 }   else {
                     return playerChoice()
@@ -51,17 +52,15 @@ class Service {
             case "2":
                 print("\nComment s'appellera votre mage ?")
                 if let name = readLine(){
-                var aWizard = Wizard(name: name)
-                    print("\(aWizard.description)")
+                let aWizard = Wizard(name: name)
                 return aWizard
                 }   else {
                 return playerChoice()
                 }
             case "3":
-                print("V\nComment s'appellera votre colosse !")
+                print("\nComment s'appellera votre colosse !")
                 if let name = readLine(){
-                var aColossus = Colossus(name: name)
-                    print("\(aColossus.description)")
+                let aColossus = Colossus(name: name)
                 return aColossus
             } else {
                 return playerChoice()
@@ -69,15 +68,13 @@ class Service {
             case "4":
                 print("\nComment s'appellera votre nain !")
                 if let name = readLine(){
-                print("\nVotre Nain s'appelle \(name)" )
-                var aDwarf = Dwarf(name: name)
-                    print("\(aDwarf.description)")
+                let aDwarf = Dwarf(name: name)
                 return aDwarf
                 }   else {
                 return playerChoice()
             }
             default:
-            print("Choisir entre 1 et 5")
+            print("Choisis entre 1 et 4")
             return playerChoice()
             }
         }

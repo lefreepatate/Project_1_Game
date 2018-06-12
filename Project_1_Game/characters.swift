@@ -1,5 +1,6 @@
+import Foundation
 //Definition of the global character class
-class Character   {
+class Character:CustomStringConvertible   {
     var characterName:String
     var healthBar:Int
     var healthDamages:Int
@@ -9,7 +10,7 @@ class Character   {
         self.healthDamages = healthDamages
     }
     var description: String{
-        return "\n–––– \(characterName) ––––\nLife : \(healthBar)\nDamages : \(healthDamages)"
+        return "\(characterName) -- Life : \(healthBar) -- Damages : \(healthDamages)"
     }
 }
 //Definition of the fighter character

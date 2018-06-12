@@ -11,32 +11,29 @@ class Service {
             + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
     }
 
-    //Welcome message and rules for choices
-    func firstCharacterType(){
+    //Function witch will create the team
+    func creatingTeam(){
+         //Welcome message and rules for choices
         print("\n\nBonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n\nQuel sera le premier personnage qui va faire parti de ton équipe ?")
-        //Choice of the character type for the team
+        //Choice of the first character type for the team
         characterChoice()
-        //Then choice of the second character type
-       
+        //Insert the first choice into the table "Team"
         team.insert("\(playerChoice())", at :0)
-        secondCharacterType()
-    }
-    //Second Character choice with message
-    func secondCharacterType(){
+        //Message confirming that the player was inserted on the table and propose the 2nd choice
         print("\nBien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?")
+        //Choice of the second character type for the team
         characterChoice()
+        //Insert the second choice into the table "Team"
         team.insert("\(playerChoice())", at :1)
-        thirdCharacterType()
-        }
-    //T Character choice with message
-    func thirdCharacterType(){
+        //Message confirming that the player was inserted on the table and propose the 3rd choice
         print("\nParfait !\n\nPlus qu'un combattant à choisir !")
+        //Choice of the third character type for the team
         characterChoice()
+        //Insert the third choice into the table "Team"
         team.insert("\(playerChoice())", at :2)
         print("\nVotre équipe est prête !!!\n\(team)")
-       
     }
-
+    
     //Choice of the player
     func playerChoice() -> Character{
         if let characterChoice = readLine() {
@@ -81,56 +78,7 @@ class Service {
         else {
             return playerChoice()
         }
+
     }
-    func createCharacter() -> Character{
-        firstCharacterType()
-        characterChoice()
-        if let characterChoice = readLine(){
-            switch characterChoice {
-            case "1":
-                print("\nComment s'appelle-t-il ?")
-                if let name = readLine(){
-                    print("\nVotre guerrier s'appelle \(name)" )
-                    var aFighter = Fighter(name: name)
-                    return aFighter
-            }        else {
-                return createCharacter()
-                }
-            case "2":
-                print("\nComment s'appelle-t-il ?")
-                if let name = readLine(){
-                    print("\nVotre guerrier s'appelle \(name)" )
-                    var aWizard = Wizard(name: name)
-                return aWizard
-            }        else {
-                return createCharacter()
-                }
-            case "3":
-                print("\nComment s'appelle-t-il ?")
-                if let name = readLine(){
-                    print("\nVotre guerrier s'appelle \(name)" )
-                    var aColossus = Colossus(name: name)
-                return aColossus
-            }        else {
-                return createCharacter()
-                }
-            case "4":
-                print("\nComment s'appelle-t-il ?")
-                if let name = readLine(){
-                    print("\nVotre guerrier s'appelle \(name)" )
-                    var aDwarf = Dwarf(name: name)
-                return aDwarf
-            }        else {
-                return createCharacter()
-                }
-            default:
-                print("Tu ne sais pas compter !")
-                return createCharacter()
-            }
-        }
-        else {
-            return createCharacter()
-        }
-}
-  
+
 }

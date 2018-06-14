@@ -1,7 +1,7 @@
 import Foundation
 //Welcome message and explication of the differents characters game's type to choice
 class Service {
-     var team: [String] = []
+     var team = [String:Character]()
     //Explication of the differents characters game's type to choice
     func characterChoice(){
         print(""
@@ -10,7 +10,6 @@ class Service {
             + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
             + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
     }
-
     //Function witch will create the team
     func creatingTeam(){
          //Welcome message and rules for choices
@@ -18,20 +17,42 @@ class Service {
         //Choice of the first character type for the team
         characterChoice()
         //Insert the first choice into the table "Team"
-        team.insert("\(playerChoice())", at :0)
+        team["Character1"] = playerChoice()
         //Message confirming that the player was inserted on the table and propose the 2nd choice
         print("\nBien !\n\nQuel sera le second personnage qui va faire parti de ton équipe ?")
         //Choice of the second character type for the team
         characterChoice()
         //Insert the second choice into the table "Team"
-        team.insert("\(playerChoice())", at :1)
+        team["Character2"] = playerChoice()
         //Message confirming that the player was inserted on the table and propose the 3rd choice
         print("\nParfait !\n\nPlus qu'un combattant à choisir !")
         //Choice of the third character type for the team
         characterChoice()
         //Insert the third choice into the table "Team"
-        team.insert("\(playerChoice())", at :2)
-        print("\nVotre équipe est prête !!!\n\(team)")
+        team["Character3"] = playerChoice()
+        func isNameValid(team:[String:Character],name: String) -> Bool{
+            for (characterName,name) in team {
+                if "\(characterName,name)" == "\(name)" {
+                    print("Vous avez déjà choisi \(name), veuillez recommencer" )
+                    creatingTeam()
+                    return false
+                }
+            }
+            print("\nVotre équipe est prête !!!\n\(team)")
+            return true
+        }
+        
+        //Checking if the same name was selected 2 times
+        /*func isNameValid(team:[String:Character], name: String) -> Bool {
+            for (characterName: name) in team {
+                if characterName == name {
+                    print("vous avez déjà choisi \(name)!\(playerChoice())")
+                    return false
+                }
+            }
+           )
+        }*/
+
     }
     
     //Choice of the player
@@ -42,31 +63,31 @@ class Service {
                 print("\nComment s'appellera votre combattant ?")
                 if let name = readLine(){
                     let aFighter = Fighter(name: name)
-                return aFighter
+                    return aFighter
                 }   else {
                     return playerChoice()
                 }
             case "2":
                 print("\nComment s'appellera votre mage ?")
                 if let name = readLine(){
-                let aWizard = Wizard(name: name)
-                return aWizard
+                    let aWizard = Wizard(name: name)
+                    return aWizard
                 }   else {
                 return playerChoice()
                 }
             case "3":
                 print("\nComment s'appellera votre colosse !")
                 if let name = readLine(){
-                let aColossus = Colossus(name: name)
-                return aColossus
+                    let aColossus = Colossus(name: name)
+                    return aColossus
             } else {
                 return playerChoice()
             }
             case "4":
                 print("\nComment s'appellera votre nain !")
                 if let name = readLine(){
-                let aDwarf = Dwarf(name: name)
-                return aDwarf
+                    let aDwarf = Dwarf(name: name)
+                    return aDwarf
                 }   else {
                 return playerChoice()
             }
@@ -78,7 +99,7 @@ class Service {
         else {
             return playerChoice()
         }
-
     }
 
 }
+

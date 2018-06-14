@@ -2,8 +2,8 @@ import Foundation
 
 class Teams: Character {
 
-    var team = [String]()
-
+    var team: [String:Character] = [:]
+    
     
 }
 

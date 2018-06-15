@@ -10,6 +10,31 @@ class Service {
             + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
             + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
     }
+    //Creating new players
+    func newPlayer() -> Player{
+        //1. Message quel est votre nom
+        //2. Récupérer nom
+        //2. Créer le player
+        //3. Return Player
+    }
+    
+    func newFighter() -> Fighter{
+        //1. Donner nom
+        print("Comment s'appelle votre combattant ?")
+        //2. Récupérer nom
+        if let name = readLine(){
+            //3. Vérifier nom
+            if  isNameValid(team:team,name: name) {
+                //4. Création fighter
+                //5. return fighter
+                return Fighter(name: name)
+            }
+        }
+    }
+    func isNameValid(team:[Character],name:String) -> Bool{
+        return true
+    }
+    
     //Choice of the player
     func playerChoice() -> Character{
         characterChoice()
@@ -18,6 +43,7 @@ class Service {
             case "1":
                 print("\nComment s'appellera votre combattant ?")
                 if let name = readLine(){
+                    isNameValid(team:team, name: name)
                     let aFighter = Fighter(name: name)
                     return aFighter
                 }   else {
@@ -56,6 +82,17 @@ class Service {
             return playerChoice()
         }
     }
+    
+    func isNameValid(team:[String:Character],name: String) -> Bool{
+        for (characterName,name) in team {
+            if "\(characterName,name)" == "\(name)" {
+                print("Vous avez déjà choisi \(name), veuillez recommencer" )
+                creatingTeam()
+                return false
+            }
+        }
+        return true
+    }
 
     //Function witch will create the team
     func creatingTeam(){
@@ -71,16 +108,7 @@ class Service {
         print("\nParfait !\n\nPlus qu'un combattant à choisir !")
         //Insert the third choice into the table "Team"
         team["Character3"] = playerChoice()
-        func isNameValid(team:[String:Character],name: String) -> Bool{
-            for (characterName,name) in team {
-                if "\(characterName,name)" == "\(name)" {
-                    print("Vous avez déjà choisi \(name), veuillez recommencer" )
-                    creatingTeam()
-                    return false
-                }
-            }
-            return true
-        }
+
         print("\nVotre équipe est prête !!!\n\(team)")
     }
 }

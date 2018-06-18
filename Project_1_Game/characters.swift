@@ -10,8 +10,9 @@ class Character:CustomStringConvertible   {
         self.healthDamages = healthDamages
     }
     var description: String{
-        return "\(characterName) -- Life : \(healthBar) -- Damages : \(healthDamages)"
+        return "\n -- \(characterName) -- Life : \(healthBar) // Damages : \(healthDamages)\n"
     }
+    
 }
 //Definition of the fighter character
 class Fighter: Character {

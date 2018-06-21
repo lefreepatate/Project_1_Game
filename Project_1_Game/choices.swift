@@ -133,8 +133,64 @@ class Service {
             + "\n4. 🐨 Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
     }
     
+    
     //============================================
-    // MARK: - GAME STEP 1 : TEAMS CREATION
+    // MARK: - STEP 2 : TEAMS FIGHTS
+    //============================================
+    
+    //Fight action steps
+    func fight(){
+            }
+        //List of fighters after the previous step
+        func charactersTeam1() {
+            print(""
+                + "1. \(firstPlayer.team[0])"
+                + "2. \(firstPlayer.team[1])"
+                + "3. \(firstPlayer.team[2])")
+        }
+        
+        func charactersTeam2() {
+            print(""
+                + "1. \(secondPlayer.team[0])"
+                + "2. \(secondPlayer.team[1])"
+                + "3. \(secondPlayer.team[2])")
+        }
+        //function for player1 for choose the character type to use for the fight
+        func team1ToChoose() -> Character{
+            print("\n\(firstPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
+            charactersTeam1()
+            if let team1ToChoose = readLine() {
+                switch team1ToChoose {
+                case "1": return firstPlayer.team[0]
+                case "2": return firstPlayer.team[1]
+                case "3": return firstPlayer.team[2]
+                default:
+                    print("Choisis entre 1 et 3")
+                }
+            }
+            return team1ToChoose()
+        }
+        //function for player1 for choose the character type to use for the fight
+        func team2ToChoose() -> Character{
+            print("\n\(secondPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
+            charactersTeam2()
+            if let team2ToChoose = readLine() {
+                switch team2ToChoose {
+                case "1": return secondPlayer.team[0]
+                case "2": return secondPlayer.team[1]
+                case "3": return secondPlayer.team[2]
+                default:
+                    print("Choisis entre 1 et 3")
+                }
+            }
+            return team2ToChoose()
+        }
+       
+
+    
+    
+    //============================================
+    // MARK: - GAME
     //============================================
     
     //Function witch will create the team
@@ -168,60 +224,11 @@ class Service {
         //Insert the third choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
-        print("\nVoici vos équipes :\n\(firstPlayer)\n\n\n\(secondPlayer)")
+        print("\nVoici vos équipes :\n\n\(firstPlayer)\n\n\n\(secondPlayer)")
+        _ = team1ToChoose()
+        _ = team2ToChoose()
     }
     
-    //============================================
-    // MARK: - GAME STEP 2 : TEAMS FIGHTS
-    //============================================
-    
-    //Fight action steps
-        func fight(){
 
-        
-        //List of fighters after the previous step
-        func charactersTeam1() {
-            print(""
-                + "1. \(firstPlayer.team[0])"
-                + "2. \(firstPlayer.team[1])"
-                + "3. \(firstPlayer.team[2])")
-        }
-        
-        func charactersTeam2() {
-            print(""
-                + "1. \(secondPlayer.team[0])"
-                + "2. \(secondPlayer.team[1])"
-                + "3. \(secondPlayer.team[2])")
-        }
-        //function for player1 for choose the character type to use for the fight
-        func team1ToChoose() -> Character{
-            charactersTeam1()
-            if let team1ToChoose = readLine() {
-                switch team1ToChoose {
-                case "1": return firstPlayer.team[0]
-                case "2": return firstPlayer.team[1]
-                case "3": return firstPlayer.team[2]
-                default:
-                    break
-                }
-            }
-            return team1ToChoose()
-        }
-        //function for player1 for choose the character type to use for the fight
-        func team2ToChoose() -> Character{
-            charactersTeam2()
-            if let team2ToChoose = readLine() {
-                switch team2ToChoose {
-                case "1": return secondPlayer.team[0]
-                case "2": return secondPlayer.team[1]
-                case "3": return secondPlayer.team[2]
-                default:
-                    break
-                }
-            }
-            return team2ToChoose()
-        }
-        print("\n\(firstPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
-    }
 }
 

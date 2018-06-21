@@ -6,7 +6,7 @@ class Player : CustomStringConvertible  {
         self.name = name
         self.team = team
     }
-    var description: String {
+     var description: String {
         return"\(name) a pour équipe\n \(team)"
     }
 

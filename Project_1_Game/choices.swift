@@ -1,41 +1,24 @@
 import Foundation
 class Service {
-
-    //Explication of the differents characters game's type to choice
-    func characterChoice(){
-        print(""
-            + "\n1. Combattant : L'attaquant classique. Un bon guerrier !"
-            + "\n2. Mage : Son talent ? Soigner les membres de son équipe."
-            + "\n3. Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
-            + "\n4. Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
-    }
-
     
-    func isNameValid(team:[Character], name: String) -> Bool{
-        for newName in team {
-            if "\(newName)" == "\(name)" {
-                print("Vous avez déjà choisi \(newName), veuillez recommencer" )
-                return false
-            }
-        }
-        return true
-    }
-    //Creating new players
+    //============================================
+    // MARK: - Creating new players
+    //============================================
+    
     func player1() -> Player{
         //1. Message quel est votre nom
-         print("Bonjour, quel est le prénom du 1er joueur ?")
+         print("Quel est le prénom du 1er joueur ?")
         //2. Récupérer nom
         if let name = readLine(){
             //2. Créer le player
             //3. Return Player
             let firstPlayer = Player(name: name, team:[Character]())
-        return firstPlayer
+            return firstPlayer
         }
         else {
             return player1()
         }
     }
-    
     func player2() -> Player{
         print("\nComment s'appelle le 2e joueur ?")
         if let name = readLine(){
@@ -47,23 +30,27 @@ class Service {
         }
     }
     
-    // Creation of the characterTypes for the choice function
+    //============================================
+    // MARK: - Creating new Characters
+    //============================================
+   
     func newFighter() -> Fighter{
         // giving the name
         print("Comment s'appelle votre combattant ?")
         if let name = readLine(){
            // checking if the name wasn't choose before
-            if  isNameValid(team:[Character](),name: name){
+            if isNameValid(team:[Character](), name: name) {
                 //creation of the fighter and return him to the table
                 let newFighter = Fighter(name: name)
                 return newFighter
-            } else {
-                return newFighter()
+        }  else {
+            return newFighter()
             }
         }  else {
             return newFighter()
         }
     }
+        
     func newWizard() -> Wizard{
         print("Comment s'appelle votre mage ?")
         if let name = readLine(){
@@ -103,7 +90,21 @@ class Service {
             return newDwarf()
         }
     }
-    
+    func isNameValid(team:[Character], name: String) -> Bool{
+        for (name: newName) in team {
+            if "\(newName)" == "\(name)" {
+                print("Vous avez déjà choisi \(newName), veuillez recommencer" )
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+    //============================================
+    // MARK: - Players choosing team characters
+    //============================================
+
     //Choice of the player
     func playerChoice() -> Character{
         characterChoice()
@@ -122,10 +123,22 @@ class Service {
             return playerChoice()
         }
     }
-
-
+    
+    //Explication of the differents characters game's type to choice
+    func characterChoice(){
+        print(""
+            + "\n1. 🦊 Combattant : L'attaquant classique. Un bon guerrier !"
+            + "\n2. 🐼 Mage : Son talent ? Soigner les membres de son équipe."
+            + "\n3. 🐻 Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
+            + "\n4. 🐨 Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
+    }
+    
+    //============================================
+    // MARK: - GAME STEP 1 : TEAMS CREATION
+    //============================================
+    
     //Function witch will create the team
-    func creatingTeam(){
+    func creatingTeam(firstPlayer: Player, secondPlayer: Player){
          //Welcome message and rules for choices
         print("\nBonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n")
         // Asking for the 1st player name
@@ -143,7 +156,7 @@ class Service {
         //Insert the second choice into the table "Team"
         firstPlayer.team.insert(playerChoice(), at :1)
         //Now is to player2 to make the choice of the 2nd character
-        print("\n\(secondPlayer.name),\nqui va épauler ton \(secondPlayer.team[0])")
+        print("\n\(secondPlayer.name),\nqui va épauler \(secondPlayer.team[0]) ?")
         //Insert the second choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :1)
         //Now the 3rd choice for player1
@@ -156,7 +169,15 @@ class Service {
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
         print("\nVoici vos équipes :\n\(firstPlayer)\n\n\n\(secondPlayer)")
-        
+    }
+    
+    //============================================
+    // MARK: - GAME STEP 2 : TEAMS FIGHTS
+    //============================================
+    
+    //Fight action steps
+        func fight(){
+
         
         //List of fighters after the previous step
         func charactersTeam1() {
@@ -166,6 +187,12 @@ class Service {
                 + "3. \(firstPlayer.team[2])")
         }
         
+        func charactersTeam2() {
+            print(""
+                + "1. \(secondPlayer.team[0])"
+                + "2. \(secondPlayer.team[1])"
+                + "3. \(secondPlayer.team[2])")
+        }
         //function for player1 for choose the character type to use for the fight
         func team1ToChoose() -> Character{
             charactersTeam1()
@@ -180,14 +207,6 @@ class Service {
             }
             return team1ToChoose()
         }
-        
-        func charactersTeam2() {
-            print(""
-                + "1. \(secondPlayer.team[0])"
-                + "2. \(secondPlayer.team[1])"
-                + "3. \(secondPlayer.team[2])")
-        }
-        
         //function for player1 for choose the character type to use for the fight
         func team2ToChoose() -> Character{
             charactersTeam2()
@@ -202,15 +221,7 @@ class Service {
             }
             return team2ToChoose()
         }
-        
         print("\n\(firstPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
-        _ = team1ToChoose()
-        _ = team2ToChoose()
-       
     }
-    
-
-    
-
 }
 

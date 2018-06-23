@@ -4,16 +4,37 @@ class Service {
     //============================================
     // MARK: - Creating new players
     //============================================
+    var firstPlayer = Player(name: "", team:[Character]())
+    var secondPlayer = Player(name: "", team:[Character]())
+    
+    // car1 = Toto, car2 = Tata, car3 = Titi
+    // test name =
+    
+    func playerNameValid(name: String) -> Bool{
+        if name.isEmpty {
+            return false
+        }
+        if name == firstPlayer.name {
+            print("'\(name)' a déjà été pris, veuillez en coisir un autre.")
+            return false
+        }
+        return true
+    }
     
     func player1() -> Player{
         //1. Message quel est votre nom
          print("Quel est le prénom du 1er joueur ?")
         //2. Récupérer nom
         if let name = readLine(){
+            if playerNameValid(name: name){
             //2. Créer le player
             //3. Return Player
             let firstPlayer = Player(name: name, team:[Character]())
             return firstPlayer
+            }
+            else {
+                return player1()
+            }
         }
         else {
             return player1()
@@ -22,24 +43,52 @@ class Service {
     func player2() -> Player{
         print("\nComment s'appelle le 2e joueur ?")
         if let name = readLine(){
+            if playerNameValid(name: name){
             let secondPlayer = Player(name: name,team:[Character]())
             return secondPlayer
+            }
         }
         else {
             return player2()
         }
+        return player2()
     }
+        
+        
     
     //============================================
     // MARK: - Creating new Characters
     //============================================
-   
+    
+    // car1 = Toto, car2 = Tata, car3 = Titi
+    // test name =
+    
+    func isNameValid(team:[Character], name: String) -> Bool{
+        if name.isEmpty {
+            return false
+        }
+        for character in firstPlayer.team {
+            if character.characterName == name || name == firstPlayer.name || name == secondPlayer.name{
+                print("Ce nom : \(name) est déjà utilisé, veuillez en choisir un autre." )
+                return false
+            }
+        }
+        for character in secondPlayer.team {
+            if character.characterName == name || name == firstPlayer.name || name == secondPlayer.name  {
+                print("Ce nom : \(name) est déjà utilisé, veuillez en choisir un autre." )
+                return false
+            }
+        }
+        
+        return true
+    }
+ 
     func newFighter() -> Fighter{
         // giving the name
         print("Comment s'appelle votre combattant ?")
         if let name = readLine(){
            // checking if the name wasn't choose before
-            if isNameValid(team:[Character](), name: name) {
+            if isNameValid(team:[Character](), name: name){
                 //creation of the fighter and return him to the table
                 let newFighter = Fighter(name: name)
                 return newFighter
@@ -54,7 +103,7 @@ class Service {
     func newWizard() -> Wizard{
         print("Comment s'appelle votre mage ?")
         if let name = readLine(){
-            if  isNameValid(team:[Character](),name: name) {
+            if isNameValid(team:[Character](), name:name){
                 let newWizard = Wizard(name: name)
                 return newWizard
             } else {
@@ -67,7 +116,7 @@ class Service {
     func newColossus() -> Colossus{
         print("Comment s'appelle votre colosse ?")
         if let name = readLine(){
-            if  isNameValid(team:[Character](),name: name){
+            if isNameValid(team:[Character](), name: name){
                 let newColossus = Colossus(name: name)
                 return newColossus
             } else {
@@ -80,7 +129,7 @@ class Service {
     func newDwarf() -> Dwarf{
         print("Comment s'appelle votre nain ?")
         if let name = readLine(){
-            if  isNameValid(team:[Character](),name: name) {
+            if isNameValid(team:[Character](), name: name){
                 let newDwarf = Dwarf(name: name)
                 return newDwarf
             } else {
@@ -90,17 +139,7 @@ class Service {
             return newDwarf()
         }
     }
-    func isNameValid(team:[Character], name: String) -> Bool{
-        for (name: newName) in team {
-            if "\(newName)" == "\(name)" {
-                print("Vous avez déjà choisi \(newName), veuillez recommencer" )
-                return true
-            } else {
-                return false
-            }
-        }
-        return true
-    }
+
     //============================================
     // MARK: - Players choosing team characters
     //============================================
@@ -172,7 +211,7 @@ class Service {
         }
         //function for player1 for choose the character type to use for the fight
         func team2ToChoose() -> Character{
-            print("\n\(secondPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
+            print("\n\(firstPlayer.name), qui vas-tu attaquer ?")
             charactersTeam2()
             if let team2ToChoose = readLine() {
                 switch team2ToChoose {
@@ -194,13 +233,13 @@ class Service {
     //============================================
     
     //Function witch will create the team
-    func creatingTeam(firstPlayer: Player, secondPlayer: Player){
+    func creatingTeam(){
          //Welcome message and rules for choices
         print("\nBonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n")
         // Asking for the 1st player name
-        let firstPlayer = player1()
+        firstPlayer = player1()
         // Asking for the 2nd player name
-        let secondPlayer = player2()
+        secondPlayer = player2()
         //Insert the first choice of player 1 into the table "teamPlayer1"
         print("\n\(firstPlayer.name), qui vas-tu choisir en premier ?")
         firstPlayer.team.insert(playerChoice(), at :0)
@@ -212,7 +251,7 @@ class Service {
         //Insert the second choice into the table "Team"
         firstPlayer.team.insert(playerChoice(), at :1)
         //Now is to player2 to make the choice of the 2nd character
-        print("\n\(secondPlayer.name),\nqui va épauler \(secondPlayer.team[0]) ?")
+        print("\n\(secondPlayer.name),\nqui va épauler \(secondPlayer.team[0].characterName) ?")
         //Insert the second choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :1)
         //Now the 3rd choice for player1
@@ -225,10 +264,10 @@ class Service {
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
         print("\nVoici vos équipes :\n\n\(firstPlayer)\n\n\n\(secondPlayer)")
-        _ = team1ToChoose()
-        _ = team2ToChoose()
+        var attaquant = team1ToChoose()
+        var victim = team2ToChoose()
+        attaquant.attack(victim: victim)
+        print("\(victim)\n\n\(firstPlayer)\n\n\n\(secondPlayer)")
     }
-    
-
-}
+ }
 

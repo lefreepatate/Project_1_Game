@@ -1,8 +1,6 @@
 import Foundation
-var firstPlayer = Player(name: "", team:[Character]())
-var secondPlayer = Player(name: "", team:[Character]())
 var game = Service()
-game.creatingTeam(firstPlayer: firstPlayer, secondPlayer: secondPlayer)
+game.creatingTeam()
 /*
 1: Bonjour
 2: Demande du nom joueur 1

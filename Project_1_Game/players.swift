@@ -7,7 +7,14 @@ class Player : CustomStringConvertible  {
         self.team = team
     }
      var description: String {
-        return"\(name) a pour équipe\n \(team)"
+        return""
+        + "           + \(name)'s    +\n"
+        + "           + ┌┬┐┌─┐┌─┐┌┬┐ +\n"
+        + "           +  │ ├┤ ├─┤│││ +\n"
+        + "           +  ┴ └─┘┴ ┴┴ ┴ +\n\n"
+        + "\(team[0].img)\n\(team[0].description)"
+        + "\(team[1].img)\n\(team[1].description)"
+        + "\(team[2].img)\n\(team[2].description)"
     }
 
 }

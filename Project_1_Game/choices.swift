@@ -6,16 +6,13 @@ class Service {
     //============================================
     var firstPlayer = Player(name: "", team:[Character]())
     var secondPlayer = Player(name: "", team:[Character]())
-    
-    // car1 = Toto, car2 = Tata, car3 = Titi
-    // test name =
-    
+   
     func playerNameValid(name: String) -> Bool{
         if name.isEmpty {
             return false
         }
         if name == firstPlayer.name {
-            print("'\(name)' a déjà été pris, veuillez en coisir un autre.")
+            print("'\(name)' already taken by the first player, choose another one !\n")
             return false
         }
         return true
@@ -23,7 +20,7 @@ class Service {
     
     func player1() -> Player{
         //1. Message quel est votre nom
-         print("Quel est le prénom du 1er joueur ?")
+        print("First player's name:")
         //2. Récupérer nom
         if let name = readLine(){
             if playerNameValid(name: name){
@@ -41,7 +38,7 @@ class Service {
         }
     }
     func player2() -> Player{
-        print("\nComment s'appelle le 2e joueur ?")
+        print("\nSecond player's name:")
         if let name = readLine(){
             if playerNameValid(name: name){
             let secondPlayer = Player(name: name,team:[Character]())
@@ -63,29 +60,28 @@ class Service {
     // car1 = Toto, car2 = Tata, car3 = Titi
     // test name =
     
-    func isNameValid(team:[Character], name: String) -> Bool{
+    func isNameValid (team:[Character], name: String) -> Bool{
         if name.isEmpty {
             return false
         }
         for character in firstPlayer.team {
             if character.characterName == name || name == firstPlayer.name || name == secondPlayer.name{
-                print("Ce nom : \(name) est déjà utilisé, veuillez en choisir un autre." )
+                print( "\n'\(name)' already exists, pick another one !\n" )
                 return false
             }
         }
         for character in secondPlayer.team {
             if character.characterName == name || name == firstPlayer.name || name == secondPlayer.name  {
-                print("Ce nom : \(name) est déjà utilisé, veuillez en choisir un autre." )
+                print( "\n'\(name)' already exists, pick another one !\n" )
                 return false
             }
         }
-        
-        return true
+         return true
     }
  
     func newFighter() -> Fighter{
         // giving the name
-        print("Comment s'appelle votre combattant ?")
+        print("Warrior's name ?")
         if let name = readLine(){
            // checking if the name wasn't choose before
             if isNameValid(team:[Character](), name: name){
@@ -101,7 +97,7 @@ class Service {
     }
         
     func newWizard() -> Wizard{
-        print("Comment s'appelle votre mage ?")
+        print("Wizard's name ?")
         if let name = readLine(){
             if isNameValid(team:[Character](), name:name){
                 let newWizard = Wizard(name: name)
@@ -114,7 +110,7 @@ class Service {
         }
     }
     func newColossus() -> Colossus{
-        print("Comment s'appelle votre colosse ?")
+        print("Colossus's name ?")
         if let name = readLine(){
             if isNameValid(team:[Character](), name: name){
                 let newColossus = Colossus(name: name)
@@ -127,7 +123,7 @@ class Service {
         }
     }
     func newDwarf() -> Dwarf{
-        print("Comment s'appelle votre nain ?")
+        print("Dwarf's name ?")
         if let name = readLine(){
             if isNameValid(team:[Character](), name: name){
                 let newDwarf = Dwarf(name: name)
@@ -145,8 +141,9 @@ class Service {
     //============================================
 
     //Choice of the player
+    
     func playerChoice() -> Character{
-        characterChoice()
+
         if let characterChoice = readLine() {
             switch characterChoice {
             case "1": return newFighter()
@@ -154,22 +151,27 @@ class Service {
             case "3": return newColossus()
             case "4": return newDwarf()
             default:
-                print("Choisis entre 1 et 4")
+                print( "\nChoose between 1 and 4\n")
                 return playerChoice()
             }
         }
         else {
             return playerChoice()
         }
+        
     }
     
     //Explication of the differents characters game's type to choice
     func characterChoice(){
-        print(""
-            + "\n1. 🦊 Combattant : L'attaquant classique. Un bon guerrier !"
-            + "\n2. 🐼 Mage : Son talent ? Soigner les membres de son équipe."
-            + "\n3. 🐻 Colosse : Imposant et très résistant, mais il ne vous fera pas bien mal"
-            + "\n4. 🐨 Nain : Sa hache vous infligera beaucoup de dégâts, mais il n'a pas beaucoup de points de vie.\n")
+        print("\n\n\n"
+            +  "+ ┌─┐┬─┐┌─┐┌─┐┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐ +\n"
+            +  "+ │  ├┬┘├┤ ├─┤ │ ├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││ +\n"
+            +  "+ └─┘┴└─└─┘┴ ┴ ┴ └─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴ +\n"
+            + "\(imgTeam)\n"
+            +   "           --------------------------------------------------------------\n\n"
+            +   "               [1] FIGHTER -- [2] WIZARD -- [3] COLOSSUS -- [4] DWARF\n\n"
+            +   "           --------------------------------------------------------------\n\n")
+        
     }
     
     
@@ -178,56 +180,85 @@ class Service {
     //============================================
     
     //Fight action steps
-    func fight(){
-            }
+ 
         //List of fighters after the previous step
         func charactersTeam1() {
             print(""
-                + "1. \(firstPlayer.team[0])"
-                + "2. \(firstPlayer.team[1])"
-                + "3. \(firstPlayer.team[2])")
+                + "[1 \(firstPlayer.team[0].characterType)] \(firstPlayer.team[0].characterName) : \(firstPlayer.team[0].healthBar)\n"
+                + "[2 \(firstPlayer.team[1].characterType)] \(firstPlayer.team[1].characterName) : \(firstPlayer.team[1].healthBar)\n"
+                + "[3 \(firstPlayer.team[2].characterType)] \(firstPlayer.team[2].characterName) : \(firstPlayer.team[2].healthBar)\n")
         }
         
         func charactersTeam2() {
             print(""
-                + "1. \(secondPlayer.team[0])"
-                + "2. \(secondPlayer.team[1])"
-                + "3. \(secondPlayer.team[2])")
+                + "[1 \(secondPlayer.team[0].characterType)] \(secondPlayer.team[0].characterName) : \(secondPlayer.team[0].healthBar)\n"
+                + "[2 \(secondPlayer.team[1].characterType)] \(secondPlayer.team[1].characterName) : \(secondPlayer.team[1].healthBar)\n"
+                + "[3 \(secondPlayer.team[2].characterType)] \(secondPlayer.team[2].characterName) : \(secondPlayer.team[2].healthBar)\n")
         }
+
         //function for player1 for choose the character type to use for the fight
+    let imgWizard = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/wizard.txt")
+    func team1toCare() -> Character{
+        print( "\n\(firstPlayer.name), who will you heal ?\n")
+        charactersTeam1()
+        if let team1toCare = readLine() {
+            switch team1toCare {
+            case "1": return firstPlayer.team[0]
+            case "2": return firstPlayer.team[1]
+            case "3": return firstPlayer.team[2]
+            default:
+            print("\nChoose between 1 and 3\n")
+            }
+        }
+        return team1toCare()
+    }
         func team1ToChoose() -> Character{
-            print("\n\(firstPlayer.name), quel guerrier vas-tu choisir pour attaquer ou soigner ?")
+            print( "\n\(firstPlayer.name), choose your character to attack or heal :\n")
             charactersTeam1()
+
             if let team1ToChoose = readLine() {
                 switch team1ToChoose {
-                case "1": return firstPlayer.team[0]
-                case "2": return firstPlayer.team[1]
-                case "3": return firstPlayer.team[2]
+                case "1": if firstPlayer.team[0].img == imgWizard {
+                                return team1toCare()
+                                } else {
+                                return firstPlayer.team[0]
+                                }
+                case "2": if firstPlayer.team[1].img == imgWizard {
+                                return team1toCare()
+                                } else {
+                                return firstPlayer.team[1]
+                                }
+                case "3": if firstPlayer.team[2].img == imgWizard {
+                                return team1toCare()
+                                } else {
+                                return firstPlayer.team[2]
+                                }
                 default:
-                    print("Choisis entre 1 et 3")
+                    print( "\nChoose between 1 and 3")
                 }
             }
             return team1ToChoose()
         }
         //function for player1 for choose the character type to use for the fight
-        func team2ToChoose() -> Character{
-            print("\n\(firstPlayer.name), qui vas-tu attaquer ?")
-            charactersTeam2()
-            if let team2ToChoose = readLine() {
-                switch team2ToChoose {
-                case "1": return secondPlayer.team[0]
-                case "2": return secondPlayer.team[1]
-                case "3": return secondPlayer.team[2]
-                default:
-                    print("Choisis entre 1 et 3")
+        func characterToChoose() -> Character{
+            print( "\n\(firstPlayer.name), who will you attack ?\n")
+                charactersTeam2()
+                if let team2ToAttack = readLine() {
+                    switch team2ToAttack {
+                    case "1": return secondPlayer.team[0]
+                    case "2": return secondPlayer.team[1]
+                    case "3": return secondPlayer.team[2]
+                    default:
+                        print("\nChoose between 1 and 3")
+                    }
                 }
-            }
-            return team2ToChoose()
-        }
-       
+    return characterToChoose()
+    }
 
-    
-    
+    let fileContent = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/bonjour.txt")
+
+    let imgTeam = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/team.txt")
+    let imgTelling = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/Telling.txt")
     //============================================
     // MARK: - GAME
     //============================================
@@ -235,39 +266,77 @@ class Service {
     //Function witch will create the team
     func creatingTeam(){
          //Welcome message and rules for choices
-        print("\nBonjour et bienvenue dans un univers, sans règles !\nChoisis bien tes joueurs, tu dois en choisir 3 maximum! ;)\n")
+
+        print("\(fileContent)\n"
+           +  "+ ██████╗  █████╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ ██╗   ██╗██╗     ███████╗ +\n"
+           +  "+ ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔═══██╗██║   ██║██║     ██╔════╝ +\n"
+           +  "+ ██║  ██║███████║██████╔╝█████╔╝     ███████╗██║   ██║██║   ██║██║     ███████╗ +\n"
+           +  "+ ██║  ██║██╔══██║██╔══██╗██╔═██╗     ╚════██║██║   ██║██║   ██║██║     ╚════██║ +\n"
+           +  "+ ██████╔╝██║  ██║██║  ██║██║  ██╗    ███████║╚██████╔╝╚██████╔╝███████╗███████║ +\n"
+           +  "+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝ +\n"
+           + " \n"
+           +  "+  ██████╗██╗  ██╗██████╗  ██████╗ ███╗   ██╗██╗ ██████╗██╗     ███████╗███████╗ +\n"
+           +  "+ ██╔════╝██║  ██║██╔══██╗██╔═══██╗████╗  ██║██║██╔════╝██║     ██╔════╝██╔════╝ +\n"
+           +  "+ ██║     ███████║██████╔╝██║   ██║██╔██╗ ██║██║██║     ██║     █████╗  ███████╗ +\n"
+           +  "+ ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╗██║██║██║     ██║     ██╔══╝  ╚════██║ +\n"
+           +  "+ ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚████║██║╚██████╗███████╗███████╗███████║ +\n"
+           +  "+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝  +\n"
+           + "\n\n"
+           +   "           --------------------------------------------------------------\n"
+           + "\n\n"
+           +   "            WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
+           +   "                     Play Now & Enjoy a story-driven, fantasy RPG"
+           + "\n\n"
+           +   "           --------------------------------------------------------------\n"
+           + "\n\n")
+        print(""
+           +  "+ ┌─┐┌─┐┬  ┌─┐┌─┐┌┬┐  ┌─┐┬  ┌─┐┬ ┬┌─┐┬─┐┌─┐  ┌┐┌┌─┐┌┬┐┌─┐ +\n"
+           +  "+ └─┐├┤ │  ├┤ │   │   ├─┘│  ├─┤└┬┘├┤ ├┬┘└─┐  │││├─┤│││├┤  +\n"
+           +  "+ └─┘└─┘┴─┘└─┘└─┘ ┴   ┴  ┴─┘┴ ┴ ┴ └─┘┴└─└─┘  ┘└┘┴ ┴┴ ┴└─┘ +\n"
+            + "\n\n")
         // Asking for the 1st player name
         firstPlayer = player1()
         // Asking for the 2nd player name
         secondPlayer = player2()
+        characterChoice()
         //Insert the first choice of player 1 into the table "teamPlayer1"
-        print("\n\(firstPlayer.name), qui vas-tu choisir en premier ?")
+        print( "\n\(firstPlayer.name), choose your first character :")
         firstPlayer.team.insert(playerChoice(), at :0)
         //Insert the first choice of player 2 into the table "teamPlayer2"
-        print("\n\(secondPlayer.name), lequels vas-tu choisir en premier ?")
+        print( "\n\(secondPlayer.name), choose your first character :")
         secondPlayer.team.insert(playerChoice(), at :0)
         //Message confirming that the player was inserted on the table and propose the 2nd choice for player1
-        print("\n\(firstPlayer.name), à toi de choisir le 2e guerrier ?")
+        print( "\n\(firstPlayer.name), your second character ?")
         //Insert the second choice into the table "Team"
         firstPlayer.team.insert(playerChoice(), at :1)
         //Now is to player2 to make the choice of the 2nd character
-        print("\n\(secondPlayer.name),\nqui va épauler \(secondPlayer.team[0].characterName) ?")
+        print( "\n\(secondPlayer.name), which character is going to support \(secondPlayer.team[0].characterName) ?")
         //Insert the second choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :1)
         //Now the 3rd choice for player1
-        print("\n\(firstPlayer.name), plus qu'un combattant à choisir !")
+        print( "\n\(firstPlayer.name), who will you choose to be with \(firstPlayer.team[0].characterName) and \(firstPlayer.team[1].characterName) ?")
         //Insert the third choice into the table "Team"
         firstPlayer.team.insert(playerChoice(), at :2)
         //Now the 3rd choice for player2
-        print("\n\(secondPlayer.name), le dernier, mais pas des moindres !")
+        print( "\n\(secondPlayer.name), the last choice for a perfect team :")
         //Insert the third choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
-        print("\nVoici vos équipes :\n\n\(firstPlayer)\n\n\n\(secondPlayer)")
+        print( "\n\(firstPlayer)\n\(secondPlayer)")
+        
+        
+        fight()
+    }
+    func fight(){
+        print(""
+        +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
+        +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
+        +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
         var attaquant = team1ToChoose()
-        var victim = team2ToChoose()
+        var victim = characterToChoose()
         attaquant.attack(victim: victim)
-        print("\(victim)\n\n\(firstPlayer)\n\n\n\(secondPlayer)")
+        print("\(victim)\n\(firstPlayer)\n\(secondPlayer)")
+        
     }
  }
 

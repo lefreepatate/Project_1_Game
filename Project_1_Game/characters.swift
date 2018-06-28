@@ -39,7 +39,7 @@ class Character:CustomStringConvertible {
 }
 //Definition of the fighter character
 class Fighter: Character {
-    let imgFighter = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/fighter.txt")
+    let imgFighter = try! String(contentsOfFile:"fighter.txt")
     init(name: String){
         super.init(characterName: name, characterType : "Fighter", healthBar: 100, healthDamages: 10, img: "\(imgFighter)")
     }
@@ -48,21 +48,21 @@ class Fighter: Character {
 }
 //Definition of the Wizard character
 class Wizard: Character {
-    let imgWizard = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/wizard.txt")
+    let imgWizard = try! String(contentsOfFile:"wizard.txt")
     init(name: String){
         super.init(characterName: name, characterType: "Wizard", healthBar: 90, healthDamages : -15, img: "\(imgWizard)")
     }
     override var description: String{
         return ""
             + "---------------------------------------\n"
-            + "     \(characterName) | Life : \(healthBar) | Care : \(healthDamages)\n"
+            + "    \(characterName) | Life : \(healthBar) | Care : \(healthDamages)\n"
             + "---------------------------------------\n"
     }
 
 }
 //Definition of the Colossus character
 class Colossus: Character {
-        let imgColossus = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/colossus.txt")
+        let imgColossus = try! String(contentsOfFile:"colossus.txt")
     init(name: String){
         super.init(characterName: name, characterType: "Colossus", healthBar: 140, healthDamages: 5, img:"\(imgColossus)")
     }
@@ -70,7 +70,7 @@ class Colossus: Character {
 }
 //Definition of the Dwarf character
 class Dwarf: Character {
-        let imgDwarf = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/dwarf.txt")
+        let imgDwarf = try! String(contentsOfFile:"dwarf.txt")
     init(name: String){
         super.init(characterName: name, characterType:"Dwarf", healthBar: 80, healthDamages: 20, img:"\(imgDwarf)")
     }

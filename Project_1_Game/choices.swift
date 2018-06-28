@@ -197,7 +197,7 @@ class Service {
         }
 
         //function for player1 for choose the character type to use for the fight
-    let imgWizard = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/wizard.txt")
+    let imgWizard = try! String(contentsOfFile:"wizard.txt")
     func team1toCare() -> Character{
         print( "\n\(firstPlayer.name), who will you heal ?\n")
         charactersTeam1()
@@ -255,10 +255,10 @@ class Service {
     return characterToChoose()
     }
 
-    let fileContent = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/bonjour.txt")
+    let fileContent = try! String(contentsOfFile:"bonjour.txt")
 
-    let imgTeam = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/team.txt")
-    let imgTelling = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/Telling.txt")
+    let imgTeam = try! String(contentsOfFile:"team.txt")
+    let imgTelling = try! String(contentsOfFile:"Telling.txt")
     //============================================
     // MARK: - GAME
     //============================================

@@ -8,14 +8,12 @@ class Player : CustomStringConvertible  {
     }
      var description: String {
         return""
-        + "///////////+ \(name)'s    \n"
-        + "///////////+ ┌┬┐┌─┐┌─┐┌┬┐ +///////////\n"
-        + "///////////+  │ ├┤ ├─┤│││ +///////////\n"
-        + "///////////+  ┴ └─┘┴ ┴┴ ┴ +///////////\n"
-        + "\(team[0].img)\n\(team[0].description)\n"
-        + "\(team[1].img)\n\(team[1].description)\n"
-        + "\(team[2].img)\n\(team[2].description)\n"
-
+        + "///+ \(name)'s    \n"
+        + "///+ ┌┬┐┌─┐┌─┐┌┬┐ +\n"
+        + "///+  │ ├┤ ├─┤│││ +\n"
+        + "///+  ┴ └─┘┴ ┴┴ ┴ +\n"
+        + "\(team[0].description)\(team[1].description)\(team[2].description)"
+        + "\n"
     }
 
 }

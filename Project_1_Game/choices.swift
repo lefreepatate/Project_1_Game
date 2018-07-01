@@ -146,13 +146,9 @@ class Service {
             case "4": return newDwarf()
             default:
                 print( "🙈 Choose between 1 and 4\n")
-                return playerChoice()
             }
         }
-        else {
-            return playerChoice()
-        }
-        
+         return playerChoice()
     }
     
     //Explication of the differents characters game's type to choice
@@ -162,12 +158,11 @@ class Service {
             +  "+ │  ├┬┘├┤ ├─┤ │ ├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││ +\n"
             +  "+ └─┘┴└─└─┘┴ ┴ ┴ └─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴ +\n\n"
             +   "------------------------------------------------------------------------\n\n"
-            +   "   [1] 🦊 FIGHTER :  ♥️ 100 | 💀 10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
-            +   "   [3] 🐻 COLOSSUS : ♥️ 140 | 💀 5     [4] 🐨 DWARF :  ♥️ 80 | 💀 20\n\n"
+            +   "   [1] 🦊 FIGHTER :  ♥️ 100 | 💀 -10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
+            +   "   [3] 🐻 COLOSSUS : ♥️ 140 | 💀 -5     [4] 🐨 DWARF :  ♥️ 80 | 💀 -20\n\n"
             +   "------------------------------------------------------------------------\n\n")
         
     }
-    
     
     //============================================
     // MARK: - STEP 2 : TEAMS FIGHTS
@@ -178,34 +173,19 @@ class Service {
         //List of fighters after the previous step
         func charactersTeam1() {
             print(""
-                + "[1 \(firstPlayer.team[0].characterType)] \(firstPlayer.team[0].characterName) : \(firstPlayer.team[0].healthBar)\n"
-                + "[2 \(firstPlayer.team[1].characterType)] \(firstPlayer.team[1].characterName) : \(firstPlayer.team[1].healthBar)\n"
-                + "[3 \(firstPlayer.team[2].characterType)] \(firstPlayer.team[2].characterName) : \(firstPlayer.team[2].healthBar)\n")
+                + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) : \(firstPlayer.team[0].healthBar)\n"
+                + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) : \(firstPlayer.team[1].healthBar)\n"
+                + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) : \(firstPlayer.team[2].healthBar)\n")
         }
         
         func charactersTeam2() {
             print(""
-                + "[1 \(secondPlayer.team[0].characterType)] \(secondPlayer.team[0].characterName) : \(secondPlayer.team[0].healthBar)\n"
-                + "[2 \(secondPlayer.team[1].characterType)] \(secondPlayer.team[1].characterName) : \(secondPlayer.team[1].healthBar)\n"
-                + "[3 \(secondPlayer.team[2].characterType)] \(secondPlayer.team[2].characterName) : \(secondPlayer.team[2].healthBar)\n")
+                + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) : \(secondPlayer.team[0].healthBar)\n"
+                + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) : \(secondPlayer.team[1].healthBar)\n"
+                + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) : \(secondPlayer.team[2].healthBar)\n")
         }
 
         //function for player1 for choose the character type to use for the fight
-
-    func team1toCare() -> Character{
-        print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
-        charactersTeam1()
-        if let team1toCare = readLine() {
-            switch team1toCare {
-            case "1": return firstPlayer.team[0]
-            case "2": return firstPlayer.team[1]
-            case "3": return firstPlayer.team[2]
-            default:
-            print("\nChoose between 1 and 3\n")
-            }
-        }
-        return team1toCare()
-    }
     func team1ToChoose() -> Character{
             print( "🐵 \(firstPlayer.name), choose your character to attack or heal :\n")
             charactersTeam1()
@@ -218,26 +198,12 @@ class Service {
                     print( "Choose between 1 and 3\n")
                 }
             }
-        return team1ToChoose()
+            return team1ToChoose()
         }
         //function for player1 for choose the character type to use for the fight
-        func characterToChoose() -> Character{
-            if team1ToChoose().characterType == "🐼" {
-            print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
-            charactersTeam1()
-            if let team1toCare = readLine() {
-                switch team1toCare {
-                case "1": return firstPlayer.team[0]
-                case "2": return firstPlayer.team[1]
-                case "3": return firstPlayer.team[2]
-                default:
-                    print("\nChoose between 1 and 3\n")
-                    }
-                }
-                return characterToChoose()
-            }
-            else {
-            print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
+    func characterToChoose() -> Character{
+       /* if firstPlayer.description != "🐼"{
+                print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
                 charactersTeam2()
                 if let team2ToAttack = readLine() {
                     switch team2ToAttack {
@@ -248,14 +214,24 @@ class Service {
                         print("Choose between 1 and 3\n")
                     }
                 }
-                return characterToChoose()
-            }
+            return characterToChoose()
         }
+        else {*/
+            print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
+            charactersTeam1()
+            if let team1toCare = readLine() {
+                switch team1toCare {
+                case "1": return firstPlayer.team[0]
+                case "2": return firstPlayer.team[1]
+                case "3": return firstPlayer.team[2]
+                default:
+                    print("\nChoose between 1 and 3\n")
+                }
+            }
+            return characterToChoose()
+        }
+    //}
 
-   let fileContent = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/bonjour.txt")
-
-   //   let imgTeam = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/team.txt")
-   //   let imgTelling = try! String(contentsOfFile:"/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/team.txt")
     //============================================
     // MARK: - GAME
     //============================================
@@ -332,7 +308,7 @@ class Service {
         var attaquant = team1ToChoose()
         var victim = characterToChoose()
         attaquant.attack(victim: victim)
-        print("\(victim)\n\(firstPlayer)\n\(secondPlayer)")
+        print("\(firstPlayer)\n\(secondPlayer)")
         
     }
  }

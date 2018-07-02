@@ -3,47 +3,28 @@ import Foundation
 //============================================
 // MARK: - GLOBAL CHARACTER CLASS
 //============================================
-
 class Character:CustomStringConvertible {
     let characterName:String
-    var characterType:String
+    let characterType:String
     var healthBar:Int
     let healthDamages:Int
     let maxHealthBar:Int
     let weapon:String
-    let characters: Characters
-    init(characterName: String, characterType:String, healthBar:Int, healthDamages:Int, weapon:String, characters:Characters){
+    let type: Characters
+    init(characterName: String, characterType:String, healthBar:Int, healthDamages:Int, weapon:String, type:Characters){
         self.characterName = characterName
         self.characterType = characterType
         self.healthBar = healthBar
         self.weapon = weapon
         self.maxHealthBar = healthBar
         self.healthDamages = healthDamages
-        self.characters = characters
-        switch characters {
-        case .fighter: _ = Fighter(name: "")
-            /*self.characterType = "🦊"
-            self.healthBar = 10
-            self.healthDamages = 10
-            self.weapon = "🏹"*/
-        case .wizard: _ = Wizard(name: "")
-           /* self.characterType = "🐼"
-            self.healthBar = 90
-            self.healthDamages = 15
-            self.weapon = "💫"*/
-        case .colossus: _ = Colossus(name: "")
-            /*self.characterType = "🐻"
-            self.healthBar = 140
-            self.healthDamages = 5
-            self.weapon = "🔥"*/
-        case .dwarf: _ = Dwarf(name:"")
-           /* self.characterType = "🐨"
-            self.healthBar = 80
-            self.healthDamages = 20
-            self.weapon = "⚔️"*/
+        self.type = type
         }
+    
+    enum Characters {
+        case fighter, wizard, colossus, dwarf
     }
- 
+    
     func attack(victim: Character){
         victim.healthBar -= healthDamages
         print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : - \(healthDamages)❣️")
@@ -55,8 +36,7 @@ class Character:CustomStringConvertible {
         }
         if healthBar < 0 {
             healthBar = 0
-            characterType = "☠️"
-            return "\(characterType) \(characterName)"
+            return "✖︎✖︎✖︎✖︎ ☠️ \(characterName) ✖︎✖︎✖︎✖︎"
         }
         else {
             return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 \(healthDamages)"
@@ -70,9 +50,8 @@ class Character:CustomStringConvertible {
 
 class Fighter: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🦊", healthBar: 100, healthDamages: 10, weapon: "🏹", characters: .fighter)
+        super.init(characterName: name, characterType : "🦊", healthBar: 20, healthDamages: 10, weapon: "🏹", type: .fighter)
     }
-
 }
 
 //============================================
@@ -81,12 +60,12 @@ class Fighter: Character {
 
 class Wizard: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", characters: .wizard)
+        super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", type: .wizard)
     }
     override var description: String{
         if healthBar < 0 {
             healthBar = 0
-            return "\(characterType) \(characterName) : ☠️"
+            return "\(characterType) \(characterName) ⇒ ☠️"
         }
         else {
             return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💚 \(healthDamages)"
@@ -104,7 +83,7 @@ class Wizard: Character {
 
 class Colossus: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🐻", healthBar: 140, healthDamages: 5, weapon: "🔥", characters: .colossus)
+        super.init(characterName: name, characterType : "🐻", healthBar: 140, healthDamages: 5, weapon: "🔥", type: .colossus)
     }
 }
 
@@ -114,14 +93,8 @@ class Colossus: Character {
 
 class Dwarf: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🐨", healthBar: 80, healthDamages: 25, weapon: "⚔", characters: .dwarf)
+        super.init(characterName: name, characterType : "🐨", healthBar: 80, healthDamages: 25, weapon: "⚔", type: .dwarf)
     }
 }
 
-//============================================
-// MARK: - ENUM
-//============================================
 
-enum Characters {
-    case fighter, wizard, colossus, dwarf
-}

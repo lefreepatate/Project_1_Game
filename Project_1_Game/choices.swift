@@ -74,20 +74,22 @@ class Service {
     }
  
     func newFighter() -> Fighter{
+
         // giving the name
-        print("Warrior's name ?")
+        print("Fighter's name ?")
         if let name = readLine(){
+            print(name)
            // checking if the name wasn't choose before
             if isNameValid(name: name){
+                 print(name)
                 //creation of the fighter and return him to the table
                 let newFighter = Fighter(name: name)
+                 print(name)
                 return newFighter
-        }  else {
-            return newFighter()
-            }
-        }  else {
+        }
             return newFighter()
         }
+         return newFighter()
     }
         
     func newWizard() -> Wizard{
@@ -187,9 +189,11 @@ class Service {
 
         //function for player1 for choose the character type to use for the fight
     func team1ToChoose() -> Character{
+        
             print( "🐵 \(firstPlayer.name), choose your character to attack or heal :\n")
             charactersTeam1()
             if let team1ToChoose = readLine() {
+                
                 switch team1ToChoose {
                 case "1": return firstPlayer.team[0]
                 case "2": return firstPlayer.team[1]
@@ -197,26 +201,15 @@ class Service {
                 default:
                     print( "Choose between 1 and 3\n")
                 }
+                
             }
             return team1ToChoose()
         }
+        
         //function for player1 for choose the character type to use for the fight
+    
     func characterToChoose() -> Character{
-       /* if firstPlayer.description != "🐼"{
-                print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
-                charactersTeam2()
-                if let team2ToAttack = readLine() {
-                    switch team2ToAttack {
-                    case "1": return secondPlayer.team[0]
-                    case "2": return secondPlayer.team[1]
-                    case "3": return secondPlayer.team[2]
-                    default:
-                        print("Choose between 1 and 3\n")
-                    }
-                }
-            return characterToChoose()
-        }
-        else {*/
+        if team1ToChoose().characterType == "🐼"{
             print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
             charactersTeam1()
             if let team1toCare = readLine() {
@@ -226,10 +219,28 @@ class Service {
                 case "3": return firstPlayer.team[2]
                 default:
                     print("\nChoose between 1 and 3\n")
+                    }
+                return characterToChoose()
+                }
+        }
+        else {
+            print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
+            charactersTeam2()
+                if let team2ToAttack = readLine() {
+                    switch team2ToAttack {
+                    case "1": return secondPlayer.team[0]
+                    case "2": return secondPlayer.team[1]
+                    case "3": return secondPlayer.team[2]
+                    default:
+                        print("Choose between 1 and 3\n")
+                    }
                 }
             }
-            return characterToChoose()
-        }
+        return characterToChoose()
+    }
+
+    
+
     //}
 
     //============================================

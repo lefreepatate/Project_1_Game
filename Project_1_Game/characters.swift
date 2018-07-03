@@ -40,19 +40,19 @@ class Character:CustomStringConvertible {
         
         return Int(strData!)!
     }
-    func play(versus player:Character){
+    func play(versus player:Character) -> Character{
         var classe1: Characters!
         var playerChoice : Int
         //showing the player description before playing
         print(player)
         //Select for player
         repeat{
-            print("Wich action are you going to do ?")
+            print("choose your character to attack or heal :\n")
             print("1. Attack")
             print("2. Heal")
             playerChoice = input()
             print()
-        } while playerChoice != 1 && playerChoice != 2
+        } while playerChoice != 1 || playerChoice != 2
         //Checking the player's action
         if playerChoice == 1 {
             switch playerChoice {
@@ -68,7 +68,8 @@ class Character:CustomStringConvertible {
             }
             self.attack(victim: player)
             }
-    }
+        return play(versus: player)
+        }
 
     var description: String{
         if self.healthBar > maxHealthBar {

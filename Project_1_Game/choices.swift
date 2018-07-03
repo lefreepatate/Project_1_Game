@@ -297,14 +297,11 @@ class Service {
         +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
         +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
         +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        var attacker = team1ToChoose()
-        var victim = characterToChoose()
-        while firstPlayer.team[0].healthBar > 0 && firstPlayer.team[1].healthBar > 0 && firstPlayer.team[2].healthBar > 0 && secondPlayer.team[0].healthBar > 0 && secondPlayer.team[1].healthBar > 0 && secondPlayer.team[2].healthBar > 0 {
-            attacker.play(versus: victim)
-        }
-
-        print("\(firstPlayer)\(secondPlayer)")
-        
+        let player1 = firstPlayer.team
+        let player2 = secondPlayer.team
+        repeat {
+            player1.play(versus:player2)
+        } while firstPlayer.team[0].healthBar > 0 && firstPlayer.team[1].healthBar > 0 && firstPlayer.team[2].healthBar > 0 && secondPlayer.team[0].healthBar > 0 && secondPlayer.team[1].healthBar > 0 && secondPlayer.team[2].healthBar > 0
     }
  }
 

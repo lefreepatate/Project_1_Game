@@ -6,8 +6,8 @@ class Player : CustomStringConvertible  {
         self.name = name
         self.team = team
     }
-     var description: String {
-        return"\n"
+    var description: String {
+    return"\n"
         + "///+ \(name)'s    \n"
         + "///+ ┌┬┐┌─┐┌─┐┌┬┐ + \(team[0].description)\n"
         + "///+  │ ├┤ ├─┤│││ + \(team[1].description)\n"

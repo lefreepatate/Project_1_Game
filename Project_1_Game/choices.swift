@@ -26,6 +26,7 @@ class Service {
             return player1()
         }
     }
+    
     func player2() -> Player{
         print("\nSecond player's name:")
         if let name = readLine(){
@@ -39,17 +40,11 @@ class Service {
         }
         return player2()
     }
-        
-        
-    
+   
     //============================================
     // MARK: - Creating new Characters
     //============================================
-    
-    // car1 = Toto, car2 = Tata, car3 = Titi
-    // test name =
-    
-   
+
     func isNameValid (name: String) -> Bool {
          if name.isEmpty {
                 return false
@@ -66,7 +61,7 @@ class Service {
             for newCharacter in teams {
                 if newCharacter.characterName == name{
                     print("🙈 '\(name)' already exists, pick another one !\n" )
-                    return false
+                return false
                 }
             }
         }
@@ -148,39 +143,36 @@ class Service {
     
     //Explication of the differents characters game's type to choice
     func characterChoice(){
-        print("\n\n\n"
+        print("\n\n"
             +  "+ ┌─┐┬─┐┌─┐┌─┐┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐ +\n"
             +  "+ │  ├┬┘├┤ ├─┤ │ ├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││ +\n"
             +  "+ └─┘┴└─└─┘┴ ┴ ┴ └─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴ +\n\n"
-            +   "------------------------------------------------------------------------\n\n"
-            +   "   [1] 🦊 FIGHTER :  ♥️ 100 | 💀 -10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
-            +   "   [3] 🐻 COLOSSUS : ♥️ 140 | 💀 -5     [4] 🐨 DWARF :  ♥️ 80 | 💀 -20\n\n"
-            +   "------------------------------------------------------------------------\n\n")
-        
+            +   "-------------------------------------------------------------------------\n\n"
+            +   "  [1] 🦊 FIGHTER :  ♥️ 100 | 💀 -10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
+            +   "  [3] 🐻 COLOSSUS : ♥️ 140 | 💀 -5     [4] 🐨 DWARF :  ♥️ 80 | 💀 -20\n\n"
+            +   "------------------------------------------------------------------------\n")
     }
     
     //============================================
     // MARK: - STEP 2 : TEAMS FIGHTS
     //============================================
-    
-    //Fight action steps
- 
-        //List of fighters after the previous step
-        func charactersTeam1() {
+
+    //List of fighters after the previous step
+    func charactersTeam1() {
             print(""
                 + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) : \(firstPlayer.team[0].healthBar)\n"
                 + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) : \(firstPlayer.team[1].healthBar)\n"
                 + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) : \(firstPlayer.team[2].healthBar)\n")
-        }
+    }
         
-        func charactersTeam2() {
+    func charactersTeam2() {
             print(""
                 + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) : \(secondPlayer.team[0].healthBar)\n"
                 + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) : \(secondPlayer.team[1].healthBar)\n"
                 + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) : \(secondPlayer.team[2].healthBar)\n")
-        }
+    }
 
-        //function for player1 for choose the character type to use for the fight
+    //function for player1 for choose the character type to use for the fight
     func team1ToChoose() -> Character{
             print( "🐵 \(firstPlayer.name), choose your character to attack or heal :\n")
             charactersTeam1()
@@ -194,10 +186,9 @@ class Service {
                 }
             }
         return team1ToChoose()
-        }
+    }
         
-        //function for player1 for choose the character type to use for the fight
-    
+    //function for player1 for choose the character type to use for the fight
     func characterToChoose() -> Character{
 
         if team1ToChoose().type == .wizard {
@@ -214,7 +205,7 @@ class Service {
                 return characterToChoose()
             }
             return characterToChoose()
-        } else {
+            } else {
             print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
             charactersTeam2()
                 if let team2ToAttack = readLine() {
@@ -231,19 +222,19 @@ class Service {
             }
         }
 
-    
-
-    //}
-
     //============================================
     // MARK: - GAME
     //============================================
-    
+    func input() -> Int {
+        let strData = readLine();
+        
+        return Int(strData!)!
+    }
     //Function witch will create the team
     func creatingTeam(){
          //Welcome message and rules for choices
 
-        print("\n\n\n"
+        print("\n\n"
            +  "+ ██████╗  █████╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ ██╗   ██╗██╗     ███████╗ +\n"
            +  "+ ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔═══██╗██║   ██║██║     ██╔════╝ +\n"
            +  "+ ██║  ██║███████║██████╔╝█████╔╝     ███████╗██║   ██║██║   ██║██║     ███████╗ +\n"
@@ -276,7 +267,7 @@ class Service {
         secondPlayer = player2()
         characterChoice()
         //Insert the first choice of player 1 into the table "teamPlayer1"
-        print( "\n\(firstPlayer.name), choose your first character :")
+        print( "\(firstPlayer.name), choose your first character :")
         firstPlayer.team.insert(playerChoice(), at :0)
         //Insert the first choice of player 2 into the table "teamPlayer2"
         print( "\n\(secondPlayer.name), choose your first character :")
@@ -299,8 +290,6 @@ class Service {
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
         print( "\n\(firstPlayer)\n\(secondPlayer)")
-        
-        
         fight()
     }
     func fight(){
@@ -308,10 +297,13 @@ class Service {
         +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
         +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
         +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        var attaquant = team1ToChoose()
+        var attacker = team1ToChoose()
         var victim = characterToChoose()
-        attaquant.attack(victim: victim)
-        print("\(firstPlayer)\n\(secondPlayer)")
+        while firstPlayer.team[0].healthBar > 0 && firstPlayer.team[1].healthBar > 0 && firstPlayer.team[2].healthBar > 0 && secondPlayer.team[0].healthBar > 0 && secondPlayer.team[1].healthBar > 0 && secondPlayer.team[2].healthBar > 0 {
+            attacker.play(versus: victim)
+        }
+
+        print("\(firstPlayer)\(secondPlayer)")
         
     }
  }

@@ -156,27 +156,29 @@ class Service {
     //============================================
     // MARK: - STEP 2 : TEAMS FIGHTS
     //============================================
-
     //List of fighters after the previous step
     func charactersTeam1() {
+        if firstPlayer.team[0].healthBar == 0 || firstPlayer.team[1].healthBar == 0 || firstPlayer.team[2].healthBar == 0 {
+            print("☠️ ✖︎✖︎✖︎✖︎ ✖︎✖︎✖︎✖︎ ☠️")
+        }
             print(""
-                + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) : \(firstPlayer.team[0].healthBar)\n"
-                + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) : \(firstPlayer.team[1].healthBar)\n"
-                + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) : \(firstPlayer.team[2].healthBar)\n")
-    }
-        
+                + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) ♥️ \(firstPlayer.team[0].healthBar)\n"
+                + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) ♥️ \(firstPlayer.team[1].healthBar)\n"
+                + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) ♥️ \(firstPlayer.team[2].healthBar)\n")
+        }
+       
     func charactersTeam2() {
             print(""
-                + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) : \(secondPlayer.team[0].healthBar)\n"
-                + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) : \(secondPlayer.team[1].healthBar)\n"
-                + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) : \(secondPlayer.team[2].healthBar)\n")
-    }
+                + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) ♥️ \(secondPlayer.team[0].healthBar)\n"
+                + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) ♥️ \(secondPlayer.team[1].healthBar)\n"
+                + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) ♥️ \(secondPlayer.team[2].healthBar)\n")
+        }
 
     //function for player1 for choose the character type to use for the fight
     func team1ToChoose() -> Character{
-            print( "🐵 \(firstPlayer.name), choose your character to attack or heal :\n")
-            charactersTeam1()
-            if let team1ToChoose = readLine() {
+        print("🐵 \(firstPlayer.name), choose your character:\n")
+        charactersTeam1()
+        if let team1ToChoose = readLine() {
                 switch team1ToChoose {
                 case "1": return firstPlayer.team[0]
                 case "2": return firstPlayer.team[1]
@@ -186,11 +188,25 @@ class Service {
                 }
             }
         return team1ToChoose()
+      }
+    //function for player2 for choose the character type to use for the fight
+    func team2ToChoose() -> Character{
+        print("🐵 \(secondPlayer.name), choose your character:\n")
+        charactersTeam2()
+        if let team1ToChoose = readLine() {
+            switch team1ToChoose {
+            case "1": return secondPlayer.team[0]
+            case "2": return secondPlayer.team[1]
+            case "3": return secondPlayer.team[2]
+            default:
+                print( "Choose between 1 and 3\n")
+            }
+        }
+        return team2ToChoose()
     }
-        
+    
     //function for player1 for choose the character type to use for the fight
-    func characterToChoose() -> Character{
-
+    func team1toFight() -> Character{
         if team1ToChoose().type == .wizard {
             print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
             charactersTeam1()
@@ -202,34 +218,57 @@ class Service {
                 default:
                     print("\nChoose between 1 and 3\n")
                 }
-                return characterToChoose()
+                return team1ToChoose()
             }
-            return characterToChoose()
-            } else {
+          } else {
             print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
             charactersTeam2()
-                if let team2ToAttack = readLine() {
-                    switch team2ToAttack {
-                    case "1": return secondPlayer.team[0]
-                    case "2": return secondPlayer.team[1]
-                    case "3": return secondPlayer.team[2]
-                    default:
-                        print("Choose between 1 and 3\n")
-                    }
-                    return characterToChoose()
+            if let team2ToAttack = readLine() {
+                switch team2ToAttack {
+                case "1": return secondPlayer.team[0]
+                case "2": return secondPlayer.team[1]
+                case "3": return secondPlayer.team[2]
+                default:
+                    print("Choose between 1 and 3\n")
                 }
-            return characterToChoose()
             }
         }
-
+    return team1toFight()
+    }
+    //function for player1 for choose the character type to use for the fight
+    func team2toFight() -> Character{
+        if team2ToChoose().type == .wizard {
+            print( "\n🐵 \(secondPlayer.name), who will you heal ?\n")
+            charactersTeam2()
+            if let team2toCare = readLine() {
+                switch team2toCare {
+                case "1": return secondPlayer.team[0]
+                case "2": return secondPlayer.team[1]
+                case "3": return secondPlayer.team[2]
+                default:
+                    print("\nChoose between 1 and 3\n")
+                }
+            return team2toFight()
+            }
+        } else {
+            print( "\n🐵 \(secondPlayer.name), who will you attack ?\n")
+            charactersTeam1()
+            if let team2ToAttack = readLine() {
+                switch team2ToAttack {
+                case "1": return firstPlayer.team[0]
+                case "2": return firstPlayer.team[1]
+                case "3": return firstPlayer.team[2]
+                default:
+                    print("Choose between 1 and 3\n")
+                }
+            }
+        }
+    return team2toFight()
+    }
     //============================================
     // MARK: - GAME
     //============================================
-    func input() -> Int {
-        let strData = readLine();
-        
-        return Int(strData!)!
-    }
+
     //Function witch will create the team
     func creatingTeam(){
          //Welcome message and rules for choices
@@ -289,7 +328,7 @@ class Service {
         //Insert the third choice into the table "Team"
         secondPlayer.team.insert(playerChoice(), at :2)
         //Message for resume and show the 2 players choices
-        print( "\n\(firstPlayer)\n\(secondPlayer)")
+        print( "\n\(firstPlayer)\(secondPlayer)")
         fight()
     }
     func fight(){
@@ -297,11 +336,22 @@ class Service {
         +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
         +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
         +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        let player1 = firstPlayer.team
-        let player2 = secondPlayer.team
+        var player1Attack = team1ToChoose()
+        var player2Attack = team2ToChoose()
+        var victimPlayer1 = team2toFight()
+        var victimPlayer2 = team1toFight()
         repeat {
-            player1.play(versus:player2)
-        } while firstPlayer.team[0].healthBar > 0 && firstPlayer.team[1].healthBar > 0 && firstPlayer.team[2].healthBar > 0 && secondPlayer.team[0].healthBar > 0 && secondPlayer.team[1].healthBar > 0 && secondPlayer.team[2].healthBar > 0
-    }
+            player1Attack.attack(victim: victimPlayer2)
+            print("\(firstPlayer)\(secondPlayer)\n")
+            player2Attack.attack(victim: victimPlayer1)
+            print("\(firstPlayer)\(secondPlayer)\n")
+        } while team1ToChoose().healthBar == 0 || team2ToChoose().healthBar == 0
+        print("\(firstPlayer)\(secondPlayer)\n\n"
+        +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
+        +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗+\n"
+        +   "+ ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣+\n"
+        +   "+ ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝+\n"
+        +   "++++++++++++++++ 🍻 +++++++++++++++++\n\n")
+        }
  }
 

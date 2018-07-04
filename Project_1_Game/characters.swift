@@ -27,20 +27,17 @@ class Character:CustomStringConvertible {
     
     func attack(victim: Character){
         victim.healthBar -= healthDamages
-        print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : - \(healthDamages)❣️")
+        print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️")
     }
     
-    func heal(victim:Character){
-        victim.healthBar += healthDamages
-        print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : + \(healthDamages)❣️")
-    }
-    
+
+    /*
     func input() -> Int {
         let strData = readLine();
         
         return Int(strData!)!
     }
-    func play(versus player:Character) -> Character{
+    func play(versus player:Character){
         var classe1: Characters!
         var playerChoice : Int
         //showing the player description before playing
@@ -68,19 +65,20 @@ class Character:CustomStringConvertible {
             }
             self.attack(victim: player)
             }
-        return play(versus: player)
         }
-
+*/
     var description: String{
         if self.healthBar > maxHealthBar {
             self.healthBar = maxHealthBar
         }
         if healthBar < 0 {
             healthBar = 0
+        }
+        if healthBar == 0 {
             return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
         }
         else {
-            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 \(healthDamages)"
+            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 - \(healthDamages)"
         }
     }
 }
@@ -104,14 +102,12 @@ class Wizard: Character {
     init(name:String){
         super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", type: .wizard)
     }
-    override var description: String{
-        if healthBar < 0 {
-            healthBar = 0
-            return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
-        }
-        else {
-            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💚 \(healthDamages)"
-        }
+    override func attack(victim:Character){
+        victim.healthBar += healthDamages
+        print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : +\(healthDamages)❣️")
+    }
+    override var description: String {
+         return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💚 +\(healthDamages)"
     }
 }
 

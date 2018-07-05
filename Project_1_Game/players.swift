@@ -9,9 +9,9 @@ class Player : CustomStringConvertible  {
     var description: String {
     return"\n"
         + "///+ \(name)'s    \n"
-        + "///+ ┌┬┐┌─┐┌─┐┌┬┐ + \(team[0].description)\n"
-        + "///+  │ ├┤ ├─┤│││ + \(team[1].description)\n"
-        + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2].description)\n"
+        + "///+ ┌┬┐┌─┐┌─┐┌┬┐ + \(team[0])\n"
+        + "///+  │ ├┤ ├─┤│││ + \(team[1])\n"
+        + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
         + "\n"
     }
 

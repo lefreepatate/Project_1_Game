@@ -127,7 +127,6 @@ class Service {
     //Choice of the player
     
     func playerChoice() -> Character{
-
         if let characterChoice = readLine() {
             switch characterChoice {
             case "1": return newFighter()
@@ -158,21 +157,26 @@ class Service {
     //============================================
     //List of fighters after the previous step
     func charactersTeam1() {
-        if firstPlayer.team[0].healthBar == 0 || firstPlayer.team[1].healthBar == 0 || firstPlayer.team[2].healthBar == 0 {
+        if firstPlayer.team[0].healthBar <= 0 || firstPlayer.team[1].healthBar <= 0 || firstPlayer.team[2].healthBar <= 0{
             print("☠️ ✖︎✖︎✖︎✖︎ ✖︎✖︎✖︎✖︎ ☠️")
-        }
+        } else {
             print(""
                 + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) ♥️ \(firstPlayer.team[0].healthBar)\n"
                 + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) ♥️ \(firstPlayer.team[1].healthBar)\n"
                 + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) ♥️ \(firstPlayer.team[2].healthBar)\n")
         }
+    }
        
     func charactersTeam2() {
+        if firstPlayer.team[0].healthBar <= 0 || firstPlayer.team[1].healthBar <= 0 || firstPlayer.team[2].healthBar <= 0{
+            print("☠️ ✖︎✖︎✖︎✖︎ ✖︎✖︎✖︎✖︎ ☠️")
+        } else {
             print(""
                 + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) ♥️ \(secondPlayer.team[0].healthBar)\n"
                 + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) ♥️ \(secondPlayer.team[1].healthBar)\n"
                 + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) ♥️ \(secondPlayer.team[2].healthBar)\n")
         }
+    }
 
     //function for player1 for choose the character type to use for the fight
     func team1ToChoose() -> Character{
@@ -193,8 +197,8 @@ class Service {
     func team2ToChoose() -> Character{
         print("🐵 \(secondPlayer.name), choose your character:\n")
         charactersTeam2()
-        if let team1ToChoose = readLine() {
-            switch team1ToChoose {
+        if let team2ToChoose = readLine() {
+            switch team2ToChoose {
             case "1": return secondPlayer.team[0]
             case "2": return secondPlayer.team[1]
             case "3": return secondPlayer.team[2]
@@ -218,13 +222,14 @@ class Service {
                 default:
                     print("\nChoose between 1 and 3\n")
                 }
-                return team1ToChoose()
+                return team1toFight()
             }
+            return team1toFight()
           } else {
             print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
             charactersTeam2()
-            if let team2ToAttack = readLine() {
-                switch team2ToAttack {
+            if let team1toFight = readLine() {
+                switch team1toFight {
                 case "1": return secondPlayer.team[0]
                 case "2": return secondPlayer.team[1]
                 case "3": return secondPlayer.team[2]
@@ -250,11 +255,12 @@ class Service {
                 }
             return team2toFight()
             }
+        return team2toFight()
         } else {
             print( "\n🐵 \(secondPlayer.name), who will you attack ?\n")
             charactersTeam1()
-            if let team2ToAttack = readLine() {
-                switch team2ToAttack {
+            if let team2toFight = readLine() {
+                switch team2toFight {
                 case "1": return firstPlayer.team[0]
                 case "2": return firstPlayer.team[1]
                 case "3": return firstPlayer.team[2]
@@ -336,22 +342,14 @@ class Service {
         +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
         +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
         +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        var player1Attack = team1ToChoose()
-        var player2Attack = team2ToChoose()
-        var victimPlayer1 = team2toFight()
-        var victimPlayer2 = team1toFight()
-        repeat {
-            player1Attack.attack(victim: victimPlayer2)
-            print("\(firstPlayer)\(secondPlayer)\n")
-            player2Attack.attack(victim: victimPlayer1)
-            print("\(firstPlayer)\(secondPlayer)\n")
-        } while team1ToChoose().healthBar == 0 || team2ToChoose().healthBar == 0
+        team1ToChoose().attack(victim: team1toFight())
+        team2ToChoose().attack(victim: team2toFight())
         print("\(firstPlayer)\(secondPlayer)\n\n"
         +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
-        +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗+\n"
-        +   "+ ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣+\n"
-        +   "+ ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝+\n"
+        +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"
+        +   "+ ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"
+        +   "+ ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"
         +   "++++++++++++++++ 🍻 +++++++++++++++++\n\n")
-        }
+    }
  }
 

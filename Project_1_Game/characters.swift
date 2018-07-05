@@ -28,6 +28,15 @@ class Character:CustomStringConvertible {
     func attack(victim: Character){
         victim.healthBar -= healthDamages
         print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️")
+        if self.healthBar > maxHealthBar {
+            self.healthBar = maxHealthBar
+        }
+        if healthBar < 0 {
+            healthBar = 0
+        }
+        if healthBar == 0 {
+            print("☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️")
+        }
     }
     
 
@@ -78,7 +87,7 @@ class Character:CustomStringConvertible {
             return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
         }
         else {
-            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 - \(healthDamages)"
+            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 -\(healthDamages)"
         }
     }
 }

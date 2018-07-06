@@ -27,62 +27,19 @@ class Character:CustomStringConvertible {
     
     func attack(victim: Character){
         victim.healthBar -= healthDamages
-        print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️")
+       /* print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️")*/
         if self.healthBar > maxHealthBar {
             self.healthBar = maxHealthBar
         }
         if healthBar < 0 {
             healthBar = 0
         }
-        if healthBar == 0 {
-            print("☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️")
-        }
+        
     }
     
 
-    /*
-    func input() -> Int {
-        let strData = readLine();
-        
-        return Int(strData!)!
-    }
-    func play(versus player:Character){
-        var classe1: Characters!
-        var playerChoice : Int
-        //showing the player description before playing
-        print(player)
-        //Select for player
-        repeat{
-            print("choose your character to attack or heal :\n")
-            print("1. Attack")
-            print("2. Heal")
-            playerChoice = input()
-            print()
-        } while playerChoice != 1 || playerChoice != 2
-        //Checking the player's action
-        if playerChoice == 1 {
-            switch playerChoice {
-            case 1:
-                classe1 = .fighter
-            case 2:
-                classe1 = .colossus
-            case 3:
-                classe1 = .dwarf
-            default:
-                classe1 = .wizard
-                self.heal(victim: player)
-            }
-            self.attack(victim: player)
-            }
-        }
-*/
     var description: String{
-        if self.healthBar > maxHealthBar {
-            self.healthBar = maxHealthBar
-        }
-        if healthBar < 0 {
-            healthBar = 0
-        }
+        
         if healthBar == 0 {
             return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
         }

@@ -155,26 +155,15 @@ class Service {
     //============================================
     // MARK: - STEP 2 : TEAMS FIGHTS
     //============================================
-    //List of fighters after the previous step
-    func charactersTeam1() {
-        print(""
-                + "[1] \(firstPlayer.team[0].characterType) \(firstPlayer.team[0].characterName) ♥️ \(firstPlayer.team[0].healthBar)\n"
-                + "[2] \(firstPlayer.team[1].characterType) \(firstPlayer.team[1].characterName) ♥️ \(firstPlayer.team[1].healthBar)\n"
-                + "[3] \(firstPlayer.team[2].characterType) \(firstPlayer.team[2].characterName) ♥️ \(firstPlayer.team[2].healthBar)\n")
-        }
-       
-    func charactersTeam2() {
-        print(""
-                + "[1] \(secondPlayer.team[0].characterType) \(secondPlayer.team[0].characterName) ♥️ \(secondPlayer.team[0].healthBar)\n"
-                + "[2] \(secondPlayer.team[1].characterType) \(secondPlayer.team[1].characterName) ♥️ \(secondPlayer.team[1].healthBar)\n"
-                + "[3] \(secondPlayer.team[2].characterType) \(secondPlayer.team[2].characterName) ♥️ \(secondPlayer.team[2].healthBar)\n")
-        }
-
-    //function for player1 for choose the character type to use for the fight
-    func team1ToChoose() -> Character{
+    //List of fighters after the previous step and function for player1 for choose the character type to use for the fight
+    
+    func charactersTeam1() -> Character {
         print("🐵 \(firstPlayer.name), choose your character:\n")
-        charactersTeam1()
-        if let team1ToChoose = readLine() {
+        for character in firstPlayer.team {
+            var i:Int = firstPlayer.team.count
+            print("[\(i)] \(character.description)")
+        }
+            if let team1ToChoose = readLine() {
                 switch team1ToChoose {
                 case "1": return firstPlayer.team[0]
                 case "2": return firstPlayer.team[1]
@@ -183,12 +172,14 @@ class Service {
                     print( "Choose between 1 and 3\n")
                 }
             }
-        return team1ToChoose()
-      }
-    //function for player2 for choose the character type to use for the fight
-    func team2ToChoose() -> Character{
+         return charactersTeam1()
+        }
+    func charactersTeam2() -> Character{
         print("🐵 \(secondPlayer.name), choose your character:\n")
-        charactersTeam2()
+        for character in secondPlayer.team {
+           var i:Int = firstPlayer.team.count
+            print("[\(i)] \(character.description)")
+        }
         if let team2ToChoose = readLine() {
             switch team2ToChoose {
             case "1": return secondPlayer.team[0]
@@ -198,14 +189,18 @@ class Service {
                 print( "Choose between 1 and 3\n")
             }
         }
-        return team2ToChoose()
+        return charactersTeam2()
     }
-    
+
+
     //function for player1 for choose the character type to use for the fight
     func team1toFight(attacker:Character) -> Character{
         if attacker.type == .wizard {
             print( "\n🐵 \(firstPlayer.name), who will you heal ?\n")
-            charactersTeam1()
+            for character in firstPlayer.team {
+                var i:Int = firstPlayer.team.count
+                print("[\(i)] \(character.description)")
+            }
             if let team1toCare = readLine() {
                 switch team1toCare {
                 case "1": return firstPlayer.team[0]
@@ -219,7 +214,10 @@ class Service {
                     return team1toFight(attacker:attacker)}
           } else {
             print( "\n🐵 \(firstPlayer.name), who will you attack ?\n")
-            charactersTeam2()
+            for character in secondPlayer.team {
+               var i:Int = firstPlayer.team.count
+                print("[\(i)] \(character.description)")
+            }
             if let team1toBattle = readLine() {
                 switch team1toBattle {
                 case "1": return secondPlayer.team[0]
@@ -238,7 +236,10 @@ class Service {
     func team2toFight(attacker:Character) -> Character{
         if attacker.type == .wizard {
             print( "\n🐵 \(secondPlayer.name), who will you heal ?\n")
-            charactersTeam2()
+            for character in secondPlayer.team {
+               var i:Int = firstPlayer.team.count
+                print("[\(i)] \(character.description)")
+            }
             if let team2toCare = readLine() {
                 switch team2toCare {
                 case "1": return secondPlayer.team[0]
@@ -253,7 +254,10 @@ class Service {
             }
         } else {
             print( "\n🐵 \(secondPlayer.name), who will you attack ?\n")
-            charactersTeam1()
+            for character in firstPlayer.team {
+                var i:Int = firstPlayer.team.count
+                print("[\(i)] \(character.description)")
+            }
             if let team2toBattle = readLine() {
                 switch team2toBattle {
                 case "1": return firstPlayer.team[0]
@@ -340,13 +344,15 @@ class Service {
         +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
         +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
         +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        var attacker1 = team1ToChoose()
-        var attacker2 = team2ToChoose()
-        while attacker1.healthBar <= 0 || attacker2.healthBar <= 0 {
-            
+        var attacker1 = charactersTeam1()
+        var attacker2 = charactersTeam2()
+        repeat {
             attacker1.attack(victim: team1toFight(attacker: attacker1))
             attacker2.attack(victim: team2toFight(attacker:attacker2))
-        }
+            print("\(firstPlayer)\(secondPlayer)\n")
+            var attacker1 = charactersTeam1()
+            var attacker2 = charactersTeam2()
+        } while attacker1.healthBar > 0 || attacker2.healthBar > 0
         print("\(firstPlayer)\(secondPlayer)\n\n"
         +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
         +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"

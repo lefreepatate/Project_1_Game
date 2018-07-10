@@ -166,12 +166,11 @@ class Service {
         print("🐵 \(player.name), choose your character:\n")
         var i:Int = 0
         for _ in player.team {
-                print("[\(i + 1)] \(player.team[i].description)")
+                print("[\(i)] \(player.team[i].description)")
                 i += 1
         }
-        i = 1
         if let input = readLine() {
-            var i = Int(input)
+            let i = Int(input)
             if i! < player.team.count {
                 return player.team[i!]
             } else {
@@ -183,8 +182,8 @@ class Service {
     }
     
     //function for player1 for choose the character type to use for the fight
-    func teamToFight(player:Player, attacker:Character) -> Character{
-        print("\(player.self.team)\(player.team)")
+    func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
+        print("\(team)\n\n\(player.team)")
         var i:Int = 0
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal ?\n")
@@ -193,39 +192,39 @@ class Service {
                 i += 1
             }
             if let input = readLine() {
-                var i = Int(input)
+                let i = Int(input)
                 if i! < player.team.count {
                     return player.team[i!]
                 } else {
                     print("\nChoose between \(0) and \(player.team.count - 1)\n")
-                    return teamToFight(player:player, attacker:attacker)
+                    return teamToFight(player:player, attacker:attacker, team: player.team)
                 }
             }
         }
         else {
             print( "\n🐵 \(player.name), who will you attack ?\n")
-            for _ in player.team {
-                print("[\(i)] \(player.team[i].description)")
+            for _ in team {
+                print("[\(i)] \(team[i].description)")
                 i += 1
             }
             if let input = readLine() {
-                var i = Int(input)
-                if i! < player.team.count {
-                    return player.team[i!]
+                let i = Int(input)
+                if i! < team.count {
+                    return team[i!]
                 } else {
-                    print("\nChoose between \(0) and \(player.team.count - 1)\n")
-                    return teamToFight(player:player, attacker:attacker)
+                    print("\nChoose between \(0) and \(team.count - 1)\n")
+                    return teamToFight(player:player, attacker:attacker, team: team)
                 }
             }
         }
-        return teamToFight(player:player, attacker:attacker)
+        return teamToFight(player:player, attacker:attacker, team: team)
     }
 
     func fight(){
-        var attacker1 = charactersTeam(player:firstPlayer)
-        var attacker2 = charactersTeam(player:secondPlayer)
-        attacker1.attack(victim: teamToFight(player:secondPlayer, attacker:attacker1))
-        attacker2.attack(victim: teamToFight(player:firstPlayer, attacker:attacker2))
+        let attacker1 = charactersTeam(player:firstPlayer)
+        let attacker2 = charactersTeam(player:secondPlayer)
+        attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
+        attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
     }
  
     //============================================

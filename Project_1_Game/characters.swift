@@ -26,9 +26,18 @@ class Character:CustomStringConvertible {
     }
     
     func attack(victim: Character){
-
-        victim.healthBar -= healthDamages
-       print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️ ++")
+        if victim.healthBar > victim.maxHealthBar {
+            victim.healthBar = victim.maxHealthBar
+        }
+        if victim.healthBar <= 0 {
+           victim.healthBar = 0
+            print("\n 🙊 He's already dead ! \(victim.description)")
+        } else {
+            victim.healthBar -= healthDamages
+            print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️ ++")
+        }
+        
+       
     }
     
 
@@ -39,7 +48,7 @@ class Character:CustomStringConvertible {
         if healthBar <= 0 {
             healthBar = 0
         }
-        if healthBar <= 0 {
+        if healthBar <= 0 || healthBar == 0{
             return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
         }
         else {
@@ -67,13 +76,16 @@ class Wizard: Character {
         super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", type: .wizard)
     }
     override func attack(victim:Character){
-
-        if healthBar == 0 {
+        
+        if victim.healthBar <= 0 {
             victim.healthBar = 0
-            print("Sorry, I can't resurrect you")
+            print("\n🐼 Sorry, I can't resurrect you.")
+        } else {
+            victim.healthBar += healthDamages
+            print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : +\(healthDamages)❣️ ++")
         }
-        victim.healthBar += healthDamages
-       print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : +\(healthDamages)❣️ ++")
+        
+       
     }
 
     override var description: String {

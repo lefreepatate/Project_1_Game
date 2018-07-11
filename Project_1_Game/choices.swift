@@ -161,7 +161,7 @@ class Service {
         }
         return creatingTeam(player:player)
     }
-  /*  func bonus(character:Character) {
+    func bonus(character:Character) {
          character.healthDamages += 15
         if character.type == .wizard {
             character.weapon = "🔱"
@@ -179,13 +179,13 @@ class Service {
                 +  "---- DAMAGES +15 ----\n")
         }
         
-        
     }
+    
     func random(){
-        let randomTypes = ["\(bonus)",""]
-        let _ = randomTypes[Int(arc4random_uniform(UInt32(randomTypes.count)))]
-        return random()
-    }*/
+        let randomTypes = [" "," ","\(bonus)"," "]
+        let randomBonus = randomTypes[Int(arc4random_uniform(UInt32(randomTypes.count)))]
+        print("\(randomBonus)")
+    }
     
     func charactersTeam(player:Player) -> Character {
         print("🐵 \(player.name), choose your character:\n")
@@ -194,17 +194,18 @@ class Service {
             if player.team[i].healthBar != 0 {
                 print("[\(i)] \(player.team[i].description)")
             } else {
-            print("\(player.team[i].description)")
+            print("\(player.team[i].description)") // ne marche pas si on insère un autre chiffre
             }
-             i += 1
+            i += 1
         }
         if let input = readLine() {
             let i = Int(input)
             if player.team[i!].healthBar != 0{
+                random()
                 return player.team[i!]
             }
-            if player.team[i!].healthBar == 0 {
-                print("Choose another one!")
+            if player.team[i!].healthBar <= 0 {
+                print("\nChoose another one!\n")
                 return charactersTeam(player:player)
             }
             if i != player.team.count {
@@ -214,7 +215,6 @@ class Service {
                 return charactersTeam(player:player)
             }
         }
-        
         return charactersTeam(player:player)
     }
     
@@ -224,17 +224,17 @@ class Service {
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal ?\n")
             for _ in player.team {
-                print("[\(i)] \(player.team[i].description)")
+                if player.team[i].healthBar != 0 {
+                    print("[\(i)] \(player.team[i].description)")
+                } else {
+                    print("\(player.team[i].description)")
+                }
                 i += 1
             }
             if let input = readLine() {
                 let i = Int(input)
                 if i! < player.team.count {
                     return player.team[i!]
-                }
-                if player.team[i!].healthBar == 0 {
-                    print("Choose another one!")
-                    return teamToFight(player:player, attacker:attacker, team: player.team)
                 }
                 else {
                     print("\nChoose between \(0) and \(player.team.count - 1)\n")
@@ -245,17 +245,17 @@ class Service {
         else {
             print( "\n🐵 \(player.name), who will you attack ?\n")
             for _ in team {
-                print("[\(i)] \(team[i].description)")
+                if team[i].healthBar != 0 {
+                    print("[\(i)] \(team[i].description)")
+                } else {
+                    print("\(team[i].description)")
+                }
                 i += 1
             }
             if let input = readLine() {
                 let i = Int(input)
                 if i! < team.count {
                     return team[i!]
-                }
-                if player.team[i!].healthBar == 0 {
-                    print("Choose another one!")
-                    return teamToFight(player:player, attacker:attacker, team: player.team)
                 }
                 else {
                     print("\nChoose between \(0) and \(team.count - 1)\n")
@@ -273,7 +273,7 @@ class Service {
             attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
             print("\(firstPlayer)\n\(secondPlayer)")
-        } while charactersTeam(player:firstPlayer).healthBar > 0 || charactersTeam(player:secondPlayer).healthBar > 0
+        } while charactersTeam(player:firstPlayer).healthBar != 0 || charactersTeam(player:secondPlayer).healthBar != 0 // ne marche pas
     }
  
     //============================================

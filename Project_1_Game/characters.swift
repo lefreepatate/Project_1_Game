@@ -7,9 +7,9 @@ class Character:CustomStringConvertible {
     let characterName:String
     let characterType:String
     var healthBar:Int
-    let healthDamages:Int
+    var healthDamages:Int
     let maxHealthBar:Int
-    let weapon:String
+    var weapon:String
     let type: Characters
     init(characterName: String, characterType:String, healthBar:Int, healthDamages:Int, weapon:String, type:Characters){
         self.characterName = characterName
@@ -26,18 +26,17 @@ class Character:CustomStringConvertible {
     }
     
     func attack(victim: Character){
-        
+
         victim.healthBar -= healthDamages
-       print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️")
+       print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️ ++")
     }
     
 
     var description: String{
-        
         if healthBar > maxHealthBar {
             healthBar = maxHealthBar
         }
-        if healthBar < 0 {
+        if healthBar <= 0 {
             healthBar = 0
         }
         if healthBar <= 0 {
@@ -48,7 +47,6 @@ class Character:CustomStringConvertible {
         }
     }
 }
-
 
 //============================================
 // MARK: - FIGHTER CHARACTER CLASS
@@ -69,17 +67,23 @@ class Wizard: Character {
         super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", type: .wizard)
     }
     override func attack(victim:Character){
+
+        if healthBar == 0 {
+            victim.healthBar = 0
+            print("Sorry, I can't resurrect you")
+        }
         victim.healthBar += healthDamages
-       print("\(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : +\(healthDamages)❣️ \(self.healthBar) \(healthBar)")
+       print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : +\(healthDamages)❣️ ++")
     }
 
     override var description: String {
         if healthBar > maxHealthBar {
             healthBar = maxHealthBar
         }
-        if healthBar < 0 {
+        if healthBar <= 0 {
             healthBar = 0
         }
+    
         if healthBar <= 0 {
             return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
         }

@@ -161,7 +161,7 @@ class Service {
         }
         return creatingTeam(player:player)
     }
-    func bonus(character:Character) {
+    func surpriseChest(character:Character){
          character.healthDamages += 15
         if character.type == .wizard {
             character.weapon = "🔱"
@@ -178,13 +178,31 @@ class Service {
                 +  " +     + 👝 +     + \n\n"
                 +  "---- DAMAGES +15 ----\n")
         }
-        
+        return surpriseChest(character:character)
+    }
+    
+    func bonus(character:Character, player:Player, team:[Character]){
+        print("\n"
+            +  "  +   ||   +  \n"
+            +  "    + || +    \n"
+            +  "===== 💣 =====\n"
+            +  "    + || +    \n"
+            +  "  +   ||  +   \n")
+        var i:Int = 0
+        for _ in player.team {
+            print("\(player.team[i].type) \(player.team[i].characterName) \(player.team[i].healthBar) - 10")
+            character.healthBar -= 10
+        }
+        for _ in team {
+            character.healthBar -= 10
+            print("\(team[i].type) \(team[i].characterName) \(team[i].healthBar) - 10")
+        }
     }
     
     func random(){
-        let randomTypes = [" "," ","\(bonus)"," "]
-        let randomBonus = randomTypes[Int(arc4random_uniform(UInt32(randomTypes.count)))]
-        print("\(randomBonus)")
+        let randomTypes = ["21 ","45 ","\(surpriseChest)","ici ", "", "", "\(bonus)"]
+        let randomBonus = Int(arc4random_uniform(UInt32(randomTypes.count)))
+        print(randomTypes[randomBonus])
     }
     
     func charactersTeam(player:Player) -> Character {
@@ -201,7 +219,7 @@ class Service {
         if let input = readLine() {
             let i = Int(input)
             if player.team[i!].healthBar != 0{
-                random()
+                _ = random()
                 return player.team[i!]
             }
             if player.team[i!].healthBar <= 0 {
@@ -243,7 +261,7 @@ class Service {
             }
         }
         else {
-            print( "\n🐵 \(player.name), who will you attack ?\n")
+            print( "\n🐵 \(player.name), who will you attack with \(attacker.characterType) \(attacker.characterName) ?\n")
             for _ in team {
                 if team[i].healthBar != 0 {
                     print("[\(i)] \(team[i].description)")

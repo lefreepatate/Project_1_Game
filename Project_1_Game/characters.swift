@@ -7,7 +7,7 @@ class Character:CustomStringConvertible {
     let characterName:String
     let characterType:String
     var healthBar:Int
-    var healthDamages:Int
+    let healthDamages:Int
     let maxHealthBar:Int
     var weapon:String
     let type: Characters

@@ -161,35 +161,17 @@ class Service {
         }
         return creatingTeam(player:player)
     }
-    // healChest
-  /*  func surpriseChest(character:Character) -> Chest?{
-        if arc4random_uniform(100) < 80 {
+
+    func surpriseChest(character:Character) -> Weapon{
+       /* if arc4random_uniform(100) < 10 {
             return nil
-        }
+        }*/
         if character.type == .wizard {
-           return HealChest()
+            return HealChest().randomHealWeapon()
         } else {
-            return AttackChest()
+            
+            return AttackChest().randomAttackWeapon()
         }
-    // créer open() random arme
-        
-        /*character.healthDamages += 15
-        if character.type == .wizard {
-            character.weapon = "🔱"
-            print("\n"
-                +  "    +    🔱    +    \n"
-                +  "  +      ||      +\n"
-                +  " +     + 👝 +     +\n \n"
-                +  "----- HEAL +15 -----\n")
-        } else {
-            character.weapon = "⚡️"
-            print("\n"
-                +  "    +    ⚡️    +    \n"
-                +  "  +      ||      +\n"
-                +  " +     + 👝 +     + \n\n"
-                +  "---- DAMAGES +15 ----\n")
-        }
-        return surpriseChest()*/
     }
     
     func bonus(character:Character, player:Player, team:[Character]){
@@ -209,12 +191,11 @@ class Service {
             print("\(team[i].type) \(team[i].characterName) \(team[i].healthBar) - 10")
         }
     }
-    
     func random(){
         let randomTypes = ["21 ","45 ","\(surpriseChest)","ici ", "", "", "\(bonus)"]
-        let randomBonus = Int(arc4random_uniform(UInt32(randomTypes.count)))
-        print(randomTypes[randomBonus])
-    }*/
+        let randomBonus = randomTypes[Int(arc4random_uniform(UInt32(randomTypes.count)))]
+        print(randomBonus)
+    }
     
     func charactersTeam(player:Player) -> Character {
         print("🐵 \(player.name), choose your character:\n")
@@ -223,7 +204,7 @@ class Service {
             if character.healthBar > 0 {
                 print("[\(i)] \(character.description)")
             } else {
-            print("\(character.description)") // ne marche pas si on insère un autre chiffre
+            print("\(character.description)")
             }
             i += 1
         }
@@ -245,6 +226,7 @@ class Service {
     
     //function for player1 for choose the character type to use for the fight
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
+        _ = surpriseChest(character: attacker)
         var i:Int = 0
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal?\n")
@@ -288,20 +270,28 @@ class Service {
     }
     
     func alive(player:Player, player2:Player) -> Bool{
+        
         var i = 0
         for character in player.team {
             if character.healthBar <= 0 {
                 i += 1
             }
         }
+        if i == player.team.count {
+            print("\(player2.name) WIN !!")
+            return false
+        }
+        var i_2 = 0
         for character in player2.team {
             if character.healthBar <= 0 {
-                i += 1
+                i_2 += 1
             }
         }
-        if i == player.team.count && i == player2.team.count {
+        if i_2 == player2.team.count {
+            print("\(player.name) WIN !!")
             return false
-        } else {
+        }
+        else {
             return true
         }
     }
@@ -372,7 +362,7 @@ class Service {
             +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
         
         fight()
-        print("\(firstPlayer)\(secondPlayer)\n"
+        print("\n"
             +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
             +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"
             +   "+ ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"

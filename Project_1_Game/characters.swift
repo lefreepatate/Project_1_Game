@@ -31,7 +31,7 @@ class Character:CustomStringConvertible {
         }
         if victim.healthBar <= 0 {
            victim.healthBar = 0
-            print("\n👻 I'm already dead!")
+            print("\nI'm already dead! 👻")
         } else {
             victim.healthBar -= healthDamages
             print("++ \(characterType) ⇒ \(weapon)\(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️ ++")

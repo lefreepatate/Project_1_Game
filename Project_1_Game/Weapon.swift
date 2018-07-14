@@ -1,5 +1,5 @@
 import Foundation
-class Weapon {
+class Weapon: CustomStringConvertible {
     let damages:Int
     let name:String
     let icon:String
@@ -10,8 +10,28 @@ class Weapon {
         self.icon = icon
         self.type = type
     }
-}
 enum type { case attack, heal}
+    
+var description:String {
+    if self.type == .heal {
+            print("\n"
+                +  "    +    \(icon)    +    \n"
+                +  "  +      ||      +\n"
+                +  " +     + 👝 +     +\n \n"
+                +  "----- HEAL +\(damages) -----\n")
+        } else {
+            print("\n"
+                +  "    +    \(icon)    +    \n"
+                +  "  +      ||      +\n"
+                +  " +     + 👝 +     + \n\n"
+                +  "---- DAMAGES +\(damages) ----\n")
+        }
+    return ""
+    }
+}
+//============================================
+// MARK: - ATTACK WEAPONS
+//============================================
 
 class FireBall:Weapon {
     init() {
@@ -38,14 +58,19 @@ class Ice:Weapon {
         super.init(damages: 22, name: "Ice", icon: "💠", type: .attack)
     }
 }
+//============================================
+// MARK: - HEALS WEAPONS
+//============================================
+
 class Moon:Weapon {
     init() {
         super.init(damages: 10, name: "Moon", icon: "🌙", type: .heal)
     }
 }
+
 class Stars:Weapon {
     init() {
-        super.init(damages: 12, name: "Stars", icon: "🌟", type: .heal)
+        super.init(damages: 8, name: "Stars", icon: "🌟", type: .heal)
     }
 }
 class Thunder:Weapon {
@@ -60,6 +85,6 @@ class Trident:Weapon {
 }
 class FullMoon:Weapon {
     init() {
-        super.init(damages: 10, name: "FullMoon", icon: "🌕", type: .heal)
+        super.init(damages: 20, name: "FullMoon", icon: "🌕", type: .heal)
     }
 }

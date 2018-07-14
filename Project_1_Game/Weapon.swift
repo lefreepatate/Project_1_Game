@@ -1,5 +1,5 @@
 import Foundation
-class Weapon: CustomStringConvertible {
+class Weapon:CustomStringConvertible {
     let damages:Int
     let name:String
     let icon:String
@@ -12,9 +12,9 @@ class Weapon: CustomStringConvertible {
     }
 enum type { case attack, heal}
     
-var description:String {
-    if self.type == .heal {
-            print("\n"
+    var description:String {
+        if self.type == .heal {
+        print("\n"
                 +  "    +    \(icon)    +    \n"
                 +  "  +      ||      +\n"
                 +  " +     + 👝 +     +\n \n"
@@ -28,6 +28,7 @@ var description:String {
         }
     return ""
     }
+
 }
 //============================================
 // MARK: - ATTACK WEAPONS

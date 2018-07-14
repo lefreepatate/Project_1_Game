@@ -6,6 +6,10 @@ class Chest {
         self.name = name
         self.weaponChest = weaponChest
     }
+    func newWeapon(character:Character) -> Weapon{
+
+        return newWeapon(character:character)
+    }
 }
 
 class HealChest:Chest {
@@ -17,8 +21,10 @@ class HealChest:Chest {
     init(){
         super.init(name: "healChest", weaponChest: [stars, moon, fullMoon, thunder, trident])
     }
-    func randomHealWeapon() -> Weapon{
+    func randomHealWeapon(character:Character) -> Weapon{
         let randomHeals = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
+        character.healthDamages = randomHeals.damages
+        character.weapon = randomHeals.icon
         print(randomHeals)
         return randomHeals
     }
@@ -33,8 +39,10 @@ class AttackChest: Chest {
     init(){
         super.init(name: "attackChest", weaponChest: [fireBall, sword, knife, hammer, ice])
     }
-    func randomAttackWeapon() -> Weapon{
+    func randomAttackWeapon(character:Character) -> Weapon{
         let randomAttack = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
+        character.healthDamages = randomAttack.damages
+        character.weapon = randomAttack.icon
         print(randomAttack)
         return randomAttack
     }

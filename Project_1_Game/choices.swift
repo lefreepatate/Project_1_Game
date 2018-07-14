@@ -162,15 +162,14 @@ class Service {
         return creatingTeam(player:player)
     }
 
-    func surpriseChest(character:Character) -> Weapon{
-       /* if arc4random_uniform(100) < 10 {
+    func surpriseChest(character:Character) -> Weapon?{
+       if arc4random_uniform(100) < 80 {
             return nil
-        }*/
+        }
         if character.type == .wizard {
-            return HealChest().randomHealWeapon()
+            return HealChest().randomHealWeapon(character:character)
         } else {
-            
-            return AttackChest().randomAttackWeapon()
+            return AttackChest().randomAttackWeapon(character:character)
         }
     }
     
@@ -211,6 +210,7 @@ class Service {
         if let input = readLine() {
             if let i = Int(input), i >= 0 && i <= player.team.count {
                 if player.team[i].healthBar > 0{
+                    _ = surpriseChest(character: player.team[i])
                     return player.team[i]
                 } else {
                     print("\nChoose another one!\n")
@@ -226,7 +226,7 @@ class Service {
     
     //function for player1 for choose the character type to use for the fight
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
-        _ = surpriseChest(character: attacker)
+        
         var i:Int = 0
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal?\n")
@@ -278,7 +278,7 @@ class Service {
             }
         }
         if i == player.team.count {
-            print("\(player2.name) WIN !!")
+            print("\(player2.name) WINS !!")
             return false
         }
         var i_2 = 0
@@ -288,7 +288,7 @@ class Service {
             }
         }
         if i_2 == player2.team.count {
-            print("\(player.name) WIN !!")
+            print("\(player.name) WINS !!")
             return false
         }
         else {
@@ -369,14 +369,6 @@ class Service {
             +   "+ ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"
             +   "++++++++++++++++ 🍻 +++++++++++++++++\n\n")
     }
-
-    /*
- print(""
- +  "    +    ⚡️    +    \n"
- +  "  +      ||      +\n"
- +  " +     + 👝 +     + \n"
- +  "---- DAMAGES +15 ----\n")
- */
 }
  
 

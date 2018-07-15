@@ -10,7 +10,7 @@ class Weapon:CustomStringConvertible {
         self.icon = icon
         self.type = type
     }
-enum type { case attack, heal}
+enum type { case attack, heal, bomb}
     
     var description:String {
         if self.type == .heal {
@@ -88,4 +88,35 @@ class FullMoon:Weapon {
     init() {
         super.init(damages: 20, name: "FullMoon", icon: "🌕", type: .heal)
     }
+}
+
+//============================================
+// MARK: - BONUS BOMB
+//============================================
+class Bomb:Weapon{
+    init() {
+        super.init(damages:10, name:"attackBomb", icon:"💣", type: .bomb)
+    }
+
+    func random(player:Player, team:[Character]) -> Bool{
+        if arc4random_uniform(100) < 80 {
+            return false
+        } else {
+        print("\n"
+            +  "      +   ||   +  \n"
+            +  "        + || +    \n"
+            +  "    ===== 💣 =====\n"
+            +  "        + || +    \n"
+            +  "      +   ||  +   \n")
+        for character in player.team {
+            print("     \(character.characterType) \(character.characterName) - 10❣️")
+            character.healthBar -= 10
+        }
+        for character in team {
+            character.healthBar -= 10
+            print("     \(character.characterType) \(character.characterName) - 10❣️")
+        }
+        return true
+    }
+}
 }

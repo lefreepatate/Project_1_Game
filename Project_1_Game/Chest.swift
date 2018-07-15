@@ -6,10 +6,6 @@ class Chest {
         self.name = name
         self.weaponChest = weaponChest
     }
-    func newWeapon(character:Character) -> Weapon{
-
-        return newWeapon(character:character)
-    }
 }
 
 class HealChest:Chest {
@@ -48,3 +44,4 @@ class AttackChest: Chest {
     }
 
 }
+

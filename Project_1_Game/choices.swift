@@ -163,39 +163,16 @@ class Service {
     }
 
     func surpriseChest(character:Character) -> Weapon?{
-       if arc4random_uniform(100) < 80 {
+        if arc4random_uniform(100) < 80 {
             return nil
         }
         if character.type == .wizard {
             return HealChest().randomHealWeapon(character:character)
-        } else {
+        } else{
             return AttackChest().randomAttackWeapon(character:character)
         }
     }
-    
-    func bonus(character:Character, player:Player, team:[Character]){
-        print("\n"
-            +  "  +   ||   +  \n"
-            +  "    + || +    \n"
-            +  "===== 💣 =====\n"
-            +  "    + || +    \n"
-            +  "  +   ||  +   \n")
-        var i:Int = 0
-        for _ in player.team {
-            print("\(player.team[i].type) \(player.team[i].characterName) \(player.team[i].healthBar) - 10")
-            character.healthBar -= 10
-        }
-        for _ in team {
-            character.healthBar -= 10
-            print("\(team[i].type) \(team[i].characterName) \(team[i].healthBar) - 10")
-        }
-    }
-    func random(){
-        let randomTypes = ["21 ","45 ","\(surpriseChest)","ici ", "", "", "\(bonus)"]
-        let randomBonus = randomTypes[Int(arc4random_uniform(UInt32(randomTypes.count)))]
-        print(randomBonus)
-    }
-    
+   
     func charactersTeam(player:Player) -> Character {
         print("🐵 \(player.name), choose your character:\n")
         var i = 0
@@ -226,7 +203,7 @@ class Service {
     
     //function for player1 for choose the character type to use for the fight
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
-        
+        _ = Bomb().random(player: player, team:team)
         var i:Int = 0
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal?\n")
@@ -270,7 +247,6 @@ class Service {
     }
     
     func alive(player:Player, player2:Player) -> Bool{
-        
         var i = 0
         for character in player.team {
             if character.healthBar <= 0 {
@@ -298,12 +274,12 @@ class Service {
     
     func fight(){
         while alive(player: firstPlayer, player2:secondPlayer) == true {
-            var attacker1 = charactersTeam(player:firstPlayer)
-            var attacker2 = charactersTeam(player:secondPlayer)
+            let attacker1 = charactersTeam(player:firstPlayer)
+            let attacker2 = charactersTeam(player:secondPlayer)
             attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
             print("\(firstPlayer)\n\(secondPlayer)")
-        }  // ne marche pas
+        }
     }
  
     //============================================

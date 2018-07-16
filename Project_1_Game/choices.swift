@@ -26,7 +26,6 @@ class Service {
             return player1()
         }
     }
-    
     func player2() -> Player{
         print("\nSecond player's name:")
         if let name = readLine(){
@@ -162,15 +161,40 @@ class Service {
         return creatingTeam(player:player)
     }
 
-    func surpriseChest(character:Character) -> Weapon?{
+    func surpriseChest(character:Character, player:Player, team:[Character]) -> Weapon?{
         if arc4random_uniform(100) < 80 {
             return nil
         }
         if character.type == .wizard {
-            return HealChest().randomHealWeapon(character:character)
-        } else{
-            return AttackChest().randomAttackWeapon(character:character)
+            print("\n\n"
+                +  " +     + 👝 +     +\n \n"
+                +  "------ CHEST ------\n"
+                + "\n🙉 Hey \(player.name)! There's a chest! Do you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\nTape 'Y' for Yes or 'N' for No:\n")
+            if let chestChoice = readLine() {
+                switch chestChoice {
+                case "Y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
+                case "N": return nil
+                default:
+                    print("🙈 You must choose Y for Yes or N for No")
+                    return surpriseChest(character:character, player: player, team:[Character]())
+                }
+            }
+        } else {
+            print("\n\n"
+                +  " +     + 👝 +     +\n \n"
+                +  "------ CHEST ------\n"
+                + "\n🙉 Hey \(player.name)! There's a chest! Do you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\nTape 'Y' for Yes or 'N' for No:\n")
+            if let chestChoice = readLine() {
+                switch chestChoice {
+                case "Y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
+                case "N": return nil
+                default:
+                    print("🙈 You must choose Y for Yes or N for No")
+                    return surpriseChest(character:character, player: player, team:[Character]())
+                }
+            }
         }
+        return nil
     }
    
     func charactersTeam(player:Player) -> Character {
@@ -187,7 +211,7 @@ class Service {
         if let input = readLine() {
             if let i = Int(input), i >= 0 && i <= player.team.count {
                 if player.team[i].healthBar > 0{
-                    _ = surpriseChest(character: player.team[i])
+                   
                     return player.team[i]
                 } else {
                     print("\nChoose another one!\n")
@@ -203,7 +227,7 @@ class Service {
     
     //function for player1 for choose the character type to use for the fight
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
-        _ = Bomb().random(player: player, team:team)
+        _ = surpriseChest(character: attacker, player: player, team:team)
         var i:Int = 0
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal?\n")

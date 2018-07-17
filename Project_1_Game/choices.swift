@@ -1,15 +1,17 @@
 import Foundation
-class Service {
+class Choices {
     
     //============================================
     // MARK: - Creating new players
     //============================================
-    var firstPlayer = Player(name: "", team:[Character]())
-    var secondPlayer = Player(name: "", team:[Character]())
+    var firstPlayer:Player
+    var secondPlayer:Player
+    init(firstPlayer:Player, secondPlayer:Player){
+        self.firstPlayer = firstPlayer
+        self.secondPlayer = secondPlayer
+    }
 
-    func player1() -> Player{
-        //1. Message quel est votre nom
-        print("First player's name:")
+    func player() -> Player{
         //2. Récupérer nom
         if let name = readLine(){
             if isNameValid(name: name){
@@ -19,25 +21,12 @@ class Service {
             return firstPlayer
             }
             else {
-                return player1()
+                return player()
             }
         }
         else {
-            return player1()
+            return player()
         }
-    }
-    func player2() -> Player{
-        print("\nSecond player's name:")
-        if let name = readLine(){
-            if isNameValid(name: name){
-            let secondPlayer = Player(name: name,team:[Character]())
-            return secondPlayer
-            }
-        }
-        else {
-            return player2()
-        }
-        return player2()
     }
    
     //============================================
@@ -52,7 +41,7 @@ class Service {
             print("🙈 '\(firstPlayer.name)' is the first player's name, choose another one !\n")
             return false
         } else if name == secondPlayer.name {
-            print("🙈 '\(secondPlayer.name)' is the second player's name, choose another one !\n")
+             print("🙈 '\(secondPlayer.name)' is the second player's name, choose another one !\n")
             return false
         }
         else {
@@ -165,32 +154,28 @@ class Service {
         if arc4random_uniform(100) < 80 {
             return nil
         }
+        print("\n\n"
+            +  " +     + 👝 +     +\n \n"
+            +  "------ CHEST ------\n"
+            + "\n🙉 Hey \(player.name)! There's a chest! Do you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\nTape 'Y' for Yes or 'N' for No:\n")
         if character.type == .wizard {
-            print("\n\n"
-                +  " +     + 👝 +     +\n \n"
-                +  "------ CHEST ------\n"
-                + "\n🙉 Hey \(player.name)! There's a chest! Do you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\nTape 'Y' for Yes or 'N' for No:\n")
             if let chestChoice = readLine() {
                 switch chestChoice {
                 case "Y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
                 case "N": return nil
                 default:
                     print("🙈 You must choose Y for Yes or N for No")
-                    return surpriseChest(character:character, player: player, team:[Character]())
+                    _ = readLine()
                 }
             }
         } else {
-            print("\n\n"
-                +  " +     + 👝 +     +\n \n"
-                +  "------ CHEST ------\n"
-                + "\n🙉 Hey \(player.name)! There's a chest! Do you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\nTape 'Y' for Yes or 'N' for No:\n")
             if let chestChoice = readLine() {
                 switch chestChoice {
                 case "Y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
                 case "N": return nil
                 default:
                     print("🙈 You must choose Y for Yes or N for No")
-                    return surpriseChest(character:character, player: player, team:[Character]())
+                    _ = readLine()
                 }
             }
         }
@@ -209,9 +194,8 @@ class Service {
             i += 1
         }
         if let input = readLine() {
-            if let i = Int(input), i >= 0 && i <= player.team.count {
+            if let i = Int(input), i >= 0 && i <= player.team.count - 1 {
                 if player.team[i].healthBar > 0{
-                   
                     return player.team[i]
                 } else {
                     print("\nChoose another one!\n")
@@ -271,29 +255,15 @@ class Service {
     }
     
     func alive(player:Player, player2:Player) -> Bool{
-        var i = 0
-        for character in player.team {
-            if character.healthBar <= 0 {
-                i += 1
-            }
-        }
-        if i == player.team.count {
+        if player.teamAlive() == false {
             print("\(player2.name) WINS !!")
             return false
         }
-        var i_2 = 0
-        for character in player2.team {
-            if character.healthBar <= 0 {
-                i_2 += 1
-            }
-        }
-        if i_2 == player2.team.count {
+        else if player2.teamAlive() == false{
             print("\(player.name) WINS !!")
             return false
         }
-        else {
-            return true
-        }
+        return true
     }
     
     func fight(){
@@ -303,9 +273,9 @@ class Service {
             attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
             print("\(firstPlayer)\n\(secondPlayer)")
+            
         }
     }
- 
     //============================================
     // MARK: - GAME
     //============================================
@@ -342,9 +312,11 @@ class Service {
            +  "+ └─┘└─┘┴─┘└─┘└─┘ ┴   ┴  ┴─┘┴ ┴ ┴ └─┘┴└─└─┘  ┘└┘┴ ┴┴ ┴└─┘ +\n"
             + "\n")
         // Asking for the 1st player name
-        firstPlayer = player1()
+        print("First player's name:")
+        firstPlayer = player()
         // Asking for the 2nd player name
-        secondPlayer = player2()
+        print("\nSecond player's name:")
+        secondPlayer = player()
         //presentation of the characters to choice
         print("\n\n"
             +  "+ ┌─┐┬─┐┌─┐┌─┐┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐ +\n"
@@ -361,7 +333,7 @@ class Service {
             +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
             +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
         
-        fight()
+        _ = fight()
         print("\n"
             +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
             +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"

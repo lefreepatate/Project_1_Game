@@ -14,6 +14,25 @@ class Player : CustomStringConvertible  {
         + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
         + "\n"
     }
-
+    func teamAlive() -> Bool {
+    var i = 0
+    var w = 0
+        for character in team {
+            if character.healthBar <= 0 {
+                i += 1
+            }
+            if character.type == .wizard {
+                w += 1
+            }
+        }
+        if w == 1 && i == 2{
+            return false
+        }
+        if i != team.count{
+            return true
+        } else {
+            return false
+        }
+    }
 }
 

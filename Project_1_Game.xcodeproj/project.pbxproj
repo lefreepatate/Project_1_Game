@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC13B8B120C80F3000EE6963 /* teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13B8B020C80F3000EE6963 /* teams.swift */; };
 		EC13B8B320C8141C00EE6963 /* characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13B8B220C8141C00EE6963 /* characters.swift */; };
 		EC13B8B520C925E300EE6963 /* choices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13B8B420C925E300EE6963 /* choices.swift */; };
 		EC2FC97120D2CF2C00D99820 /* players.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2FC97020D2CF2C00D99820 /* players.swift */; };
@@ -29,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EC13B8B020C80F3000EE6963 /* teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = teams.swift; sourceTree = "<group>"; };
 		EC13B8B220C8141C00EE6963 /* characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = characters.swift; sourceTree = "<group>"; };
 		EC13B8B420C925E300EE6963 /* choices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = choices.swift; sourceTree = "<group>"; };
 		EC2FC97020D2CF2C00D99820 /* players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = players.swift; sourceTree = "<group>"; };
@@ -70,9 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				ECF0E14E20C58FDF00037870 /* main.swift */,
-				EC13B8B020C80F3000EE6963 /* teams.swift */,
-				EC13B8B220C8141C00EE6963 /* characters.swift */,
 				EC13B8B420C925E300EE6963 /* choices.swift */,
+				EC13B8B220C8141C00EE6963 /* characters.swift */,
 				EC8A6A3820F7B961005F1304 /* Weapon.swift */,
 				EC8A6A3A20F8E2C1005F1304 /* Chest.swift */,
 				EC2FC97020D2CF2C00D99820 /* players.swift */,
@@ -139,7 +136,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC13B8B120C80F3000EE6963 /* teams.swift in Sources */,
 				ECF0E14F20C58FE000037870 /* main.swift in Sources */,
 				EC2FC97120D2CF2C00D99820 /* players.swift in Sources */,
 				EC13B8B520C925E300EE6963 /* choices.swift in Sources */,

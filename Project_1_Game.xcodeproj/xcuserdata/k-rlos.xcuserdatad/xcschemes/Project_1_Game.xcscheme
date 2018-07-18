@@ -88,6 +88,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "dark_souls"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

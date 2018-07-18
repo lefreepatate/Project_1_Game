@@ -17,14 +17,16 @@ enum type { case attack, heal, bomb}
         print("\n"
                 +  "    +    \(icon)    +    \n"
                 +  "  +      ||      +\n"
-                +  " +     + 👝 +     +\n \n"
-                +  " ----- \(name) \(damages) -----\n")
+                +  " +     + 👝 +     +\n"
+                +  "-------------------\n"
+                +  "    \(name) \(damages)\n")
         } else {
             print("\n"
                 +  "    +    \(icon)    +    \n"
                 +  "  +      ||      +\n"
-                +  " +     + 👝 +     + \n\n"
-                +  " ---- \(name) \(damages) ----\n")
+                +  " +     + 👝 +     +\n"
+                +  "-------------------\n"
+                +  "    \(name) \(damages)\n")
         }
     return ""
     }

@@ -6,11 +6,24 @@ class Choices {
     //============================================
     var firstPlayer:Player
     var secondPlayer:Player
-    init(firstPlayer:Player, secondPlayer:Player){
+    var type: PrintType
+    init(firstPlayer:Player, secondPlayer:Player, type:PrintType){
         self.firstPlayer = firstPlayer
         self.secondPlayer = secondPlayer
+        self.type = type
     }
-
+    enum PrintType:String{
+        case name = "🙈 This name already exists, pick another one !\n"
+        case yes_no = "🙈 You must choose Y for Yes or N for No"
+    }
+    var wrongName = PrintType.name.rawValue
+    var yesNo = PrintType.yes_no.rawValue
+   
+    //============================================
+    // MARK: - Creating players
+    //============================================
+    
+    // function making new players whith name, checking if the name was taken before.
     func player() -> Player{
         //2. Récupérer nom
         if let name = readLine(){
@@ -32,32 +45,32 @@ class Choices {
     //============================================
     // MARK: - Creating new Characters
     //============================================
-
+    //Verifying if the player gives a name. If the same name was taken before restart the demand
     func isNameValid (name: String) -> Bool {
          if name.isEmpty {
                 return false
             }
         if name == firstPlayer.name {
-            print("🙈 '\(firstPlayer.name)' is the first player's name, choose another one !\n")
+            print(wrongName)
             return false
         } else if name == secondPlayer.name {
-             print("🙈 '\(secondPlayer.name)' is the second player's name, choose another one !\n")
+             print(wrongName)
             return false
         }
         else {
+            //checking if the name was taken by another character
         let teams = firstPlayer.team + secondPlayer.team
             for newCharacter in teams {
                 if newCharacter.characterName == name{
-                    print("🙈 '\(name)' already exists, pick another one !\n" )
+                    print(wrongName)
                 return false
                 }
             }
         }
         return true
     }
- 
+    //creating a new fighter
     func newFighter() -> Fighter{
-
         // giving the name
         print("Fighter's name ?")
         if let name = readLine(){
@@ -71,7 +84,7 @@ class Choices {
         }
          return newFighter()
     }
-        
+    //creating a new Wizard
     func newWizard() -> Wizard{
         print("Wizard's name ?")
         if let name = readLine(){
@@ -83,7 +96,7 @@ class Choices {
         }
         return newWizard()
     }
-    
+    //creating a new Colossus
     func newColossus() -> Colossus{
         print("Colossus's name ?")
         if let name = readLine(){
@@ -95,7 +108,7 @@ class Choices {
         }
         return newColossus()
     }
-    
+    //creating a new Dwarf
     func newDwarf() -> Dwarf{
         print("Dwarf's name ?")
         if let name = readLine(){
@@ -112,7 +125,7 @@ class Choices {
     // MARK: - Players choosing team characters
     //============================================
 
-    //Choice of the player
+    //Players choose characters team's
     
     func playerChoice() -> Character{
         if let characterChoice = readLine() {
@@ -131,8 +144,8 @@ class Choices {
     //============================================
     // MARK: - STEP 2 : TEAMS FIGHTS
     //============================================
+   
     //List of fighters after the previous step and function for the 2 players to choose the character type to use in the fight
-    
     func creatingTeam(player:Player) -> Bool{
         if player.team.count == 0 {
             var i = 0
@@ -161,25 +174,24 @@ class Choices {
         if character.type == .wizard {
             if let chestChoice = readLine() {
                 switch chestChoice {
-                case "Y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
-                case "N": return nil
+                case "Y","y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
+                case "N","n": return nil
                 default:
-                    print("🙈 You must choose Y for Yes or N for No")
-                    _ = readLine()
+                    print(yesNo)
                 }
             }
+            return surpriseChest(character:character, player:player, team:team)
         } else {
             if let chestChoice = readLine() {
                 switch chestChoice {
-                case "Y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
-                case "N": return nil
+                case "Y","y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
+                case "N","n": return nil
                 default:
-                    print("🙈 You must choose Y for Yes or N for No")
-                    _ = readLine()
+                    print(yesNo)
                 }
             }
+        return surpriseChest(character:character, player:player, team:team)
         }
-        return nil
     }
    
     func charactersTeam(player:Player) -> Character {
@@ -213,6 +225,7 @@ class Choices {
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
         _ = surpriseChest(character: attacker, player: player, team:team)
         var i:Int = 0
+        // if character is a Wizard, player heals his own characters
         if attacker.type == .wizard {
             print( "\n🐵 \(player.name), who will you heal?\n")
             for character in player.team {
@@ -233,6 +246,7 @@ class Choices {
             }
         }
         else {
+            // if character is other than Wizard, player attacks the other characters team
             print( "\n🐵 \(player.name), who will you attack?\n")
             for character in team {
                 if character.healthBar > 0 {
@@ -253,7 +267,7 @@ class Choices {
         }
         return teamToFight(player:player, attacker:attacker, team: team)
     }
-    
+    //checking if the characters of both teams still alive OR if there is only a wizard alive in the team
     func alive(player:Player, player2:Player) -> Bool{
         if player.teamAlive() == false {
             print("\(player2.name) WINS !!")
@@ -265,7 +279,7 @@ class Choices {
         }
         return true
     }
-    
+    // Checking if characters are alive to continue the battle
     func fight(){
         while alive(player: firstPlayer, player2:secondPlayer) == true {
             let attacker1 = charactersTeam(player:firstPlayer)
@@ -275,71 +289,6 @@ class Choices {
             print("\(firstPlayer)\n\(secondPlayer)")
             
         }
-    }
-    //============================================
-    // MARK: - GAME
-    //============================================
-
-    //Function witch will create the teams
-    func game(){
-        
-         //Welcome message and rules for choices
-        print("\n\n"
-           +  "+ ██████╗  █████╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ ██╗   ██╗██╗     ███████╗ +\n"
-           +  "+ ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔═══██╗██║   ██║██║     ██╔════╝ +\n"
-           +  "+ ██║  ██║███████║██████╔╝█████╔╝     ███████╗██║   ██║██║   ██║██║     ███████╗ +\n"
-           +  "+ ██║  ██║██╔══██║██╔══██╗██╔═██╗     ╚════██║██║   ██║██║   ██║██║     ╚════██║ +\n"
-           +  "+ ██████╔╝██║  ██║██║  ██║██║  ██╗    ███████║╚██████╔╝╚██████╔╝███████╗███████║ +\n"
-           +  "+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝ +\n"
-           + " \n"
-           +  "+  ██████╗██╗  ██╗██████╗  ██████╗ ███╗   ██╗██╗ ██████╗██╗     ███████╗███████╗ +\n"
-           +  "+ ██╔════╝██║  ██║██╔══██╗██╔═══██╗████╗  ██║██║██╔════╝██║     ██╔════╝██╔════╝ +\n"
-           +  "+ ██║     ███████║██████╔╝██║   ██║██╔██╗ ██║██║██║     ██║     █████╗  ███████╗ +\n"
-           +  "+ ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╗██║██║██║     ██║     ██╔══╝  ╚════██║ +\n"
-           +  "+ ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚████║██║╚██████╗███████╗███████╗███████║ +\n"
-           +  "+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝  +\n"
-           + "\n"
-           +   "           --------------------------------------------------------------\n"
-           + "\n"
-           +   "            🐵 WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
-           +   "                     Play Now & Enjoy a story-driven, fantasy RPG\n"
-           + "\n"
-           +   "           --------------------------------------------------------------\n"
-           + "\n")
-        print(""
-           +  "+ ┌─┐┌─┐┬  ┌─┐┌─┐┌┬┐  ┌─┐┬  ┌─┐┬ ┬┌─┐┬─┐┌─┐  ┌┐┌┌─┐┌┬┐┌─┐ +\n"
-           +  "+ └─┐├┤ │  ├┤ │   │   ├─┘│  ├─┤└┬┘├┤ ├┬┘└─┐  │││├─┤│││├┤  +\n"
-           +  "+ └─┘└─┘┴─┘└─┘└─┘ ┴   ┴  ┴─┘┴ ┴ ┴ └─┘┴└─└─┘  ┘└┘┴ ┴┴ ┴└─┘ +\n"
-            + "\n")
-        // Asking for the 1st player name
-        print("First player's name:")
-        firstPlayer = player()
-        // Asking for the 2nd player name
-        print("\nSecond player's name:")
-        secondPlayer = player()
-        //presentation of the characters to choice
-        print("\n\n"
-            +  "+ ┌─┐┬─┐┌─┐┌─┐┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐ +\n"
-            +  "+ │  ├┬┘├┤ ├─┤ │ ├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││ +\n"
-            +  "+ └─┘┴└─└─┘┴ ┴ ┴ └─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴ +\n\n"
-            +   "-------------------------------------------------------------------------\n\n"
-            +   "  [1] 🦊 FIGHTER :  ♥️ 100 | 💀 -10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
-            +   "  [3] 🐻 COLOSSUS : ♥️ 140 | 💀 -5     [4] 🐨 DWARF :  ♥️ 80 | 💀 -20\n\n"
-            +   "------------------------------------------------------------------------\n")
-        creatingTeam(player: firstPlayer)
-        creatingTeam(player: secondPlayer)
-        print(""
-            +   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
-            +   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
-            +   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")
-        
-        _ = fight()
-        print("\n"
-            +   "++++++++++++++++ 🙉 +++++++++++++++++\n"
-            +   "+ ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"
-            +   "+ ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"
-            +   "+ ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"
-            +   "++++++++++++++++ 🍻 +++++++++++++++++\n\n")
     }
 }
  

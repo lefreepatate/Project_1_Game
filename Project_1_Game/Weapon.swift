@@ -101,22 +101,23 @@ class Bomb:Weapon{
         return ""
     }
     func bomb(player:Player, team:[Character]){
+        for character in player.team {
+            print("         \(character.characterType) \(character.characterName) -10❣️")
+            character.healthBar -= 10
+        }
         print("\n"
             +  " ┬┬  ╔╗   ╔═╗  ╔═╗  ╔═╗  ╔╦╗  ┬┬\n"
             +  " ││  ╠╩╗  ║ ║  ║ ║  ║ ║  ║║║  ││\n"
-           +   " oo  ╚═╝  ╚═╝  ╚═╝  ╚═╝  ╩ ╩  oo\n\n"
+            +  " oo  ╚═╝  ╚═╝  ╚═╝  ╚═╝  ╩ ╩  oo\n\n"
             +  "    +      +   ||   +         +    \n"
             +  "      +      + || +       +       \n"
             +  " +  +  + ===== 💣 ===== +  +  +\n"
             +  "      +      + || +       +      \n"
             +  "    +      +   ||  +        +  \n")
-        for character in player.team {
-            print("         \(character.characterType) \(character.characterName) - 10❣️")
-            character.healthBar -= 10
-        }
+        
         for character in team {
             character.healthBar -= 10
-            print("          \(character.characterType) \(character.characterName) - 10❣️")
+            print("         \(character.characterType) \(character.characterName) -10❣️")
         }
     }
 }

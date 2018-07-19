@@ -147,11 +147,7 @@ class Choices {
          return playerChoice()
     }
     
-    //============================================
-    // MARK: - STEP 2 : TEAMS FIGHTS
-    //============================================
-   
-    //List of fighters after the previous step and function for the 2 players to choose the character type to use in the fight
+
     func creatingTeam(player:Player) -> Bool{
         if player.team.count == 0 {
             var i = 0
@@ -168,7 +164,7 @@ class Choices {
         }
         return creatingTeam(player:player)
     }
-
+    // Random Chest with a better, wors weapon or a bomb that takes 10 points of all characters
     func surpriseChest(character:Character, player:Player, team:[Character]) -> Weapon?{
         if arc4random_uniform(100) < 80 {
             return nil
@@ -176,7 +172,7 @@ class Choices {
         print("\n\n"
             +  " +     + 👝 +     +\n \n"
             +  "------ CHEST ------\n"
-            + "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it?\nWatch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")
+            + "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it? Watch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")
         if character.type == .wizard {
             if let chestChoice = readLine() {
                 switch chestChoice {
@@ -200,7 +196,22 @@ class Choices {
         return surpriseChest(character:character, player:player, team:team)
         }
     }
-   
+    
+    func fruits(character:Character) -> Fruits? {
+        if arc4random_uniform(100) < 90 {
+            return nil
+        } else if character.healthBar < character.maxHealthBar{
+            return FruitsChest().randomFruits(character: character)
+        } else {
+            return nil
+        }
+    }
+    
+    //============================================
+    // MARK: - STEP 2 : TEAMS FIGHTS
+    //============================================
+    
+    //List of fighters after the previous step and function for the 2 players to choose the character type to use in the fight
     func charactersTeam(player:Player) -> Character {
         print("\n🐵 \(player.name), choose your character:\n")
         var i = 0
@@ -215,6 +226,7 @@ class Choices {
         if let input = readLine() {
             if let i = Int(input), i >= 0 && i <= player.team.count - 1 {
                 if player.team[i].healthBar > 0{
+                    _ = fruits(character: player.team[i])
                     return player.team[i]
                 } else {
                     print("\nChoose another one!\n")
@@ -277,11 +289,11 @@ class Choices {
     //checking if the characters of both teams still alive OR if there is only a wizard alive in the team
     func alive(player:Player, player2:Player) -> Bool{
         if player.teamAlive() == false {
-            print(player2.p2, player2.wins)
+            print(player2.p2)
             return false
         }
         else if player2.teamAlive() == false{
-            print(player.p1, player.wins)
+            print(player.p1)
             return false
         }
         return true

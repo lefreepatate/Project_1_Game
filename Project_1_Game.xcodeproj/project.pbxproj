@@ -10,6 +10,7 @@
 		EC13B8B320C8141C00EE6963 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13B8B220C8141C00EE6963 /* Characters.swift */; };
 		EC13B8B520C925E300EE6963 /* Choices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13B8B420C925E300EE6963 /* Choices.swift */; };
 		EC2FC97120D2CF2C00D99820 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2FC97020D2CF2C00D99820 /* Players.swift */; };
+		EC7564AB21009A98003F1E4C /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7564AA21009A98003F1E4C /* Fruits.swift */; };
 		EC8A6A3920F7B961005F1304 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A6A3820F7B961005F1304 /* Weapon.swift */; };
 		EC8A6A3B20F8E2C1005F1304 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A6A3A20F8E2C1005F1304 /* Chest.swift */; };
 		ECF0E14F20C58FE000037870 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF0E14E20C58FDF00037870 /* main.swift */; };
@@ -31,6 +32,7 @@
 		EC13B8B220C8141C00EE6963 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		EC13B8B420C925E300EE6963 /* Choices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choices.swift; sourceTree = "<group>"; };
 		EC2FC97020D2CF2C00D99820 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		EC7564AA21009A98003F1E4C /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
 		EC8A6A3820F7B961005F1304 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		EC8A6A3A20F8E2C1005F1304 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		ECB2F66420C570410087750C /* Project_1_Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project_1_Game; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,10 +71,11 @@
 			children = (
 				ECF0E14E20C58FDF00037870 /* main.swift */,
 				EC13B8B420C925E300EE6963 /* Choices.swift */,
-				EC13B8B220C8141C00EE6963 /* Characters.swift */,
-				EC8A6A3820F7B961005F1304 /* Weapon.swift */,
-				EC8A6A3A20F8E2C1005F1304 /* Chest.swift */,
 				EC2FC97020D2CF2C00D99820 /* Players.swift */,
+				EC13B8B220C8141C00EE6963 /* Characters.swift */,
+				EC8A6A3A20F8E2C1005F1304 /* Chest.swift */,
+				EC8A6A3820F7B961005F1304 /* Weapon.swift */,
+				EC7564AA21009A98003F1E4C /* Fruits.swift */,
 			);
 			path = Project_1_Game;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7564AB21009A98003F1E4C /* Fruits.swift in Sources */,
 				ECF0E14F20C58FE000037870 /* main.swift in Sources */,
 				EC2FC97120D2CF2C00D99820 /* Players.swift in Sources */,
 				EC13B8B520C925E300EE6963 /* Choices.swift in Sources */,

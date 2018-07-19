@@ -34,9 +34,9 @@ class Character:CustomStringConvertible {
             print("\nI'm already dead! 👻")
         } else {
             victim.healthBar -= healthDamages
-            print("\n+--  \(characterType) ⇒ \(weapon) \(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️  --+\n")
+            print("\n+--  \(characterType) ⇒ \(weapon) \(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️  --+")
             if victim.healthBar <= 0 {
-                print("+--  ☠️ ✖︎✖︎✖︎✖︎ \(victim.characterType) \(victim.characterName) ✖︎✖︎✖︎✖︎ ☠️  --+\n")
+                print("\n+--  ☠️ ✖︎✖︎✖︎✖︎ \(victim.characterType) \(victim.characterName) ✖︎✖︎✖︎✖︎ ☠️  --+")
             }
         }
     }

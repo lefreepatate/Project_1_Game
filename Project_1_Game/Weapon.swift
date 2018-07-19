@@ -18,13 +18,13 @@ enum type { case attack, heal, bomb}
                 +  "    +    \(icon)    +    \n"
                 +  "  +      ||      +\n"
                 +  " +     + 👝 +     +\n"
-                +  " ------------------- \(name) \(damages)\n"
+                +  " ----------------- \(name) \(damages)"
         } else {
         return "\n"
                 +  "    +    \(icon)    +    \n"
                 +  "  +      ||      +\n"
                 +  " +     + 👝 +     +\n"
-                +  " ------------------- \(name) \(damages)\n"
+                +  " ----------------- \(name) \(damages)"
         }
     }
 

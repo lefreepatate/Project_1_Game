@@ -6,13 +6,12 @@ class Player : CustomStringConvertible  {
         self.name = name
         self.team = team
     }
-    var description: String {
+    var description:String {
     return"\n"
         + "///+ \(name)'s    \n"
         + "///+ ┌┬┐┌─┐┌─┐┌┬┐ + \(team[0])\n"
         + "///+  │ ├┤ ├─┤│││ + \(team[1])\n"
         + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
-        + "\n"
     }
     func teamAlive() -> Bool {
     var i = 0

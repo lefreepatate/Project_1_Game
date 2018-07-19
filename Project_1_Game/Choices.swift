@@ -169,8 +169,8 @@ class Choices {
         if arc4random_uniform(100) < 80 {
             return nil
         }
-        print("\n\n"
-            +  " +     + 👝 +     +\n \n"
+        print("\n"
+            +  " +     + 👝 +     +\n"
             +  "------ CHEST ------\n"
             + "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it? Watch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")
         if character.type == .wizard {
@@ -229,7 +229,7 @@ class Choices {
                     _ = fruits(character: player.team[i])
                     return player.team[i]
                 } else {
-                    print("\nChoose another one!\n")
+                    print("\nChoose another one!")
                     return charactersTeam(player:player)
                 }
             } else {
@@ -302,10 +302,11 @@ class Choices {
     func fight(){
         while alive(player: firstPlayer, player2:secondPlayer) == true {
             let attacker1 = charactersTeam(player:firstPlayer)
-            let attacker2 = charactersTeam(player:secondPlayer)
             attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
+            let attacker2 = charactersTeam(player:secondPlayer)
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
-            print("\(firstPlayer)\n\(secondPlayer)")
+            print(firstPlayer,secondPlayer)
+            
             
         }
     }

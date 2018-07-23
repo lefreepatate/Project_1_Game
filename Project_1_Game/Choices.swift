@@ -223,7 +223,7 @@ class Choices {
         var i:Int = 0
         // if character is a Wizard, player heals his own characters
         if attacker.type == .wizard {
-            print( "\n🐵 \(player.name), who will you heal?\n")
+            print( "\n🐵  \(player.name), who will you heal?\n")
             for character in player.team {
                 if character.healthBar > 0 {
                     print("[\(i)] \(character.description)")
@@ -243,7 +243,7 @@ class Choices {
         }
         else {
             // if character is other than Wizard, player attacks the other characters team
-            print( "\n🐵 \(player.name), who will you attack?\n")
+            print( "\n🐵  \(player.name), who will you attack?\n")
             for character in team {
                 if character.healthBar > 0 {
                     print("[\(i)] \(character.description)")
@@ -266,11 +266,11 @@ class Choices {
    
     //checking if the characters of both teams still alive OR if there is only a wizard alive in the team
     func alive(player:Player, player2:Player) -> Bool{
-        if !player.teamAlive(){
+        if player.teamAlive(){
             print(player2.p2)
             return false
         }
-        else if !player2.teamAlive(){
+        else if player2.teamAlive(){
             print(player.p1)
             return false
         }

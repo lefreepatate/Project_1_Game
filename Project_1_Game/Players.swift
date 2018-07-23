@@ -13,23 +13,23 @@ class Player : CustomStringConvertible  {
         + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
     }
     func teamAlive() -> Bool {
-    var characterDead = 0
+    var dead = 0
     var wizards = 0
         for character in team {
             if character.healthBar <= 0 {
-                characterDead += 1
+                dead += 1
             }
             if character.type == .wizard {
                 wizards += 1
             }
         }
-        if wizards == 1 && characterDead == 2 || wizards == 2 && characterDead == 1 || wizards == 3{
-            return false
-        }
-        if characterDead != team.count{
+        if wizards == 1 && dead == 2 || wizards == 2 && dead == 1 || wizards == 3{
             return true
-        } else {
+        }
+        if dead != team.count{
             return false
+        } else {
+            return true
         }
     }
     var p1:String {

@@ -35,10 +35,10 @@ class Character:CustomStringConvertible {
         } else {
             victim.healthBar -= healthDamages
             if victim.healthBar <= 0 {
-                print("\n+--  \(characterType) ⇒ \(weapon) \(victim.characterType) \(victim.characterName) : ✖︎✖︎✖︎✖︎ ☠️ ✖︎✖︎✖︎✖︎  --+")
+                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : ✖︎✖︎✖︎✖︎  ☠️  ✖︎✖︎✖︎✖︎  --+")
             }
             else {
-                print("\n+--  \(characterType) ⇒ \(weapon) \(victim.characterType) \(victim.characterName) : -\(healthDamages)❣️  --+")
+                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : -\(healthDamages) ❣️  --+")
             }
         }
     }
@@ -51,10 +51,10 @@ class Character:CustomStringConvertible {
             healthBar = 0
         }
         if healthBar <= 0 || healthBar == 0{
-            return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
+            return "☠️  ✖︎✖︎✖︎✖︎ \(characterType)  \(characterName) ✖︎✖︎✖︎✖︎  ☠️"
         }
         else {
-            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💀 -\(healthDamages)"
+            return "\(characterType)  \(characterName) : ♥️  \(healthBar) | 💀  -\(healthDamages)"
         }
     }
 }
@@ -86,26 +86,26 @@ class Wizard: Character {
         }
         if victim.healthBar <= 0 {
             victim.healthBar = 0
-            print("\n🐼 Sorry, I can't resurrect you.")
+            print("\n🐼  Sorry, I can't resurrect you.")
         } else if victim.healthBar == victim.maxHealthBar {
-            print("\n🐼 You're in great shape!")
+            print("\n🐼  You're in great shape!")
         }
         else {
             victim.healthBar += healthDamages
             if healthBar <= 0 {
-                print("\n+--  🐼 I have just been killed  --+")
+                print("\n+--  🐼  I have just been killed  --+")
             } else {
-            print("\n+--  \(characterType) ⇒ \(weapon) \(victim.characterType) \(victim.characterName) : +\(healthDamages)💕  --+")
+            print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType) \(victim.characterName) : +\(healthDamages) 💕  --+")
             }
         }
     }
     
     override var description: String {
         if healthBar <= 0 {
-            return "☠️ ✖︎✖︎✖︎✖︎ \(characterType) \(characterName) ✖︎✖︎✖︎✖︎ ☠️"
+            return "☠️  ✖︎✖︎✖︎✖︎  \(characterType) \(characterName)  ✖︎✖︎✖︎✖︎ ☠️"
         }
         else {
-            return "\(characterType) \(characterName) : ♥️ \(healthBar) | 💚 +\(healthDamages)"
+            return "\(characterType)  \(characterName) : ♥️  \(healthBar) | 💚  +\(healthDamages)"
         }   
     }
 }

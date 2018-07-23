@@ -23,7 +23,7 @@ class Main:Choices {	init(){		let firstPlayer = Player(name: "")	let secondPl
 		+ "\n"
 		+   "           --------------------------------------------------------------\n"
 		+ "\n"
-		+   "            🐵 WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
+		+   "            🐵  WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
 		+   "                     Play Now & Enjoy a story-driven, fantasy RPG\n"
 		+ "\n"
 		+   "           --------------------------------------------------------------\n"
@@ -44,8 +44,8 @@ class Main:Choices {	init(){		let firstPlayer = Player(name: "")	let secondPl
 		+  "+ ┌─┐┬─┐┌─┐┌─┐┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐ +\n"
 		+  "+ │  ├┬┘├┤ ├─┤ │ ├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││ +\n"
 		+  "+ └─┘┴└─└─┘┴ ┴ ┴ └─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴ +\n\n"		+  "-------------------------------------------------------------------------\n\n"
-		+  "  [1] 🦊 FIGHTER :  ♥️ 100 | 💀 -10    [2] 🐼 WIZARD : ♥️ 90 | 💚 +15\n\n"
-		+  "  [3] 🐻 COLOSSUS : ♥️ 140 | 💀 -5     [4] 🐨 DWARF :  ♥️ 80 | 💀 -20\n\n"		+  "------------------------------------------------------------------------\n"		+  "                    🐵 You have to choose 3 warriors.\n"		+  "     As soon as there are only wizards alive in your team: GAME OVER!\n")
+		+  "  [1] 🦊  FIGHTER :  ♥️  100 | 💀  -10    [2] 🐼 WIZARD : ♥️  90 | 💚  +15\n\n"
+		+  "  [3] 🐻  COLOSSUS : ♥️  140 | 💀  -5     [4] 🐨 DWARF :  ♥️  80 | 💀  -20\n\n"		+  "------------------------------------------------------------------------\n"		+  "                    🐵 You have to choose 3 warriors.\n"		+  "     As soon as there are only wizards alive in your team: GAME OVER!\n")
 		creatingTeam(player: firstPlayer)		creatingTeam(player: secondPlayer)
 		print(""
 		+   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"

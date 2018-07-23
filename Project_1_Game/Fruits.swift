@@ -36,9 +36,9 @@ class RedPepper:Fruits{
         super.init(heal: -10, name: "Red Pepper", icon: "🌶 🙊", fruitsType: .pepper)
     }
 }
-class Perry:Fruits{
+class Pear:Fruits{
     init() {
-        super.init(heal: 4, name: "Perry", icon: "🍐", fruitsType: .vitamin)
+        super.init(heal: 4, name: "Pear", icon: "🍐", fruitsType: .vitamin)
     }
 }
 class Orange:Fruits{

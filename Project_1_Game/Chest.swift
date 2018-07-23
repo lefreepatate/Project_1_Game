@@ -1,12 +1,8 @@
 import Foundation
 class Chest {
     var name:String
-    var weaponChest = [Weapon]()
-    var fruitsChest = [Fruits]()
-    init(name:String, weaponChest:[Weapon], fruitsChest:[Fruits]){
+    init(name:String){
         self.name = name
-        self.weaponChest = weaponChest
-        self.fruitsChest = fruitsChest
     }
 }
 
@@ -18,9 +14,10 @@ class HealChest:Chest {
     let trident = Trident()
     let healBomb = Bomb()
     init(){
-        super.init(name: "healChest", weaponChest: [stars, moon, fullMoon, thunder, trident, healBomb], fruitsChest:[])
+        super.init(name: "healChest")
     }
-    func randomHealWeapon(character:Character, player:Player, team:[Character]) -> Weapon{
+    func randomHealWeapon(character:Character, player:Player, team:[Character]){
+        let  weaponChest = [stars, moon, fullMoon, thunder, trident, healBomb]
         let randomHeals = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
         if randomHeals.type == .bomb {
             healBomb.bomb(player: player, team: team)
@@ -29,7 +26,6 @@ class HealChest:Chest {
             character.weapon = randomHeals.icon
         }
         print(randomHeals)
-        return randomHeals
     }
 }
 
@@ -41,9 +37,10 @@ class AttackChest: Chest {
     let ice = Ice()
     let attackBomb = Bomb()
     init(){
-        super.init(name: "attackChest", weaponChest: [fireBall, sword, knife, hammer, ice, attackBomb],fruitsChest:[])
+        super.init(name: "attackChest")
     }
-    func randomAttackWeapon(character:Character, player:Player, team:[Character]) -> Weapon{
+    func randomAttackWeapon(character:Character, player:Player, team:[Character]){
+        let weaponChest = [fireBall, sword, knife, hammer, ice, attackBomb]
         let randomAttack = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
         if randomAttack.type == .bomb {
             attackBomb.bomb(player: player, team: team)
@@ -52,7 +49,6 @@ class AttackChest: Chest {
             character.weapon = randomAttack.icon
         }
         print(randomAttack)
-        return randomAttack
     }
 
 }
@@ -61,7 +57,7 @@ class FruitsChest:Chest{
     let apple = Apple()
     let kiwi = Kiwi()
     let redPepper = RedPepper()
-    let perry = Perry()
+    let pear = Pear()
     let orange = Orange()
     let lemon = Lemon()
     let banana = Banana()
@@ -69,9 +65,10 @@ class FruitsChest:Chest{
     let strawberry = Strawberry()
     let cherry = Cherry()
     init() {
-        super.init(name: "FruitsChest", weaponChest:[],fruitsChest: [apple, kiwi, redPepper, perry, orange, lemon, banana, watermelon, strawberry, cherry])
+        super.init(name: "FruitsChest")
     }
-    func randomFruits(character:Character) -> Fruits {
+    func randomFruits(character:Character){
+        let fruitsChest = [apple, kiwi, redPepper, pear, orange, lemon, banana, watermelon, strawberry, cherry]
         let randomFruits = fruitsChest[Int(arc4random_uniform(UInt32(fruitsChest.count)))]
         character.healthBar += randomFruits.heal
             if randomFruits.fruitsType == .pepper {
@@ -79,7 +76,6 @@ class FruitsChest:Chest{
             } else {
                 print("\(randomFruits)\n+--  \(character.characterType) \(character.characterName) +\(randomFruits.heal)💕")
             }
-        return randomFruits
     }
 }
 

@@ -2,9 +2,8 @@ import Foundation
 class Player : CustomStringConvertible  {
     var name:String 
     var team = [Character]()
-    init(name:String, team:[Character]){
+    init(name:String){
         self.name = name
-        self.team = team
     }
     var description:String {
     return"\n"
@@ -14,20 +13,20 @@ class Player : CustomStringConvertible  {
         + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
     }
     func teamAlive() -> Bool {
-    var i = 0
-    var w = 0
+    var characterDead = 0
+    var wizards = 0
         for character in team {
             if character.healthBar <= 0 {
-                i += 1
+                characterDead += 1
             }
             if character.type == .wizard {
-                w += 1
+                wizards += 1
             }
         }
-        if w == 1 && i == 2 || w == 2 && i == 1 || w == 3{
+        if wizards == 1 && characterDead == 2 || wizards == 2 && characterDead == 1 || wizards == 3{
             return false
         }
-        if i != team.count{
+        if characterDead != team.count{
             return true
         } else {
             return false

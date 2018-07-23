@@ -6,61 +6,48 @@ class Choices {
     //============================================
     var firstPlayer:Player
     var secondPlayer:Player
-    var type: PrintType
-    init(firstPlayer:Player, secondPlayer:Player, type:PrintType){
+    init(firstPlayer:Player, secondPlayer:Player){
         self.firstPlayer = firstPlayer
         self.secondPlayer = secondPlayer
-        self.type = type
     }
-    enum PrintType:String{
-        case name = "🙈 This name already exists, pick another one !\n"
-        case yes_no = "🙈 You must choose Y for Yes or N for No"
-        case resurrect = "🐼 Sorry, I can't resurrect you."
-        case greatShape = "🐼 You're in great shape!"
-        case dead = "I'm already dead! 👻"
-    }
-    let wrongName = PrintType.name.rawValue
-    let yesNo = PrintType.yes_no.rawValue
-    let resurrect = PrintType.resurrect.rawValue
-    let greatShape = PrintType.greatShape.rawValue
-    let dead = PrintType.dead.rawValue
-   
+    
     //============================================
     // MARK: - Creating players
     //============================================
-    
+    //let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
     // function making new players whith name, checking if the name was taken before.
     func player() -> Player{
-        //2. Récupérer nom
+        //Having the name given by player
         if let name = readLine(){
+            if name.isEmpty{
+                print(Main().noName)
+            }
             if isNameValid(name: name){
-            //2. Créer le player
-            //3. Return Player
-            let firstPlayer = Player(name: name, team:[Character]())
-            return firstPlayer
+               
+            //Checking if is avaible
+            //Creating player
+            let player = Player(name: name)
+            return player
             }
-            else {
-                return player()
-            }
-        }
-        else {
             return player()
         }
+        return player()
     }
-   
+    
     //============================================
     // MARK: - Creating new Characters
     //============================================
+    
     //Verifying if the player gives a name. If the same name was taken before restart the demand
     func isNameValid (name: String) -> Bool {
-         if name.isEmpty {
+        if name.isEmpty{
                 return false
             }
         if name == firstPlayer.name {
-            print(wrongName)
+            print(Main().wrongName)
             return false
         } else if name == secondPlayer.name {
-             print(wrongName)
+             print(Main().wrongName)
             return false
         }
         else {
@@ -68,21 +55,22 @@ class Choices {
         let teams = firstPlayer.team + secondPlayer.team
             for newCharacter in teams {
                 if newCharacter.characterName == name{
-                    print(wrongName)
+                    print(Main().wrongName)
                 return false
                 }
             }
         }
         return true
     }
+   
     //creating a new fighter
     func newFighter() -> Fighter{
         // giving the name
-        print("Fighter's name ?")
+        print(Main().fighterName)
         if let name = readLine(){
            // checking if the name wasn't choose before
             if isNameValid(name: name){
-                //creation of the fighter and return him to the table
+                //creation of the fighter and return him to the array
                 let newFighter = Fighter(name: name)
                 return newFighter
             }
@@ -90,9 +78,10 @@ class Choices {
         }
          return newFighter()
     }
+   
     //creating a new Wizard
     func newWizard() -> Wizard{
-        print("Wizard's name ?")
+        print(Main().wizardName)
         if let name = readLine(){
             if isNameValid(name:name){
                 let newWizard = Wizard(name: name)
@@ -102,9 +91,10 @@ class Choices {
         }
         return newWizard()
     }
+   
     //creating a new Colossus
     func newColossus() -> Colossus{
-        print("Colossus's name ?")
+        print(Main().colossusName)
         if let name = readLine(){
             if isNameValid( name: name){
                 let newColossus = Colossus(name: name)
@@ -114,9 +104,10 @@ class Choices {
         }
         return newColossus()
     }
+   
     //creating a new Dwarf
     func newDwarf() -> Dwarf{
-        print("Dwarf's name ?")
+        print(Main().dwarfName)
         if let name = readLine(){
             if isNameValid(name: name){
                 let newDwarf = Dwarf(name: name)
@@ -132,7 +123,6 @@ class Choices {
     //============================================
 
     //Players choose characters team's
-    
     func playerChoice() -> Character{
         if let characterChoice = readLine() {
             switch characterChoice {
@@ -141,69 +131,56 @@ class Choices {
             case "3": return newColossus()
             case "4": return newDwarf()
             default:
-                print( "🙈 Choose between 1 and 4\n")
+                print(Main().choose1_4)
             }
         }
          return playerChoice()
     }
     
-
-    func creatingTeam(player:Player) -> Bool{
+    func creatingTeam(player:Player){
         if player.team.count == 0 {
             var i = 0
             repeat {
                 print("\n\(player.name), choose your character number \(i + 1):")
                 player.team.insert(playerChoice(), at :(i))
                 i += 1
-                print("")
             }  while player.team.count < 3
-            print("\(player)")
-            return true
-        } else {
-            print("\(player)")
+            print(player)
         }
-        return creatingTeam(player:player)
     }
+   
     // Random Chest with a better, wors weapon or a bomb that takes 10 points of all characters
-    func surpriseChest(character:Character, player:Player, team:[Character]) -> Weapon?{
-        if arc4random_uniform(100) < 80 {
-            return nil
+    func surpriseChest(character:Character, player:Player, team:[Character]){
+        if arc4random_uniform(100) < 10 {
+            return
         }
-        print("\n"
-            +  " +     + 👝 +     +\n"
-            +  "------ CHEST ------\n"
-            + "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it? Watch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")
+        Main().printRandom(player:player)
         if character.type == .wizard {
             if let chestChoice = readLine() {
                 switch chestChoice {
                 case "Y","y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
-                case "N","n": return nil
-                default:
-                    print(yesNo)
+                case "N","n": return
+                default: print(Main().yesNo)
                 }
             }
-            return surpriseChest(character:character, player:player, team:team)
         } else {
             if let chestChoice = readLine() {
                 switch chestChoice {
                 case "Y","y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
-                case "N","n": return nil
-                default:
-                    print(yesNo)
-                    return surpriseChest(character:character, player:player, team:team)
+                case "N","n": return
+                default: print(Main().yesNo)
                 }
             }
-        return surpriseChest(character:character, player:player, team:team)
         }
     }
     
-    func fruits(character:Character) -> Fruits? {
+    func fruits(character:Character){
         if arc4random_uniform(100) < 90 {
-            return nil
+            return
         } else if character.healthBar < character.maxHealthBar{
-            return FruitsChest().randomFruits(character: character)
+            FruitsChest().randomFruits(character: character)
         } else {
-            return nil
+            return
         }
     }
     
@@ -213,7 +190,7 @@ class Choices {
     
     //List of fighters after the previous step and function for the 2 players to choose the character type to use in the fight
     func charactersTeam(player:Player) -> Character {
-        print("\n🐵 \(player.name), choose your character:\n")
+        print(Main().choose(player: player))
         var i = 0
         for character in player.team {
             if character.healthBar > 0 {
@@ -226,10 +203,10 @@ class Choices {
         if let input = readLine() {
             if let i = Int(input), i >= 0 && i <= player.team.count - 1 {
                 if player.team[i].healthBar > 0{
-                    _ = fruits(character: player.team[i])
+                    fruits(character: player.team[i])
                     return player.team[i]
                 } else {
-                    print("\nChoose another one!")
+                    print(Main().another)
                     return charactersTeam(player:player)
                 }
             } else {
@@ -242,7 +219,7 @@ class Choices {
     
     //function for player1 for choose the character type to use for the fight
     func teamToFight(player:Player, attacker:Character, team:[Character]) -> Character{
-        _ = surpriseChest(character: attacker, player: player, team:team)
+        surpriseChest(character: attacker, player: player, team:team)
         var i:Int = 0
         // if character is a Wizard, player heals his own characters
         if attacker.type == .wizard {
@@ -286,28 +263,35 @@ class Choices {
         }
         return teamToFight(player:player, attacker:attacker, team: team)
     }
+   
     //checking if the characters of both teams still alive OR if there is only a wizard alive in the team
     func alive(player:Player, player2:Player) -> Bool{
-        if player.teamAlive() == false {
+        if !player.teamAlive(){
             print(player2.p2)
             return false
         }
-        else if player2.teamAlive() == false{
+        else if !player2.teamAlive(){
             print(player.p1)
             return false
         }
         return true
     }
+   
     // Checking if characters are alive to continue the battle
     func fight(){
-        while alive(player: firstPlayer, player2:secondPlayer) == true {
-            let attacker1 = charactersTeam(player:firstPlayer)
-            attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
-            let attacker2 = charactersTeam(player:secondPlayer)
+        var currentPlayer = firstPlayer
+        var otherPlayer = secondPlayer
+        var tmp:Player
+        while alive(player: firstPlayer, player2:secondPlayer){
+            let attacker1 = charactersTeam(player:currentPlayer)
+            attacker1.attack(victim: teamToFight(player:currentPlayer, attacker:attacker1, team: otherPlayer.team))
+            print(currentPlayer, otherPlayer)
+            /*let attacker2 = charactersTeam(player:secondPlayer)
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
-            print(firstPlayer,secondPlayer)
-            
-            
+            print(firstPlayer,secondPlayer)*/
+            otherPlayer = currentPlayer
+            tmp = currentPlayer
+            currentPlayer = tmp
         }
     }
 }

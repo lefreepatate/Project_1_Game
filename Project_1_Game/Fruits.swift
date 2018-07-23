@@ -33,7 +33,7 @@ class Kiwi:Fruits{
 }
 class RedPepper:Fruits{
     init() {
-        super.init(heal: -10, name: "Red Pepper", icon: "🌶 🙊", fruitsType: .pepper)
+        super.init(heal: -10, name: "Red Pepper", icon: "🌶  🙊", fruitsType: .pepper)
     }
 }
 class Pear:Fruits{

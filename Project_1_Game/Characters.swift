@@ -102,7 +102,7 @@ class Wizard: Character {
     
     override var description: String {
         if healthBar <= 0 {
-            return "☠️  ✖︎✖︎✖︎✖︎  \(characterType) \(characterName)  ✖︎✖︎✖︎✖︎ ☠️"
+            return "☠️  ✖︎✖︎✖︎✖︎  \(characterType)  \(characterName)  ✖︎✖︎✖︎✖︎  ☠️"
         }
         else {
             return "\(characterType)  \(characterName) : ♥️  \(healthBar) | 💚  +\(healthDamages)"

@@ -102,7 +102,7 @@ class Bomb:Weapon{
     }
     func bomb(player:Player, team:[Character]){
         for character in player.team {
-            print("         \(character.characterType) \(character.characterName) -10❣️")
+            print("         \(character.characterType)  \(character.characterName) -10 ❣️")
             character.healthBar -= 10
         }
         print("\n"
@@ -117,7 +117,7 @@ class Bomb:Weapon{
         
         for character in team {
             character.healthBar -= 10
-            print("         \(character.characterType) \(character.characterName) -10❣️")
+            print("         \(character.characterType)  \(character.characterName) -10 ❣️")
         }
     }
 }

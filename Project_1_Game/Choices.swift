@@ -279,19 +279,19 @@ class Choices {
    
     // Checking if characters are alive to continue the battle
     func fight(){
-        var currentPlayer = firstPlayer
+        /*var currentPlayer = firstPlayer
         var otherPlayer = secondPlayer
-        var tmp:Player
+        var tmp:Player*/
         while alive(player: firstPlayer, player2:secondPlayer){
-            let attacker1 = charactersTeam(player:currentPlayer)
-            attacker1.attack(victim: teamToFight(player:currentPlayer, attacker:attacker1, team: otherPlayer.team))
+            let attacker1 = charactersTeam(player:firstPlayer)
+            attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
             print(currentPlayer, otherPlayer)
-            /*let attacker2 = charactersTeam(player:secondPlayer)
+            let attacker2 = charactersTeam(player:secondPlayer)
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
-            print(firstPlayer,secondPlayer)*/
-            otherPlayer = currentPlayer
+            print(firstPlayer,secondPlayer)
+            /*otherPlayer = currentPlayer
             tmp = currentPlayer
-            currentPlayer = tmp
+            currentPlayer = tmp*/
         }
     }
 }

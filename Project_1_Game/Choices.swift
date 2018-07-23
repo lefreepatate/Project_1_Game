@@ -151,7 +151,7 @@ class Choices {
    
     // Random Chest with a better, wors weapon or a bomb that takes 10 points of all characters
     func surpriseChest(character:Character, player:Player, team:[Character]){
-        if arc4random_uniform(100) < 10 {
+        if arc4random_uniform(100) < 70 {
             return
         }
         Main().printRandom(player:player)
@@ -175,7 +175,7 @@ class Choices {
     }
     
     func fruits(character:Character){
-        if arc4random_uniform(100) < 90 {
+        if arc4random_uniform(100) < 80 {
             return
         } else if character.healthBar < character.maxHealthBar{
             FruitsChest().randomFruits(character: character)
@@ -190,7 +190,7 @@ class Choices {
     
     //List of fighters after the previous step and function for the 2 players to choose the character type to use in the fight
     func charactersTeam(player:Player) -> Character {
-        print(Main().choose(player: player))
+        Main().choose(player: player)
         var i = 0
         for character in player.team {
             if character.healthBar > 0 {
@@ -285,7 +285,7 @@ class Choices {
         while alive(player: firstPlayer, player2:secondPlayer){
             let attacker1 = charactersTeam(player:firstPlayer)
             attacker1.attack(victim: teamToFight(player:firstPlayer, attacker:attacker1, team: secondPlayer.team))
-            print(currentPlayer, otherPlayer)
+            print(firstPlayer, secondPlayer)
             let attacker2 = charactersTeam(player:secondPlayer)
             attacker2.attack(victim: teamToFight(player:secondPlayer, attacker:attacker2, team: firstPlayer.team))
             print(firstPlayer,secondPlayer)

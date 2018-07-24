@@ -15,7 +15,7 @@ class Fruits:CustomStringConvertible {
         return "\n"
             +  "  +   +   + \n"
             +  "   +  +  +  \n"
-            +  "    \(icon) \(name)\n"
+            +  "    \(icon)  \(name)\n"
             +  "   +  +  +  \n"
             +  "  +   +   +  \n"
         }

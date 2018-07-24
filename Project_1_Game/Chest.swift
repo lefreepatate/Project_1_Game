@@ -72,9 +72,9 @@ class FruitsChest:Chest{
         let randomFruits = fruitsChest[Int(arc4random_uniform(UInt32(fruitsChest.count)))]
         character.healthBar += randomFruits.heal
             if randomFruits.fruitsType == .pepper {
-            print("\(randomFruits)\n+--  \(character.characterType)  \(character.characterName) \(randomFruits.heal)  ❣️")
+            print("\(randomFruits)\n+--  \(character.characterType)  \(character.characterName) \(randomFruits.heal) ❣️")
             } else {
-                print("\(randomFruits)\n+--  \(character.characterType)  \(character.characterName) +\(randomFruits.heal)  💕")
+                print("\(randomFruits)\n+--  \(character.characterType)  \(character.characterName) +\(randomFruits.heal) 💕")
             }
     }
 }

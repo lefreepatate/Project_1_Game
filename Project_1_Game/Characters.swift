@@ -35,10 +35,10 @@ class Character:CustomStringConvertible {
         } else {
             victim.healthBar -= healthDamages
             if victim.healthBar <= 0 {
-                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : ✖︎✖︎✖︎✖︎  ☠️  ✖︎✖︎✖︎✖︎  --+")
+                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : ✖︎✖︎✖︎✖︎  ☠️  ✖︎✖︎✖︎✖︎  --+\n")
             }
             else {
-                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : -\(healthDamages) ❣️  --+")
+                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : -\(healthDamages) ❣️  --+\n")
             }
         }
     }
@@ -93,9 +93,9 @@ class Wizard: Character {
         else {
             victim.healthBar += healthDamages
             if healthBar <= 0 {
-                print("\n+--  🐼  I have just been killed  --+")
+                print("\n+--  🐼  I have just been killed  --+\n")
             } else {
-            print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType) \(victim.characterName) : +\(healthDamages) 💕  --+")
+            print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType) \(victim.characterName) : +\(healthDamages) 💕  --+\n")
             }
         }
     }

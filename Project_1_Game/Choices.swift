@@ -290,6 +290,18 @@ class Choices {
             currentPlayer = otherPlayer
             otherPlayer = tmp
         }
+        restart()
+    }
+    //At the end of the game, asking if the player wants to try again a new round
+    func restart(){
+        print(Main().printRestart)
+        if let restart = readLine(){
+            switch restart {
+            case "Y","y": return Main().printGame()
+            case "N","n": return
+            default: print(Main().yesNo)
+            }
+        }
     }
 }
  

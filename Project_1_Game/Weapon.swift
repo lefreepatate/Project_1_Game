@@ -15,14 +15,14 @@ enum type { case attack, heal, bomb}
     var description:String {
         if self.type == .heal {
         return "\n"
-                +  "    +    \(icon)    +    \n"
-                +  "  +      ||      +\n"
+                +  "    +    \(icon)    +\n"
+                +  "  +      ||     +\n"
                 +  " +     + 👝 +     +\n"
                 +  " ----------------- \(name) \(damages)"
         } else {
         return "\n"
-                +  "    +    \(icon)    +    \n"
-                +  "  +      ||      +\n"
+                +  "    +    \(icon)    +\n"
+                +  "  +      ||     +\n"
                 +  " +     + 👝 +     +\n"
                 +  " ----------------- \(name) \(damages)"
         }

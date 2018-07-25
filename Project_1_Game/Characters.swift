@@ -35,7 +35,7 @@ class Character:CustomStringConvertible {
         } else {
             victim.healthBar -= healthDamages
             if victim.healthBar <= 0 {
-                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : ✖︎✖︎✖︎✖︎  ☠️  ✖︎✖︎✖︎✖︎  --+\n")
+                print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : ✖︎✖︎✖︎✖︎  ☠️   ✖︎✖︎✖︎✖︎  --+\n")
             }
             else {
                 print("\n+--  \(characterType)  ⇒  \(weapon)  \(victim.characterType)  \(victim.characterName) : -\(healthDamages) ❣️  --+\n")
@@ -50,8 +50,8 @@ class Character:CustomStringConvertible {
         if healthBar <= 0 {
             healthBar = 0
         }
-        if healthBar <= 0 || healthBar == 0{
-            return "☠️  ✖︎✖︎✖︎✖︎ \(characterType)  \(characterName) ✖︎✖︎✖︎✖︎  ☠️"
+        if healthBar <= 0 {
+            return "☠️   ✖︎✖︎✖︎✖︎ \(characterType)  \(characterName) ✖︎✖︎✖︎✖︎  ☠️"
         }
         else {
             return "\(characterType)  \(characterName) : ♥️  \(healthBar) | 💀  -\(healthDamages)"
@@ -102,7 +102,7 @@ class Wizard: Character {
     
     override var description: String {
         if healthBar <= 0 {
-            return "☠️  ✖︎✖︎✖︎✖︎  \(characterType)  \(characterName)  ✖︎✖︎✖︎✖︎  ☠️"
+            return "☠️   ✖︎✖︎✖︎✖︎  \(characterType)  \(characterName)  ✖︎✖︎✖︎✖︎  ☠️"
         }
         else {
             return "\(characterType)  \(characterName) : ♥️  \(healthBar) | 💚  +\(healthDamages)"

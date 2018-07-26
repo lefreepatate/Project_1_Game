@@ -298,7 +298,7 @@ class Choices {
         if let restart = readLine(){
             switch restart {
             case "Y","y": return Main().printGame()
-            case "N","n": return
+            case "N","n": print(Main().end)
             default: print(Main().yesNo)
             }
         }

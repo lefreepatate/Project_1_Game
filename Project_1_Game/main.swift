@@ -23,7 +23,7 @@ class Main:Choices {	init(){		let firstPlayer = Player(name: "")	let secondPl
 		+ "\n"
 		+   "           --------------------------------------------------------------\n"
 		+ "\n"
-		+   "            🐵  WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
+		+   "          🐵  WELCOME TO THE DARK SOUL'S CHRONICLE RPG WORLD OF CGM [©1983]\n"
 		+   "                     Play Now & Enjoy a story-driven, fantasy RPG\n"
 		+ "\n"
 		+   "           --------------------------------------------------------------\n"
@@ -51,8 +51,7 @@ class Main:Choices {	init(){		let firstPlayer = Player(name: "")	let secondPl
 		+   "+ ╔═╗╔═╗  ╔╦╗╔═╗  ╔╦╗╦ ╦╔═╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗  ┬ +\n"
 		+   "+ ║ ╦║ ║   ║ ║ ║   ║ ╠═╣║╣   ╠╩╗╠═╣ ║  ║ ║  ║╣   │ +\n"
 		+   "+ ╚═╝╚═╝   ╩ ╚═╝   ╩ ╩ ╩╚═╝  ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝  o +\n")		fight()
-		print("\n"			+   "                      +++++++++++++++  🙉  ++++++++++++++++\n"			+   "                      + ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"			+   "                      + ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"			+   "                      + ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"			+   "                      +++++++++++++++  🍻  ++++++++++++++++\n\n")
-	}	func printRandom(player:Player) {		print("\n"		+  " +     + 👝 +     +\n"		+  "------ CHEST ------\n"		+ "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it? Watch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")	}		func choose(player:Player){			print("\n🐵  \(player.name), choose your character:\n")	}	var printRestart:String {			return"\n"			+ "                      +  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔═╗╦╔╗╔  ┌─┐  +\n"			+ "                      +  ╠═╝║  ╠═╣╚╦╝  ╠═╣║ ╦╠═╣║║║║   ┌┘  +\n"			+ "                      +  ╩  ╩═╝╩ ╩ ╩   ╩ ╩╚═╝╩ ╩╩╝╚╝   o   +\n"			+ "                         TYPE 'Y' FOR YES OR 'N' FOR NO:\n"	}}
+	}	func printRandom(player:Player) {		print("\n"		+  " +     + 👝 +     +\n"		+  "------ CHEST ------\n"		+ "\n🙉  Hey \(player.name)! There's a chest!\n\nDo you want to open it? Watch out! there could be a best/worst weapon or a bomb!\n'Y' = Yes\n'N' = No")	}		func choose(player:Player){			print("\n🐵  \(player.name), choose your character:\n")	}	var printRestart:String {			return"\n"			+ "                      +  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔═╗╦╔╗╔  ┌─┐  +\n"			+ "                      +  ╠═╝║  ╠═╣╚╦╝  ╠═╣║ ╦╠═╣║║║║   ┌┘  +\n"			+ "                      +  ╩  ╩═╝╩ ╩ ╩   ╩ ╩╚═╝╩ ╩╩╝╚╝   o   +\n"			+ "                         TYPE 'Y' FOR YES OR 'N' FOR NO:\n"	}	var end:String {			return "\n"			+ "                        +++++++++++++++ 👊  ++++++++++++++\n"			+ "                     + ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"			+ "                     + ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"			+ "                     + ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"			+ "                        +++++++++++++++ 🍻  ++++++++++++++\n\n"	}}
 var game = Main()
 game.printGame()
  

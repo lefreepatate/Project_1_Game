@@ -1,5 +1,7 @@
 import Foundation
-//Creating the player base structure
+//============================================
+// MARK: - CLASS PLAYER
+//============================================
 class Player : CustomStringConvertible  {
     var name:String 
     var team = [Character]()

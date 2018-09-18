@@ -1,8 +1,8 @@
 import Foundation
+//============================================
+// MARK: - CLASS CHOICES WITH 2 PLAYERS
+//============================================
 class Choices {
-    //============================================
-    // MARK: - Creating new players
-    //============================================
     var firstPlayer:Player
     var secondPlayer:Player
     init(firstPlayer:Player, secondPlayer:Player){
@@ -13,7 +13,6 @@ class Choices {
     //============================================
     // MARK: - Creating players
     //============================================
-    //let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
     // function making new players whith name, checking if the name was taken before.
     func player() -> Player{
         //Having the name given by player

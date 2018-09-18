@@ -21,7 +21,7 @@ class Fruits:CustomStringConvertible {
             +  "    \(icon)  \(name)\n"
             +  "   +  +  +  \n"
             +  "  +   +   +  \n"
-        }
+    }
 }
 //Creating differents kind of fruits giving more healthbar (vitamin) and only one removing healthbar (pepper)
 class Apple:Fruits{

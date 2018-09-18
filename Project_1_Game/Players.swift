@@ -1,4 +1,5 @@
 import Foundation
+//Creating the player base structure
 class Player : CustomStringConvertible  {
     var name:String 
     var team = [Character]()
@@ -12,6 +13,7 @@ class Player : CustomStringConvertible  {
         + "///+  │ ├┤ ├─┤│││ + \(team[1])\n"
         + "///+  ┴ └─┘┴ ┴┴ ┴ + \(team[2])\n"
     }
+    //checking if there are only wizards in a team, or if all the 3 characters are dead = game over
     func teamAlive() -> Bool {
     var dead = 0
     var wizards = 0
@@ -32,6 +34,7 @@ class Player : CustomStringConvertible  {
             return true
         }
     }
+    //Messages at the end of a match saying who wons
     var p1:String {
         return"\n\n"
            +  "                                      🏆  \(name)  🏆\n"

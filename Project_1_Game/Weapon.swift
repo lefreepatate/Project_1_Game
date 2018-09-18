@@ -1,4 +1,7 @@
 import Foundation
+//============================================
+// MARK: - WEAPON CLASS
+//============================================
 class Weapon:CustomStringConvertible {
     let damages:Int
     let name:String
@@ -32,7 +35,7 @@ enum type { case attack, heal, bomb}
 //============================================
 // MARK: - ATTACK WEAPONS
 //============================================
-
+//Creating differents kind of weapons wich will be on the random chest for ATTACK
 class FireBall:Weapon {
     init() {
         super.init(damages: 30, name: "FIREBALL", icon: "☄️", type: .attack)
@@ -61,6 +64,7 @@ class Ice:Weapon {
 //============================================
 // MARK: - HEALS WEAPONS
 //============================================
+//Creating differents kind of weapons wich will be on the random chest for HEAL
 
 class Moon:Weapon {
     init() {
@@ -90,8 +94,9 @@ class FullMoon:Weapon {
 }
 
 //============================================
-// MARK: - BONUS BOMB
+// MARK: - **BONUS** BOMB
 //============================================
+//Creating a bomb which could be on the attackChest OR on the healChest
 class Bomb:Weapon{
     init() {
         super.init(damages:10, name:"attackBomb", icon:"💣", type: .bomb)

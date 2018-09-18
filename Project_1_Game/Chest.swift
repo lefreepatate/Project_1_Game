@@ -1,11 +1,17 @@
 import Foundation
+//============================================
+// MARK: - CHEST CLASS
+//============================================
 class Chest {
     var name:String
     init(name:String){
         self.name = name
     }
 }
-
+//============================================
+// MARK: - HEALCHEST CLASS
+//============================================
+//Giving to the wizard ramdomly new weapons with differents damages value
 class HealChest:Chest {
     let stars = Stars()
     let moon = Moon()
@@ -16,6 +22,7 @@ class HealChest:Chest {
     init(){
         super.init(name: "healChest")
     }
+    //Function for the random
     func randomHealWeapon(character:Character, player:Player, team:[Character]){
         let  weaponChest = [stars, moon, fullMoon, thunder, trident, healBomb]
         let randomHeals = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
@@ -28,6 +35,10 @@ class HealChest:Chest {
         print(randomHeals)
     }
 }
+//============================================
+// MARK: - ATTACKCHEST CLASS
+//============================================
+//Giving to the other characters ramdomly new weapons with differents damages value
 
 class AttackChest: Chest {
     let fireBall = FireBall()
@@ -39,6 +50,7 @@ class AttackChest: Chest {
     init(){
         super.init(name: "attackChest")
     }
+    //Function for the random
     func randomAttackWeapon(character:Character, player:Player, team:[Character]){
         let weaponChest = [fireBall, sword, knife, hammer, ice, attackBomb]
         let randomAttack = weaponChest[Int(arc4random_uniform(UInt32(weaponChest.count)))]
@@ -52,7 +64,10 @@ class AttackChest: Chest {
     }
 
 }
-
+//============================================
+// MARK: - **BONUS** FRUITS CHEST CLASS
+//============================================
+//Giving to the other characters ramdomly fruits wich give them more healthbar
 class FruitsChest:Chest{
     let apple = Apple()
     let kiwi = Kiwi()
@@ -67,6 +82,7 @@ class FruitsChest:Chest{
     init() {
         super.init(name: "FruitsChest")
     }
+    //Function for the random 
     func randomFruits(character:Character){
         let fruitsChest = [apple, kiwi, redPepper, pear, orange, lemon, banana, watermelon, strawberry, cherry]
         let randomFruits = fruitsChest[Int(arc4random_uniform(UInt32(fruitsChest.count)))]

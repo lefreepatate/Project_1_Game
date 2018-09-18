@@ -36,7 +36,7 @@
 		EC8A6A3820F7B961005F1304 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		EC8A6A3A20F8E2C1005F1304 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		ECB2F66420C570410087750C /* Project_1_Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project_1_Game; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECF0E14E20C58FDF00037870 /* main.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; lineEnding = 1; name = main.swift; path = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/../../../../../../../../../Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/main.swift"; sourceTree = "<absolute>"; usesTabs = 1; };
+		ECF0E14E20C58FDF00037870 /* main.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; lineEnding = 1; name = main.swift; path = "/Users/k-rlos/Documents/OCR/Parcours/Project_1_Game/Project_1_Game/main.swift"; sourceTree = "<absolute>"; usesTabs = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

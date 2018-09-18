@@ -24,7 +24,7 @@ class Character:CustomStringConvertible {
     enum Characters {
         case fighter, wizard, colossus, dwarf
     }
-    
+    //Attack function checking healthbar
     func attack(victim: Character){
         if victim.healthBar > victim.maxHealthBar {
             victim.healthBar = victim.maxHealthBar
@@ -77,6 +77,7 @@ class Wizard: Character {
     init(name:String){
         super.init(characterName: name, characterType : "🐼", healthBar: 90, healthDamages: 15, weapon: "💫", type: .wizard)
     }
+    //Attack override function of attack is here a "heal" (healthDamages +)
     override func attack(victim:Character){
         if healthBar > maxHealthBar {
             healthBar = maxHealthBar

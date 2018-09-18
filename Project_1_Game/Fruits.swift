@@ -1,4 +1,7 @@
 import Foundation
+//============================================
+// MARK: - **BONUS** FRUITS CLASS
+//============================================
 class Fruits:CustomStringConvertible {
     let heal:Int
     let name:String
@@ -20,7 +23,7 @@ class Fruits:CustomStringConvertible {
             +  "  +   +   +  \n"
         }
 }
-
+//Creating differents kind of fruits giving more healthbar (vitamin) and only one removing healthbar (pepper)
 class Apple:Fruits{
     init() {
         super.init(heal: 5, name: "Apple", icon: "🍏", fruitsType: .vitamin)

@@ -64,7 +64,7 @@ class Character:CustomStringConvertible {
 
 class Fighter: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🦊", healthBar: 100, healthDamages: 10, weapon: "🏹", type: .fighter)
+        super.init(characterName: name, characterType : "🦊", healthBar: 100, healthDamages: 40, weapon: "🏹", type: .fighter)
     }
 }
 
@@ -116,7 +116,7 @@ class Wizard: Character {
 
 class Colossus: Character {
     init(name:String){
-        super.init(characterName: name, characterType : "🐻", healthBar: 140, healthDamages: 5, weapon: "🔥", type: .colossus)
+        super.init(characterName: name, characterType : "🐻", healthBar: 140, healthDamages: 30, weapon: "🔥", type: .colossus)
     }
 }
 

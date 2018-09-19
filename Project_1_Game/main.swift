@@ -9,33 +9,7 @@ class Main:Choices {
 	let secondPlayer = Player(name: "")
 	super.init(firstPlayer: firstPlayer, secondPlayer:secondPlayer)
 	}
-	//Getting the print messages
-	enum PrintType:String{
-	case noName = "🙊  You must enter a name!"
-	case name = "🙈  This name already exists, pick another one !\n"
-	case yes_no = "🙈  You must choose Y for Yes or N for No"
-	case resurrect = "🐼  Sorry, I can't resurrect you."
-	case greatShape = "🐼  You're in great shape!"
-	case dead = "I'm already dead!  👻"
-	case choose1_4 = "🙈  Choose between 1 and 4\n"
-	case another = "🙈  He's dead! Choose another one!"
-	case fighterName = "Fighter's name?"
-	case wizardName = "Wizard's name?"
-	case colossusName = "Colossus's name?"
-	case dwarfName = "Dwarf's name?"
-	}
-	let wrongName = PrintType.name.rawValue
-	let yesNo = PrintType.yes_no.rawValue
-	let resurrect = PrintType.resurrect.rawValue
-	let greatShape = PrintType.greatShape.rawValue
-	let dead = PrintType.dead.rawValue
-	let noName = PrintType.noName.rawValue
-	let choose1_4 = PrintType.choose1_4.rawValue
-	let fighterName = PrintType.fighterName.rawValue
-	let wizardName = PrintType.wizardName.rawValue
-	let colossusName = PrintType.colossusName.rawValue
-	let dwarfName = PrintType.dwarfName.rawValue
-	let another = PrintType.another.rawValue
+
 
 	//Welcome message and rules for choices
 	//============================================
@@ -107,23 +81,7 @@ class Main:Choices {
 			print("\n🐵  \(player.name), choose your character:\n")
 	}
 	
-	//Asking if the players wish to do a new match
-	var printRestart:String {
-			return"\n"
-			+ "                      +  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔═╗╦╔╗╔  ┌─┐  +\n"
-			+ "                      +  ╠═╝║  ╠═╣╚╦╝  ╠═╣║ ╦╠═╣║║║║   ┌┘  +\n"
-			+ "                      +  ╩  ╩═╝╩ ╩ ╩   ╩ ╩╚═╝╩ ╩╩╝╚╝   o   +\n"
-			+ "                         TYPE 'Y' FOR YES OR 'N' FOR NO:\n"
-	}
-	// End message
-	var end:String {
-			return "\n"
-			+ "                        +++++++++++++++ 👊  ++++++++++++++\n"
-			+ "                     + ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"
-			+ "                     + ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"
-			+ "                     + ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"
-			+ "                        +++++++++++++++ 🍻  ++++++++++++++\n\n"
-	}
+
 }
 
 var game = Main()

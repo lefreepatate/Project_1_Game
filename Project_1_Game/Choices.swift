@@ -9,7 +9,33 @@ class Choices {
         self.firstPlayer = firstPlayer
         self.secondPlayer = secondPlayer
     }
-    
+    //Getting the print messages
+    enum PrintType:String{
+        case noName = "🙊  You must enter a name!"
+        case name = "🙈  This name already exists, pick another one !\n"
+        case yes_no = "🙈  You must choose Y for Yes or N for No"
+        case resurrect = "🐼  Sorry, I can't resurrect you."
+        case greatShape = "🐼  You're in great shape!"
+        case dead = "I'm already dead!  👻"
+        case choose1_4 = "🙈  Choose between 1 and 4\n"
+        case another = "🙈  He's dead! Choose another one!"
+        case fighterName = "Fighter's name?"
+        case wizardName = "Wizard's name?"
+        case colossusName = "Colossus's name?"
+        case dwarfName = "Dwarf's name?"
+    }
+    let wrongName = PrintType.name.rawValue
+    let yesNo = PrintType.yes_no.rawValue
+    let resurrect = PrintType.resurrect.rawValue
+    let greatShape = PrintType.greatShape.rawValue
+    let dead = PrintType.dead.rawValue
+    let noName = PrintType.noName.rawValue
+    let choose1_4 = PrintType.choose1_4.rawValue
+    let fighterName = PrintType.fighterName.rawValue
+    let wizardName = PrintType.wizardName.rawValue
+    let colossusName = PrintType.colossusName.rawValue
+    let dwarfName = PrintType.dwarfName.rawValue
+    let another = PrintType.another.rawValue
     //============================================
     // MARK: - Creating players
     //============================================
@@ -18,7 +44,7 @@ class Choices {
         //Having the name given by player
         if let name = readLine(){
             if name.isEmpty{
-                print(Main().noName)
+                print(noName)
             }
             if isNameValid(name: name){
                
@@ -42,10 +68,10 @@ class Choices {
                 return false
             }
         if name == firstPlayer.name {
-            print(Main().wrongName)
+            print(wrongName)
             return false
         } else if name == secondPlayer.name {
-             print(Main().wrongName)
+             print(wrongName)
             return false
         }
         else {
@@ -53,7 +79,7 @@ class Choices {
         let teams = firstPlayer.team + secondPlayer.team
             for newCharacter in teams {
                 if newCharacter.characterName == name{
-                    print(Main().wrongName)
+                    print(wrongName)
                 return false
                 }
             }
@@ -64,7 +90,7 @@ class Choices {
     //creating a new fighter
     func newFighter() -> Fighter{
         // giving the name
-        print(Main().fighterName)
+        print(fighterName)
         if let name = readLine(){
            // checking if the name wasn't choose before
             if isNameValid(name: name){
@@ -79,7 +105,7 @@ class Choices {
    
     //creating a new Wizard
     func newWizard() -> Wizard{
-        print(Main().wizardName)
+        print(wizardName)
         if let name = readLine(){
             if isNameValid(name:name){
                 let newWizard = Wizard(name: name)
@@ -92,7 +118,7 @@ class Choices {
    
     //creating a new Colossus
     func newColossus() -> Colossus{
-        print(Main().colossusName)
+        print(colossusName)
         if let name = readLine(){
             if isNameValid( name: name){
                 let newColossus = Colossus(name: name)
@@ -105,7 +131,7 @@ class Choices {
    
     //creating a new Dwarf
     func newDwarf() -> Dwarf{
-        print(Main().dwarfName)
+        print(dwarfName)
         if let name = readLine(){
             if isNameValid(name: name){
                 let newDwarf = Dwarf(name: name)
@@ -129,7 +155,7 @@ class Choices {
             case "3": return newColossus()
             case "4": return newDwarf()
             default:
-                print(Main().choose1_4)
+                print(choose1_4)
             }
         }
          return playerChoice()
@@ -158,7 +184,7 @@ class Choices {
                 switch chestChoice {
                 case "Y","y": return HealChest().randomHealWeapon(character:character, player: player, team:team)
                 case "N","n": return
-                default: print(Main().yesNo)
+                default: print(yesNo)
                 }
             }
         } else {
@@ -166,7 +192,7 @@ class Choices {
                 switch chestChoice {
                 case "Y","y": return AttackChest().randomAttackWeapon(character:character, player: player, team:team)
                 case "N","n": return
-                default: print(Main().yesNo)
+                default: print(yesNo)
                 }
             }
         }
@@ -204,7 +230,7 @@ class Choices {
                     fruits(character: player.team[i])
                     return player.team[i]
                 } else {
-                    print(Main().another)
+                    print(another)
                     return charactersTeam(player:player)
                 }
             } else {
@@ -292,14 +318,31 @@ class Choices {
     }
     //At the end of the game, asking if the player wants to try again a new round
     func restart(){
-        print(Main().printRestart)
+        print(printRestart)
         if let restart = readLine(){
             switch restart {
             case "Y","y": return Main().printGame()
-            case "N","n": print(Main().end)
-            default: print(Main().yesNo)
+            case "N","n": print(end)
+            default: print(yesNo)
             }
         }
+    }
+    //Asking if the players wish to do a new match
+    var printRestart:String {
+        return"\n"
+            + "                      +  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔═╗╦╔╗╔  ┌─┐  +\n"
+            + "                      +  ╠═╝║  ╠═╣╚╦╝  ╠═╣║ ╦╠═╣║║║║   ┌┘  +\n"
+            + "                      +  ╩  ╩═╝╩ ╩ ╩   ╩ ╩╚═╝╩ ╩╩╝╚╝   o   +\n"
+            + "                         TYPE 'Y' FOR YES OR 'N' FOR NO:\n"
+    }
+    // End message
+    var end:String {
+        return "\n"
+            + "                        +++++++++++++++ 👊  ++++++++++++++\n"
+            + "                     + ╔═╗╦═╗╔═╗╔═╗╔╦╗  ╔╗ ╔═╗╔╦╗╔╦╗╦  ╔═╗ +\n"
+            + "                     + ║ ╦╠╦╝║╣ ╠═╣ ║   ╠╩╗╠═╣ ║  ║ ║  ║╣  +\n"
+            + "                     + ╚═╝╩╚═╚═╝╩ ╩ ╩   ╚═╝╩ ╩ ╩  ╩ ╩═╝╚═╝ +\n"
+            + "                        +++++++++++++++ 🍻  ++++++++++++++\n\n"
     }
 }
  
